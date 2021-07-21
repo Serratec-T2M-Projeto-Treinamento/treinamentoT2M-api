@@ -22,6 +22,9 @@ public class Colaboradores {
 	@Column(name = "id")
 	private Long idColaboradores;
 
+	@Column(name = "nome")
+	private String nome;
+
 	@Column(name = "data_nascimento")
 	private Calendar dataNascimento;
 
@@ -46,8 +49,6 @@ public class Colaboradores {
 	@Column(name = "islider")
 	private Integer isLider;
 
-	// TODAS AS FK
-
 	@OneToOne(mappedBy = "colaborador")
 	private Usuarios usuario;
 
@@ -63,5 +64,147 @@ public class Colaboradores {
 
 	@OneToMany(mappedBy = "colaborador")
 	private Set<ColaboradoresFormacoes> setColaboradoresFormacoes;
+
+	@OneToMany(mappedBy = "colaborador")
+	private Set<ColaboradoresTreinamentos> setColaboradoresTreinamentos;
+
+	@OneToMany(mappedBy = "colaborador")
+	private Set<ColaboradoresCertificacoes> setColaboradoresCertificacoes;
+
+	public Long getIdColaboradores() {
+		return idColaboradores;
+	}
+
+	public void setIdColaboradores(Long idColaboradores) {
+		this.idColaboradores = idColaboradores;
+	}
+
+	public Calendar getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(Calendar dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Double getContaBancaria() {
+		return contaBancaria;
+	}
+
+	public void setContaBancaria(Double contaBancaria) {
+		this.contaBancaria = contaBancaria;
+	}
+
+	public String getPix() {
+		return pix;
+	}
+
+	public void setPix(String pix) {
+		this.pix = pix;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getRg() {
+		return rg;
+	}
+
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
+
+	public String getCnh() {
+		return cnh;
+	}
+
+	public void setCnh(String cnh) {
+		this.cnh = cnh;
+	}
+
+	public Integer getIsLider() {
+		return isLider;
+	}
+
+	public void setIsLider(Integer isLider) {
+		this.isLider = isLider;
+	}
+
+	public Usuarios getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuarios usuario) {
+		this.usuario = usuario;
+	}
+
+	public Posicoes getPosicao() {
+		return posicao;
+	}
+
+	public void setPosicao(Posicoes posicao) {
+		this.posicao = posicao;
+	}
+
+	public Set<ColaboradoresEnderecos> getSetColaboradoresEnderecos() {
+		return setColaboradoresEnderecos;
+	}
+
+	public void setSetColaboradoresEnderecos(Set<ColaboradoresEnderecos> setColaboradoresEnderecos) {
+		this.setColaboradoresEnderecos = setColaboradoresEnderecos;
+	}
+
+	public Set<ColaboradoresProjetos> getSetColaboradoresProjetos() {
+		return setColaboradoresProjetos;
+	}
+
+	public void setSetColaboradoresProjetos(Set<ColaboradoresProjetos> setColaboradoresProjetos) {
+		this.setColaboradoresProjetos = setColaboradoresProjetos;
+	}
+
+	public Set<ColaboradoresFormacoes> getSetColaboradoresFormacoes() {
+		return setColaboradoresFormacoes;
+	}
+
+	public void setSetColaboradoresFormacoes(Set<ColaboradoresFormacoes> setColaboradoresFormacoes) {
+		this.setColaboradoresFormacoes = setColaboradoresFormacoes;
+	}
+
+	public Set<ColaboradoresTreinamentos> getSetColaboradoresTreinamentos() {
+		return setColaboradoresTreinamentos;
+	}
+
+	public void setSetColaboradoresTreinamentos(Set<ColaboradoresTreinamentos> setColaboradoresTreinamentos) {
+		this.setColaboradoresTreinamentos = setColaboradoresTreinamentos;
+	}
+
+	public Set<ColaboradoresCertificacoes> getSetColaboradoresCertificacoes() {
+		return setColaboradoresCertificacoes;
+	}
+
+	public void setSetColaboradoresCertificacoes(Set<ColaboradoresCertificacoes> setColaboradoresCertificacoes) {
+		this.setColaboradoresCertificacoes = setColaboradoresCertificacoes;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
 }
