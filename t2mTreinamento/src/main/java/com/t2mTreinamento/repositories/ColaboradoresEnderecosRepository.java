@@ -9,5 +9,5 @@ import com.t2mTreinamento.entities.ColaboradoresEnderecosId;
 @Repository
 public interface ColaboradoresEnderecosRepository
 		extends JpaRepository<ColaboradoresEnderecos, ColaboradoresEnderecosId> {
-
+	
 }
