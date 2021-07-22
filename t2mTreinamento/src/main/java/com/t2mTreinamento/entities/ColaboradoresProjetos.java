@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
@@ -19,10 +20,12 @@ public class ColaboradoresProjetos {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@MapsId("idColaborador")
+	@JoinColumn(name = "id_colaborador")
 	private Colaboradores colaborador;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@MapsId("idProjeto")
+	@JoinColumn(name = "id_projeto")
 	private Projetos projeto;
 
 	@Column(name = "funcao")
@@ -33,6 +36,9 @@ public class ColaboradoresProjetos {
 
 	@Column(name = "data_saida")
 	private Calendar dataSaida;
+
+	@Column(name = "isativo")
+	private Integer isAtivo;
 
 	public ColaboradoresProjetosId getIdColaboradoresProjetos() {
 		return idColaboradoresProjetos;
@@ -80,6 +86,14 @@ public class ColaboradoresProjetos {
 
 	public void setDataSaida(Calendar dataSaida) {
 		this.dataSaida = dataSaida;
+	}
+
+	public Integer getIsAtivo() {
+		return isAtivo;
+	}
+
+	public void setIsAtivo(Integer isAtivo) {
+		this.isAtivo = isAtivo;
 	}
 
 }

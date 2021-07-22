@@ -3,6 +3,7 @@ package com.t2mTreinamento.entities;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
@@ -16,10 +17,12 @@ public class ConhecimentosTreinamentos {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@MapsId("idConhecimento")
+	@JoinColumn(name = "id_conhecimento")
 	private Conhecimentos conhecimento;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@MapsId("idTreinamento")
+	@JoinColumn(name = "id_treinamento")
 	private Treinamentos treinamento;
 
 	public CompetenciasNiveisId getIdCompetenciasNiveis() {

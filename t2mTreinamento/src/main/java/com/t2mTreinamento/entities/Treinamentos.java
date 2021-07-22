@@ -18,7 +18,7 @@ public class Treinamentos {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private String idTreinamentos;
+	private Long idTreinamentos;
 
 	@Column(name = "nome")
 	private String nome;
@@ -41,11 +41,11 @@ public class Treinamentos {
 	@OneToOne(mappedBy = "treinamento")
 	private Certificacoes certificacao;
 
-	public String getIdTreinamentos() {
+	public Long getIdTreinamentos() {
 		return idTreinamentos;
 	}
 
-	public void setIdTreinamentos(String idTreinamentos) {
+	public void setIdTreinamentos(Long idTreinamentos) {
 		this.idTreinamentos = idTreinamentos;
 	}
 

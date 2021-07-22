@@ -49,6 +49,9 @@ public class Colaboradores {
 	@Column(name = "islider")
 	private Integer isLider;
 
+	@Column(name = "isativo")
+	private Integer isAtivo;
+
 	@OneToOne(mappedBy = "colaborador")
 	private Usuarios usuario;
 
@@ -205,6 +208,14 @@ public class Colaboradores {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public Integer getIsAtivo() {
+		return isAtivo;
+	}
+
+	public void setIsAtivo(Integer isAtivo) {
+		this.isAtivo = isAtivo;
 	}
 
 }
