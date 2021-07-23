@@ -1,5 +1,7 @@
-package com.t2mTreinamento.services;
-
-public class ColaboradoresFormacoesService {
-
-}
+//package com.t2mTreinamento.services;
+//
+//
+//@Service
+//public class ColaboradoresFormacoesService {
+//	ColaboradoresFormacoesRepository 
+//}

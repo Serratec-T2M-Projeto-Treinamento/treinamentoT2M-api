@@ -23,7 +23,7 @@ public class ColaboradoresService {
 	}
 
 	public List<Colaboradores> findAll() {
-		return colaboradoresRepository.findByIsAtivo(1);
+		return colaboradoresRepository.findAll();
 	}
 
 	public Long Count() {
@@ -45,7 +45,7 @@ public class ColaboradoresService {
 		if (id != null) {
 			Colaboradores colaborador = colaboradoresRepository.findById(id).get();
 			colaborador.setIsAtivo(0);
-			colabProjRepository.findByColaborador(colaborador).setIsAtivo(0);
+//			colabProjRepository.findByColaborador(colaborador).setIsAtivo(0);
 			return true;
 		} else {
 			return false;

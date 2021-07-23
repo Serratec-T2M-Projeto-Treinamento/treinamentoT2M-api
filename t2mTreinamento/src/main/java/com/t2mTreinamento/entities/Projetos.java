@@ -41,6 +41,9 @@ public class Projetos {
 	@Column(name = "equipe")
 	private Long equipe;
 
+	@Column(name = "isativo")
+	private Integer isAtivo;
+
 	@OneToMany(mappedBy = "projeto")
 	private Set<ColaboradoresProjetos> setColaboradoresProjetos;
 
@@ -114,6 +117,14 @@ public class Projetos {
 
 	public void setSetColaboradoresProjetos(Set<ColaboradoresProjetos> setColaboradoresProjetos) {
 		this.setColaboradoresProjetos = setColaboradoresProjetos;
+	}
+
+	public Integer getIsAtivo() {
+		return isAtivo;
+	}
+
+	public void setIsAtivo(Integer isAtivo) {
+		this.isAtivo = isAtivo;
 	}
 
 }

@@ -21,32 +21,36 @@ public class ProjetosService {
 	public List<Projetos> findAll() {
 		return projetosRepository.findAll();
 	}
-	
+
 	public Long Count() {
 		return projetosRepository.count();
 	}
-	
+
 	public Projetos save(Projetos projeto) {
+		projeto.setIsAtivo(1);
 		Projetos novoProjeto = projetosRepository.save(projeto);
-		
+
 		if (novoProjeto != null) {
 			return novoProjeto;
 		} else {
 			return null;
 		}
 	}
-	
+
 	public boolean delete(Long id) {
-		if(id != null) {
-			projetosRepository.deleteById(id);
+		if (id != null) {
+			Projetos projeto = projetosRepository.findById(id).get();
+			projeto.setIsAtivo(0);
+			projetosRepository.save(projeto);
 			return true;
 		} else {
 			return false;
 		}
 	}
-	
+
 	public Projetos update(Projetos projeto, Long id) {
 		projeto.setIdProjetos(id);
+		projeto.setIsAtivo(1);
 		return projetosRepository.save(projeto);
 	}
 }
