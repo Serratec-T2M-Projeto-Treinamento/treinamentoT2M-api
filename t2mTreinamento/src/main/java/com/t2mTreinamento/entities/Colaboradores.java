@@ -3,6 +3,7 @@ package com.t2mTreinamento.entities;
 import java.util.Calendar;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -52,26 +53,26 @@ public class Colaboradores {
 	@Column(name = "isativo")
 	private Integer isAtivo;
 
-	@OneToOne(mappedBy = "colaborador")
+	@OneToOne(mappedBy = "colaborador", cascade = CascadeType.ALL)
 	private Usuarios usuario;
 
 	@OneToOne
 	@JoinColumn(name = "id_posicao", referencedColumnName = "id")
 	private Posicoes posicao;
 
-	@OneToMany(mappedBy = "colaborador")
+	@OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<ColaboradoresEnderecos> setColaboradoresEnderecos;
 
-	@OneToMany(mappedBy = "colaborador")
+	@OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<ColaboradoresProjetos> setColaboradoresProjetos;
 
-	@OneToMany(mappedBy = "colaborador")
+	@OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<ColaboradoresFormacoes> setColaboradoresFormacoes;
 
-	@OneToMany(mappedBy = "colaborador")
+	@OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<ColaboradoresTreinamentos> setColaboradoresTreinamentos;
 
-	@OneToMany(mappedBy = "colaborador")
+	@OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<ColaboradoresCertificacoes> setColaboradoresCertificacoes;
 
 	public Long getIdColaboradores() {
