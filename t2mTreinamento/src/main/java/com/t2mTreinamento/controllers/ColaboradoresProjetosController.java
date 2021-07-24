@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,16 +24,28 @@ public class ColaboradoresProjetosController {
 	@Autowired
 	private ColaboradoresProjetosService colabsProjsService;
 
-	@GetMapping("/colaborador/{id}")
+	@GetMapping("/history/colaborador/{id}")
 	public ResponseEntity<List<ColaboradoresProjetos>> findByIdColaborador(@PathVariable Long id) {
 		HttpHeaders headers = new HttpHeaders();
 		return new ResponseEntity<>(colabsProjsService.findByIdColaborador(id), headers, HttpStatus.OK);
 	}
 
-	@GetMapping("/projeto/{id}")
+//	@GetMapping("/colaborador/{id}")
+//	public ResponseEntity<List<ColaboradoresProjetos>> findByIdColaboradorAtivo(@PathVariable Long id) {
+//		HttpHeaders headers = new HttpHeaders();
+//		return new ResponseEntity<>(colabsProjsService.findByIdColaboradorAtivo(id), headers, HttpStatus.OK);
+//	}
+
+	@GetMapping("/history/projeto/{id}")
 	public ResponseEntity<List<ColaboradoresProjetos>> findByIdProjeto(@PathVariable Long id) {
 		HttpHeaders headers = new HttpHeaders();
 		return new ResponseEntity<>(colabsProjsService.findByIdProjeto(id), headers, HttpStatus.OK);
+	}
+
+	@GetMapping("/projeto/{id}")
+	public ResponseEntity<List<ColaboradoresProjetos>> findByIdProjetoAtivo(@PathVariable Long id) {
+		HttpHeaders headers = new HttpHeaders();
+		return new ResponseEntity<>(colabsProjsService.findByIdProjetoAtivo(id), headers, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/projeto/{id}")
@@ -57,6 +71,23 @@ public class ColaboradoresProjetosController {
 			return new ResponseEntity<>(headers, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@PutMapping("colaborador/{id}")
+	public ResponseEntity<ColaboradoresProjetos> update(@RequestBody ColaboradoresProjetos colabProj,
+			@PathVariable Long id) {
+		HttpHeaders headers = new HttpHeaders();
+
+		Long idColab = colabProj.getColaborador().getIdColaboradores();
+		Long idProj = colabProj.getProjeto().getIdProjetos();
+
+		ColaboradoresProjetos colabProjAtualizado = colabsProjsService.update(colabProj, idColab, idProj);
+
+		if (colabProjAtualizado != null) {
+			return new ResponseEntity<>(colabProjAtualizado, headers, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(colabProjAtualizado, headers, HttpStatus.BAD_REQUEST);
 		}
 	}
 

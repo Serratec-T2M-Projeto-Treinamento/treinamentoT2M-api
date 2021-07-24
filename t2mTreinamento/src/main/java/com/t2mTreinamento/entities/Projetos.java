@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "projetos")
 public class Projetos {
@@ -42,9 +44,11 @@ public class Projetos {
 	private Long equipe;
 
 	@Column(name = "isativo")
+	@JsonIgnore
 	private Integer isAtivo;
 
 	@OneToMany(mappedBy = "projeto")
+	@JsonIgnore
 	private Set<ColaboradoresProjetos> setColaboradoresProjetos;
 
 	public Long getIdProjetos() {

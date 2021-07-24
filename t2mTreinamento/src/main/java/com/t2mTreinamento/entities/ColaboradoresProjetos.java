@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "colaboradores_projetos")
 public class ColaboradoresProjetos {
@@ -20,11 +22,13 @@ public class ColaboradoresProjetos {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@MapsId("idColaborador")
+	@JsonIgnore
 	@JoinColumn(name = "id_colaborador")
 	private Colaboradores colaborador;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@MapsId("idProjeto")
+	@JsonIgnore
 	@JoinColumn(name = "id_projeto")
 	private Projetos projeto;
 
@@ -38,6 +42,7 @@ public class ColaboradoresProjetos {
 	private Calendar dataSaida;
 
 	@Column(name = "isativo")
+	@JsonIgnore
 	private Integer isAtivo;
 
 	public ColaboradoresProjetosId getIdColaboradoresProjetos() {

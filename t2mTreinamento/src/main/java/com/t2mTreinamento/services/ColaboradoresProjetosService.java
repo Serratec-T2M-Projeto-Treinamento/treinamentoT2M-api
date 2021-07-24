@@ -19,19 +19,37 @@ public class ColaboradoresProjetosService {
 	public ColaboradoresProjetosRepository colabsProjsRepository;
 
 	@Autowired
-	public ProjetosRepository projetosRepository;
+	public ColaboradoresRepository colaboradoresRepository;
 
 	@Autowired
-	public ColaboradoresRepository colaboradoresRepository;
+	public ProjetosRepository projetosRepository;
 
 	public List<ColaboradoresProjetos> findByIdColaborador(Long id) {
 		Colaboradores colaborador = colaboradoresRepository.findById(id).get();
 		return colabsProjsRepository.findByColaborador(colaborador);
-
 	}
+//	
+//	
+//	
+//	IMPLEMENTAR MÉTODOS DE COLABORADORES
+//	
+//	
+//	
+//	
+//	
+//	public List<ColaboradoresProjetos> findByIdColaboradorAtivo(Long id) {
+//		Colaboradores colaborador = colaboradoresRepository.findById(id).get();
+//		return colabsProjsRepository.findByColaborador(colaborador);
+//
+//	}
 
 	public List<ColaboradoresProjetos> findByIdProjeto(Long id) {
 		Projetos projeto = projetosRepository.findById(id).get();
+		return colabsProjsRepository.findByProjeto(projeto);
+	}
+
+	public List<ColaboradoresProjetos> findByIdProjetoAtivo(Long id) {
+		Projetos projeto = projetosRepository.findByIsAtivoAndIdProjetos(1, id);
 		return colabsProjsRepository.findByProjeto(projeto);
 	}
 
@@ -90,9 +108,25 @@ public class ColaboradoresProjetosService {
 		}
 	}
 
-//	public ColaboradoresProjetos update(Projetos projeto, Long id) {
-//		projeto.setIdProjetos(id);
-//		projeto.setIsAtivo(1);
-//		return colabsProjsRepository.save(projeto);
-//	}
+	private void updateDados(ColaboradoresProjetos colabProj, ColaboradoresProjetos novoColabProj) {
+		novoColabProj.setColaborador(colabProj.getColaborador());
+		novoColabProj.setProjeto(colabProj.getProjeto());
+		novoColabProj.setIsAtivo(colabProj.getIsAtivo());
+		novoColabProj.setDataInicio(colabProj.getDataInicio());
+		novoColabProj.setDataSaida(colabProj.getDataSaida());
+		novoColabProj.setFuncao(colabProj.getFuncao());
+		novoColabProj.setIdColaboradoresProjetos(colabProj.getIdColaboradoresProjetos());
+	}
+
+	public ColaboradoresProjetos update(ColaboradoresProjetos colabProj, Long idColab, Long idProj) {
+		Colaboradores colaborador = colaboradoresRepository.findById(idColab).get();
+
+		Projetos projeto = projetosRepository.findById(idProj).get();
+
+		ColaboradoresProjetos novoColabProj = colabsProjsRepository.findByColaboradorAndProjeto(colaborador, projeto);
+
+		updateDados(colabProj, novoColabProj);
+
+		return colabsProjsRepository.save(novoColabProj);
+	}
 }

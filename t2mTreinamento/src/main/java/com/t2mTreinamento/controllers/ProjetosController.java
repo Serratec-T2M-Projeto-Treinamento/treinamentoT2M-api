@@ -31,16 +31,28 @@ public class ProjetosController {
 	@Autowired
 	private ColaboradoresProjetosService colabsProjsService;
 
-	@GetMapping("/{id}")
+	@GetMapping("/history/{id}")
 	public ResponseEntity<Projetos> findById(@PathVariable Long id) {
 		HttpHeaders headers = new HttpHeaders();
 		return new ResponseEntity<>(projetosService.findById(id), headers, HttpStatus.OK);
 	}
 
-	@GetMapping
+	@GetMapping("/{id}")
+	public ResponseEntity<Projetos> findByIsAtivoAndIdProjetos(@PathVariable Long id) {
+		HttpHeaders headers = new HttpHeaders();
+		return new ResponseEntity<>(projetosService.findByIsAtivoAndIdProjetos(id), headers, HttpStatus.OK);
+	}
+
+	@GetMapping("/history")
 	public ResponseEntity<List<Projetos>> findAll() throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 		return new ResponseEntity<>(projetosService.findAll(), headers, HttpStatus.OK);
+	}
+
+	@GetMapping
+	public ResponseEntity<List<Projetos>> findByIsAtivo() throws Exception {
+		HttpHeaders headers = new HttpHeaders();
+		return new ResponseEntity<>(projetosService.findByIsAtivo(), headers, HttpStatus.OK);
 	}
 
 	@GetMapping("/count")

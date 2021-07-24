@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "colaboradores_formacoes")
 public class ColaboradoresFormacoes {
@@ -20,11 +22,13 @@ public class ColaboradoresFormacoes {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@MapsId("idColaborador")
+	@JsonIgnore
 	@JoinColumn(name = "id_colaborador")
 	private Colaboradores colaborador;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@MapsId("idFormacao")
+	@JsonIgnore
 	@JoinColumn(name = "id_formacao")
 	private Formacoes formacao;
 
@@ -33,6 +37,10 @@ public class ColaboradoresFormacoes {
 
 	@Column(name = "data_conclusao")
 	private Calendar dataConclusao;
+
+	@Column(name = "isativo")
+	@JsonIgnore
+	private Integer isAtivo;
 
 	public ColaboradoresFormacoesId getIdColaboradoresFormacoes() {
 		return idColaboradoresFormacoes;
@@ -72,6 +80,14 @@ public class ColaboradoresFormacoes {
 
 	public void setDataConclusao(Calendar dataConclusao) {
 		this.dataConclusao = dataConclusao;
+	}
+
+	public Integer getIsAtivo() {
+		return isAtivo;
+	}
+
+	public void setIsAtivo(Integer isAtivo) {
+		this.isAtivo = isAtivo;
 	}
 
 }

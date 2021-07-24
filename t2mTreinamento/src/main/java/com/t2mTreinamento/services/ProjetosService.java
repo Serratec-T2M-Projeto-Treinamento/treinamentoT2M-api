@@ -18,8 +18,16 @@ public class ProjetosService {
 		return projetosRepository.findById(id).get();
 	}
 
+	public Projetos findByIsAtivoAndIdProjetos(Long idProjetos) {
+		return projetosRepository.findByIsAtivoAndIdProjetos(1, idProjetos);
+	}
+
 	public List<Projetos> findAll() {
 		return projetosRepository.findAll();
+	}
+
+	public List<Projetos> findByIsAtivo() {
+		return projetosRepository.findByIsAtivo(1);
 	}
 
 	public Long Count() {

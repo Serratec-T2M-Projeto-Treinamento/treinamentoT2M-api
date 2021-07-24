@@ -2,6 +2,7 @@ package com.t2mTreinamento.entities;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "formacoes")
@@ -28,7 +31,12 @@ public class Formacoes {
 	@Column(name = "instituicao")
 	private String instituicao;
 
-	@OneToMany(mappedBy = "formacao")
+	@Column(name = "isativo")
+	@JsonIgnore
+	private Integer isAtivo;
+
+	@OneToMany(mappedBy = "formacao", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Set<ColaboradoresFormacoes> setColaboradoresFormacoes;
 
 	public Long getIdFormacoes() {
@@ -69,6 +77,14 @@ public class Formacoes {
 
 	public void setSetColaboradoresFormacoes(Set<ColaboradoresFormacoes> setColaboradoresFormacoes) {
 		this.setColaboradoresFormacoes = setColaboradoresFormacoes;
+	}
+
+	public Integer getIsAtivo() {
+		return isAtivo;
+	}
+
+	public void setIsAtivo(Integer isAtivo) {
+		this.isAtivo = isAtivo;
 	}
 
 }

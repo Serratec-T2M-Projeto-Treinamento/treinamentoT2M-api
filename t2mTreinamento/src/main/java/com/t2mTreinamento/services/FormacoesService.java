@@ -18,8 +18,16 @@ public class FormacoesService {
 		return formacoesRepository.findById(id).get();
 	}
 
+	public Formacoes findByIsAtivoAndIdFormacoes(Long idFormacoes) {
+		return formacoesRepository.findByIsAtivoAndIdFormacoes(1, idFormacoes);
+	}
+
 	public List<Formacoes> findAll() {
 		return formacoesRepository.findAll();
+	}
+
+	public List<Formacoes> findByIsAtivo() {
+		return formacoesRepository.findByIsAtivo(1);
 	}
 
 	public Long Count() {
@@ -27,6 +35,7 @@ public class FormacoesService {
 	}
 
 	public Formacoes save(Formacoes formacao) {
+		formacao.setIsAtivo(1);
 		Formacoes novaFormacao = formacoesRepository.save(formacao);
 
 		if (novaFormacao != null) {
@@ -38,7 +47,9 @@ public class FormacoesService {
 
 	public boolean delete(Long id) {
 		if (id != null) {
-			formacoesRepository.deleteById(id);
+			Formacoes formacao = formacoesRepository.findById(id).get();
+			formacao.setIsAtivo(0);
+			formacoesRepository.save(formacao);
 			return true;
 		} else {
 			return false;
@@ -47,6 +58,7 @@ public class FormacoesService {
 
 	public Formacoes update(Formacoes formacao, Long id) {
 		formacao.setIdFormacoes(id);
+		formacao.setIsAtivo(1);
 		return formacoesRepository.save(formacao);
 	}
 }
