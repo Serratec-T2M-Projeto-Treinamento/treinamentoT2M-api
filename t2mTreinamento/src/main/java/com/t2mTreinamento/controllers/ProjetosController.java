@@ -100,5 +100,4 @@ public class ProjetosController {
 			return new ResponseEntity<>(projetoAtualizado, headers, HttpStatus.BAD_REQUEST);
 		}
 	}
-
 }

@@ -37,7 +37,7 @@ public class ProjetosService {
 	public Projetos save(Projetos projeto) {
 		projeto.setIsAtivo(1);
 		Projetos novoProjeto = projetosRepository.save(projeto);
-
+		// SERVIÇO DE ENTIDADE DE LIGAÇÃO (?)
 		if (novoProjeto != null) {
 			return novoProjeto;
 		} else {
@@ -46,8 +46,9 @@ public class ProjetosService {
 	}
 
 	public boolean delete(Long id) {
-		if (id != null) {
-			Projetos projeto = projetosRepository.findById(id).get();
+		// DELETAR DA LISTA DE REGISTROS ATIVOS
+		if (id != null && projetosRepository.findById(id).get().getIsAtivo() == 1) {
+			Projetos projeto = projetosRepository.findByIsAtivoAndIdProjetos(1, id);
 			projeto.setIsAtivo(0);
 			projetosRepository.save(projeto);
 			return true;

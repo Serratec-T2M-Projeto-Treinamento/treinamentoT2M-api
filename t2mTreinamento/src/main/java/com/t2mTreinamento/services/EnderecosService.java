@@ -18,8 +18,16 @@ public class EnderecosService {
 		return enderecosRepository.findById(id).get();
 	}
 
+	public Enderecos findByIsAtivoAndIdEnderecos(Long idEnderecos) {
+		return enderecosRepository.findByIsAtivoAndIdEnderecos(1, idEnderecos);
+	}
+
 	public List<Enderecos> findAll() {
 		return enderecosRepository.findAll();
+	}
+
+	public List<Enderecos> findByIsAtivo() {
+		return enderecosRepository.findByIsAtivo(1);
 	}
 
 	public Long Count() {
@@ -27,8 +35,9 @@ public class EnderecosService {
 	}
 
 	public Enderecos save(Enderecos endereco) {
+		endereco.setIsAtivo(1);
 		Enderecos novoEndereco = enderecosRepository.save(endereco);
-
+		// SERVIÇO DE ENTIDADE DE LIGAÇÃO (?)
 		if (novoEndereco != null) {
 			return novoEndereco;
 		} else {
@@ -37,8 +46,11 @@ public class EnderecosService {
 	}
 
 	public boolean delete(Long id) {
-		if (id != null) {
-			enderecosRepository.deleteById(id);
+		// DELETAR DA LISTA DE REGISTROS ATIVOS
+		if (id != null && enderecosRepository.findById(id).get().getIsAtivo() == 1) {
+			Enderecos endereco = enderecosRepository.findByIsAtivoAndIdEnderecos(1, id);
+			endereco.setIsAtivo(0);
+			enderecosRepository.save(endereco);
 			return true;
 		} else {
 			return false;
@@ -47,6 +59,7 @@ public class EnderecosService {
 
 	public Enderecos update(Enderecos endereco, Long id) {
 		endereco.setIdEnderecos(id);
+		endereco.setIsAtivo(1);
 		return enderecosRepository.save(endereco);
 	}
 }

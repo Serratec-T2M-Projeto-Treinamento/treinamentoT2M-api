@@ -3,6 +3,7 @@ package com.t2mTreinamento.entities;
 import java.util.Calendar;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -47,7 +48,7 @@ public class Projetos {
 	@JsonIgnore
 	private Integer isAtivo;
 
-	@OneToMany(mappedBy = "projeto")
+	@OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Set<ColaboradoresProjetos> setColaboradoresProjetos;
 
