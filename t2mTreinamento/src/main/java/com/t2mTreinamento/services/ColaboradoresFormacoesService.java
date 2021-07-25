@@ -29,15 +29,10 @@ public class ColaboradoresFormacoesService {
 		return colabsFormsRepository.findByColaborador(colaborador);
 	}
 
-//	
-//	
-//	
-//	IMPLEMENTAR MÉTODOS DE COLABORADORES
-//	
-//	
-//	
-//	
-//	
+	public List<ColaboradoresFormacoes> findByIdColaboradorAtivo(Long id) {
+		Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, id);
+		return colabsFormsRepository.findByColaborador(colaborador);
+	}
 
 	public List<ColaboradoresFormacoes> findByIdFormacao(Long id) {
 		Formacoes formacao = formacoesRepository.findById(id).get();

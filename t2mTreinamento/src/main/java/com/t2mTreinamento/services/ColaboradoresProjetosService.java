@@ -28,20 +28,12 @@ public class ColaboradoresProjetosService {
 		Colaboradores colaborador = colaboradoresRepository.findById(id).get();
 		return colabsProjsRepository.findByColaborador(colaborador);
 	}
-//	
-//	
-//	
-//	IMPLEMENTAR MÉTODOS DE COLABORADORES
-//	
-//	
-//	
-//	
-//	
-//	public List<ColaboradoresProjetos> findByIdColaboradorAtivo(Long id) {
-//		Colaboradores colaborador = colaboradoresRepository.findById(id).get();
-//		return colabsProjsRepository.findByColaborador(colaborador);
-//
-//	}
+
+	public List<ColaboradoresProjetos> findByIdColaboradorAtivo(Long id) {
+		Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, id);
+		return colabsProjsRepository.findByColaborador(colaborador);
+
+	}
 
 	public List<ColaboradoresProjetos> findByIdProjeto(Long id) {
 		Projetos projeto = projetosRepository.findById(id).get();

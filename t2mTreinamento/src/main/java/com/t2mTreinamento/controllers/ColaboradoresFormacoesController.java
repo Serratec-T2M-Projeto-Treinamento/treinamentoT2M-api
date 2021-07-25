@@ -30,11 +30,11 @@ public class ColaboradoresFormacoesController {
 		return new ResponseEntity<>(colabsFormsService.findByIdColaborador(id), headers, HttpStatus.OK);
 	}
 
-//	@GetMapping("/colaborador/{id}")
-//	public ResponseEntity<List<ColaboradoresFormacoes>> findByIdColaboradorAtivo(@PathVariable Long id) {
-//		HttpHeaders headers = new HttpHeaders();
-//		return new ResponseEntity<>(colabsFormsService.findByIdColaboradorAtivo(id), headers, HttpStatus.OK);
-//	}
+	@GetMapping("/colaborador/{id}")
+	public ResponseEntity<List<ColaboradoresFormacoes>> findByIdColaboradorAtivo(@PathVariable Long id) {
+		HttpHeaders headers = new HttpHeaders();
+		return new ResponseEntity<>(colabsFormsService.findByIdColaboradorAtivo(id), headers, HttpStatus.OK);
+	}
 
 	@GetMapping("/history/formacao/{id}")
 	public ResponseEntity<List<ColaboradoresFormacoes>> findByIdFormacao(@PathVariable Long id) {

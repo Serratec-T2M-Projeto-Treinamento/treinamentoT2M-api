@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "usuarios")
 public class Usuarios {
@@ -27,7 +29,11 @@ public class Usuarios {
 	@Column(name = "isadmin")
 	private Integer isAdmin;
 
+	@Column(name = "isativo")
+	private Integer isAtivo;
+
 	@OneToOne
+	@JsonIgnore
 	@JoinColumn(name = "id_colaborador", referencedColumnName = "id")
 	private Colaboradores colaborador;
 
@@ -69,6 +75,14 @@ public class Usuarios {
 
 	public void setColaborador(Colaboradores colaborador) {
 		this.colaborador = colaborador;
+	}
+
+	public Integer getIsAtivo() {
+		return isAtivo;
+	}
+
+	public void setIsAtivo(Integer isAtivo) {
+		this.isAtivo = isAtivo;
 	}
 
 }

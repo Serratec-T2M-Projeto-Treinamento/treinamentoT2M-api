@@ -29,19 +29,10 @@ public class ColaboradoresEnderecosService {
 		return colabsEndrsRepository.findByColaborador(colaborador);
 	}
 
-//	
-//	
-//	
-//	IMPLEMENTAR MÉTODOS DE COLABORADORES
-//	
-//	
-//	
-//	
-//	
-//	public List<ColaboradoresEnderecos> findByIdColaboradorAtivo(Long id) {
-//		Colaboradores colaborador = colaboradoresRepository.findById(id).get();
-//		return colabsEndrsRepository.findByColaborador(colaborador);
-//	}
+	public List<ColaboradoresEnderecos> findByIdColaboradorAtivo(Long id) {
+		Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, id);
+		return colabsEndrsRepository.findByColaborador(colaborador);
+	}
 
 	public List<ColaboradoresEnderecos> findByIdEndereco(Long id) {
 		Enderecos endereco = enderecosRepository.findById(id).get();

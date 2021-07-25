@@ -37,7 +37,6 @@ public class ProjetosService {
 	public Projetos save(Projetos projeto) {
 		projeto.setIsAtivo(1);
 		Projetos novoProjeto = projetosRepository.save(projeto);
-		// SERVIÇO DE ENTIDADE DE LIGAÇÃO (?)
 		if (novoProjeto != null) {
 			return novoProjeto;
 		} else {

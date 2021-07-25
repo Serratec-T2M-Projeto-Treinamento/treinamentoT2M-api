@@ -8,8 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "posicoes")
@@ -26,10 +27,15 @@ public class Posicoes {
 	@Column(name = "descricao")
 	private String descricao;
 
-	@OneToOne(mappedBy = "posicao")
-	private Colaboradores colaborador;
+	@Column(name = "isativo")
+	private Integer isAtivo;
 
 	@OneToMany(mappedBy = "posicao")
+	@JsonIgnore
+	private Set<Colaboradores> setColaboradores;
+
+	@OneToMany(mappedBy = "posicao")
+	@JsonIgnore
 	private Set<PosicoesCompetencias> setPosicoesCompetencias;
 
 	public Long getIdPosicoes() {
@@ -56,20 +62,28 @@ public class Posicoes {
 		this.descricao = descricao;
 	}
 
-	public Colaboradores getColaborador() {
-		return colaborador;
-	}
-
-	public void setColaborador(Colaboradores colaborador) {
-		this.colaborador = colaborador;
-	}
-
 	public Set<PosicoesCompetencias> getSetPosicoesCompetencias() {
 		return setPosicoesCompetencias;
 	}
 
 	public void setSetPosicoesCompetencias(Set<PosicoesCompetencias> setPosicoesCompetencias) {
 		this.setPosicoesCompetencias = setPosicoesCompetencias;
+	}
+
+	public Integer getIsAtivo() {
+		return isAtivo;
+	}
+
+	public void setIsAtivo(Integer isAtivo) {
+		this.isAtivo = isAtivo;
+	}
+
+	public Set<Colaboradores> getSetColaboradores() {
+		return setColaboradores;
+	}
+
+	public void setSetColaboradores(Set<Colaboradores> setColaboradores) {
+		this.setColaboradores = setColaboradores;
 	}
 
 }

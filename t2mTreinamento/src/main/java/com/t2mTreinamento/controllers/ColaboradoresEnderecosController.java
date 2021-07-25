@@ -30,11 +30,11 @@ public class ColaboradoresEnderecosController {
 		return new ResponseEntity<>(colabsEndrsService.findByIdColaborador(id), headers, HttpStatus.OK);
 	}
 
-//	@GetMapping("/colaborador/{id}")
-//	public ResponseEntity<List<ColaboradoresEnderecos>> findByIdColaboradorAtivo(@PathVariable Long id) {
-//		HttpHeaders headers = new HttpHeaders();
-//		return new ResponseEntity<>(colabsEndrsService.findByIdColaboradorAtivo(id), headers, HttpStatus.OK);
-//	}
+	@GetMapping("/colaborador/{id}")
+	public ResponseEntity<List<ColaboradoresEnderecos>> findByIdColaboradorAtivo(@PathVariable Long id) {
+		HttpHeaders headers = new HttpHeaders();
+		return new ResponseEntity<>(colabsEndrsService.findByIdColaboradorAtivo(id), headers, HttpStatus.OK);
+	}
 
 	@GetMapping("/history/endereco/{id}")
 	public ResponseEntity<List<ColaboradoresEnderecos>> findByIdEndereco(@PathVariable Long id) {

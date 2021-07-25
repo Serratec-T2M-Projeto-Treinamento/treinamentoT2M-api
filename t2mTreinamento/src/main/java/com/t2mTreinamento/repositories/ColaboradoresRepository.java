@@ -12,4 +12,6 @@ public interface ColaboradoresRepository extends JpaRepository<Colaboradores, Lo
 
 	List<Colaboradores> findByIsAtivo(Integer isAtivo);
 
+	Colaboradores findByIsAtivoAndIdColaboradores(Integer isAtivo, Long idColaboradores);
+	
 }

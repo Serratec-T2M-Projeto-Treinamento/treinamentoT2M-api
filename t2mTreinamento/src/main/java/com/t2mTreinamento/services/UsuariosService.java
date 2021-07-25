@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.t2mTreinamento.entities.Colaboradores;
 import com.t2mTreinamento.entities.Usuarios;
+import com.t2mTreinamento.repositories.ColaboradoresRepository;
 import com.t2mTreinamento.repositories.UsuariosRepository;
 
 @Service
@@ -14,12 +16,23 @@ public class UsuariosService {
 	@Autowired
 	public UsuariosRepository usuariosRepository;
 
+	@Autowired
+	public ColaboradoresRepository colaboradoresRepository;
+
 	public Usuarios findById(Long id) {
 		return usuariosRepository.findById(id).get();
 	}
 
+	public Usuarios findByIsAtivoAndIdUsuarios(Long idUsuarios) {
+		return usuariosRepository.findByIsAtivoAndIdUsuarios(1, idUsuarios);
+	}
+
 	public List<Usuarios> findAll() {
 		return usuariosRepository.findAll();
+	}
+
+	public List<Usuarios> findByIsAtivo() {
+		return usuariosRepository.findByIsAtivo(1);
 	}
 
 	public Long Count() {
@@ -27,6 +40,7 @@ public class UsuariosService {
 	}
 
 	public Usuarios save(Usuarios usuario) {
+		usuario.setIsAtivo(1);
 		Usuarios novoUsuario = usuariosRepository.save(usuario);
 
 		if (novoUsuario != null) {
@@ -37,8 +51,11 @@ public class UsuariosService {
 	}
 
 	public boolean delete(Long id) {
-		if (id != null) {
-			usuariosRepository.deleteById(id);
+		// DELETAR DA LISTA DE REGISTROS ATIVOS
+		if (id != null && usuariosRepository.findById(id).get().getIsAtivo() == 1) {
+			Usuarios usuario = usuariosRepository.findByIsAtivoAndIdUsuarios(1, id);
+			usuario.setIsAtivo(0);
+			usuariosRepository.save(usuario);
 			return true;
 		} else {
 			return false;
@@ -47,6 +64,37 @@ public class UsuariosService {
 
 	public Usuarios update(Usuarios usuario, Long id) {
 		usuario.setIdUsuarios(id);
+		usuario.setIsAtivo(1);
 		return usuariosRepository.save(usuario);
+	}
+
+	public Usuarios insereColaborador(Long idUsuario, Long idColab) {
+		Usuarios usuario = usuariosRepository.findByIsAtivoAndIdUsuarios(1, idUsuario);
+		Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);
+
+		if (colaborador.getIsLider() == 1) {
+			usuario.setColaborador(colaborador);
+
+			Usuarios usuarioAtualizado = usuariosRepository.save(usuario);
+
+			if (usuarioAtualizado != null) {
+				return usuarioAtualizado;
+			} else {
+				return null;
+			}
+
+		} else {
+			return null;
+		}
+	}
+	
+	public boolean verificaAdmin(Long idUsuario) {
+		Usuarios usuario = usuariosRepository.findByIsAtivoAndIdUsuarios(1, idUsuario);
+		
+		if (usuario.getIsAdmin() == 1) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

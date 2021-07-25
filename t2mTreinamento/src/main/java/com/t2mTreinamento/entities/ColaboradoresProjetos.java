@@ -45,6 +45,20 @@ public class ColaboradoresProjetos {
 	@JsonIgnore
 	private Integer isAtivo;
 
+	public ColaboradoresProjetos() {
+
+	}
+
+	public ColaboradoresProjetos(ColaboradoresProjetosId idColaboradoresProjetos, Colaboradores colaborador,
+			Projetos projeto, String funcao, Calendar dataInicio, Integer isAtivo) {
+		this.idColaboradoresProjetos = idColaboradoresProjetos;
+		this.colaborador = colaborador;
+		this.projeto = projeto;
+		this.funcao = funcao;
+		this.dataInicio = dataInicio;
+		this.isAtivo = isAtivo;
+	}
+
 	public ColaboradoresProjetosId getIdColaboradoresProjetos() {
 		return idColaboradoresProjetos;
 	}

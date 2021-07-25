@@ -42,6 +42,19 @@ public class ColaboradoresFormacoes {
 	@JsonIgnore
 	private Integer isAtivo;
 
+	public ColaboradoresFormacoes() {
+
+	}
+
+	public ColaboradoresFormacoes(ColaboradoresFormacoesId idColaboradoresFormacoes, Colaboradores colaborador,
+			Formacoes formacao, Calendar dataEntrada, Integer isAtivo) {
+		this.idColaboradoresFormacoes = idColaboradoresFormacoes;
+		this.colaborador = colaborador;
+		this.formacao = formacao;
+		this.dataEntrada = dataEntrada;
+		this.isAtivo = isAtivo;
+	}
+
 	public ColaboradoresFormacoesId getIdColaboradoresFormacoes() {
 		return idColaboradoresFormacoes;
 	}

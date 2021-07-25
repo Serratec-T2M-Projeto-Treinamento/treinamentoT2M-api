@@ -30,11 +30,11 @@ public class ColaboradoresProjetosController {
 		return new ResponseEntity<>(colabsProjsService.findByIdColaborador(id), headers, HttpStatus.OK);
 	}
 
-//	@GetMapping("/colaborador/{id}")
-//	public ResponseEntity<List<ColaboradoresProjetos>> findByIdColaboradorAtivo(@PathVariable Long id) {
-//		HttpHeaders headers = new HttpHeaders();
-//		return new ResponseEntity<>(colabsProjsService.findByIdColaboradorAtivo(id), headers, HttpStatus.OK);
-//	}
+	@GetMapping("/colaborador/{id}")
+	public ResponseEntity<List<ColaboradoresProjetos>> findByIdColaboradorAtivo(@PathVariable Long id) {
+		HttpHeaders headers = new HttpHeaders();
+		return new ResponseEntity<>(colabsProjsService.findByIdColaboradorAtivo(id), headers, HttpStatus.OK);
+	}
 
 	@GetMapping("/history/projeto/{id}")
 	public ResponseEntity<List<ColaboradoresProjetos>> findByIdProjeto(@PathVariable Long id) {
@@ -74,7 +74,7 @@ public class ColaboradoresProjetosController {
 		}
 	}
 
-	@PutMapping("colaborador/{id}")
+	@PutMapping("/colaborador/{id}")
 	public ResponseEntity<ColaboradoresProjetos> update(@RequestBody ColaboradoresProjetos colabProj,
 			@PathVariable Long id) {
 		HttpHeaders headers = new HttpHeaders();

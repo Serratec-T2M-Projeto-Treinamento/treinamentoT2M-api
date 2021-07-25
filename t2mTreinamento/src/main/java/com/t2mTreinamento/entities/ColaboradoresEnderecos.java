@@ -33,6 +33,19 @@ public class ColaboradoresEnderecos {
 	@JsonIgnore
 	private Integer isAtivo;
 
+	public ColaboradoresEnderecos() {
+
+	}
+
+	public ColaboradoresEnderecos(ColaboradoresEnderecosId idColaboradoresEnderecos, Colaboradores colaborador,
+			Enderecos endereco, Integer isAtivo) {
+
+		this.idColaboradoresEnderecos = idColaboradoresEnderecos;
+		this.colaborador = colaborador;
+		this.endereco = endereco;
+		this.isAtivo = isAtivo;
+	}
+
 	public ColaboradoresEnderecosId getIdColaboradoresEnderecos() {
 		return idColaboradoresEnderecos;
 	}
