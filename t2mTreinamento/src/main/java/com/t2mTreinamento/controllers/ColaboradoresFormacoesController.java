@@ -74,13 +74,10 @@ public class ColaboradoresFormacoesController {
 		}
 	}
 
-	@PutMapping("colaborador/{id}")
+	@PutMapping("/colaborador/{idColab}/formacao/{idForm}")
 	public ResponseEntity<ColaboradoresFormacoes> update(@RequestBody ColaboradoresFormacoes colabForm,
-			@PathVariable Long id) {
+			@PathVariable Long idColab, @PathVariable Long idForm) {
 		HttpHeaders headers = new HttpHeaders();
-
-		Long idColab = colabForm.getColaborador().getIdColaboradores();
-		Long idForm = colabForm.getFormacao().getIdFormacoes();
 
 		ColaboradoresFormacoes colabFormAtualizado = colabsFormsService.update(colabForm, idColab, idForm);
 

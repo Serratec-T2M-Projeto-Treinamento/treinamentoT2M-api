@@ -74,13 +74,10 @@ public class ColaboradoresProjetosController {
 		}
 	}
 
-	@PutMapping("/colaborador/{id}")
+	@PutMapping("/colaborador/{idColab}/projeto/{idProj}")
 	public ResponseEntity<ColaboradoresProjetos> update(@RequestBody ColaboradoresProjetos colabProj,
-			@PathVariable Long id) {
+			@PathVariable Long idColab, @PathVariable Long idProj) {
 		HttpHeaders headers = new HttpHeaders();
-
-		Long idColab = colabProj.getColaborador().getIdColaboradores();
-		Long idProj = colabProj.getProjeto().getIdProjetos();
 
 		ColaboradoresProjetos colabProjAtualizado = colabsProjsService.update(colabProj, idColab, idProj);
 
@@ -90,5 +87,19 @@ public class ColaboradoresProjetosController {
 			return new ResponseEntity<>(colabProjAtualizado, headers, HttpStatus.BAD_REQUEST);
 		}
 	}
+
+//	@PutMapping("/colaborador/{idColab}/projeto/{idProj}/dataSaida/{dataSaidaProj}")
+//	public ResponseEntity<ColaboradoresProjetos> updateDataSaida(@PathVariable Long idColab, @PathVariable Long idProj,
+//			@PathVariable String dataSaidaProj) throws Exception {
+//		HttpHeaders headers = new HttpHeaders();
+//
+//		ColaboradoresProjetos colabProjAtualizado = colabsProjsService.updateDataSaida(idColab, idProj, dataSaidaProj);
+//
+//		if (colabProjAtualizado != null) {
+//			return new ResponseEntity<>(colabProjAtualizado, headers, HttpStatus.OK);
+//		} else {
+//			return new ResponseEntity<>(colabProjAtualizado, headers, HttpStatus.BAD_REQUEST);
+//		}
+//	}
 
 }

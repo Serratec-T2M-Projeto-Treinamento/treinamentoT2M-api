@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.t2mTreinamento.entities.Colaboradores;
 import com.t2mTreinamento.entities.ColaboradoresProjetos;
+import com.t2mTreinamento.entities.ColaboradoresProjetosId;
 import com.t2mTreinamento.entities.Projetos;
 import com.t2mTreinamento.repositories.ColaboradoresProjetosRepository;
 import com.t2mTreinamento.repositories.ColaboradoresRepository;
@@ -101,24 +102,45 @@ public class ColaboradoresProjetosService {
 	}
 
 	private void updateDados(ColaboradoresProjetos colabProj, ColaboradoresProjetos novoColabProj) {
+
 		novoColabProj.setColaborador(colabProj.getColaborador());
 		novoColabProj.setProjeto(colabProj.getProjeto());
-		novoColabProj.setIsAtivo(colabProj.getIsAtivo());
 		novoColabProj.setDataInicio(colabProj.getDataInicio());
 		novoColabProj.setDataSaida(colabProj.getDataSaida());
 		novoColabProj.setFuncao(colabProj.getFuncao());
-		novoColabProj.setIdColaboradoresProjetos(colabProj.getIdColaboradoresProjetos());
+		novoColabProj.setIsAtivo(1);
 	}
 
 	public ColaboradoresProjetos update(ColaboradoresProjetos colabProj, Long idColab, Long idProj) {
-		Colaboradores colaborador = colaboradoresRepository.findById(idColab).get();
 
-		Projetos projeto = projetosRepository.findById(idProj).get();
+		Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);
+		Projetos projeto = projetosRepository.findByIsAtivoAndIdProjetos(1, idProj);
 
-		ColaboradoresProjetos novoColabProj = colabsProjsRepository.findByColaboradorAndProjeto(colaborador, projeto);
+		ColaboradoresProjetos novoColabProj = new ColaboradoresProjetos();
+
+		novoColabProj.setColaborador(colaborador);
+		novoColabProj.setProjeto(projeto);
+		novoColabProj.setIdColaboradoresProjetos(new ColaboradoresProjetosId(idColab, idProj));
 
 		updateDados(colabProj, novoColabProj);
 
 		return colabsProjsRepository.save(novoColabProj);
+
 	}
+
+//	public ColaboradoresProjetos updateDataSaida(Long idColab, Long idProj, String dataSaidaProj) throws Exception {
+//		Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);
+//		Projetos projeto = projetosRepository.findByIsAtivoAndIdProjetos(1, idProj);
+//
+//		ColaboradoresProjetos colabProj = colabsProjsRepository.findByColaboradorAndProjeto(colaborador, projeto);
+//
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//		Date dataProj = sdf.parse(dataSaidaProj);
+//		Calendar dataSaida = Calendar.getInstance();
+//		dataSaida.setTime(dataProj);
+//
+//		colabProj.setDataSaida(dataSaida);
+//
+//		return colabsProjsRepository.save(colabProj);
+//	}
 }

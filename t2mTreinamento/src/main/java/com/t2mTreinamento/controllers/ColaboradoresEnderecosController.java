@@ -61,13 +61,10 @@ public class ColaboradoresEnderecosController {
 		}
 	}
 
-	@PutMapping("colaborador/{id}")
+	@PutMapping("/colaborador/{idColab}/endereco/{idEndr}")
 	public ResponseEntity<ColaboradoresEnderecos> update(@RequestBody ColaboradoresEnderecos colabEndr,
-			@PathVariable Long id) {
+			@PathVariable Long idColab, @PathVariable Long idEndr) {
 		HttpHeaders headers = new HttpHeaders();
-
-		Long idColab = colabEndr.getColaborador().getIdColaboradores();
-		Long idEndr = colabEndr.getEndereco().getIdEnderecos();
 
 		ColaboradoresEnderecos colabEndrAtualizado = colabsEndrsService.update(colabEndr, idColab, idEndr);
 

@@ -1,5 +1,6 @@
 package com.t2mTreinamento.services;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,12 +40,26 @@ public class UsuariosService {
 		return usuariosRepository.count();
 	}
 
-	public Usuarios save(Usuarios usuario) {
-		usuario.setIsAtivo(1);
-		Usuarios novoUsuario = usuariosRepository.save(usuario);
+	public Usuarios criaNovoUsuario(Colaboradores colaborador) {
 
-		if (novoUsuario != null) {
-			return novoUsuario;
+		String nomeUsuario = colaborador.getCpf().charAt(0) + "-" + colaborador.getCpf().charAt(4)
+				+ colaborador.getCpf().charAt(8) + colaborador.getCpf().charAt(12) + colaborador.getCpf().charAt(13);
+
+		String senha = colaborador.getDataNascimento().get(Calendar.YEAR) + "/"
+				+ colaborador.getDataNascimento().get(Calendar.MONTH);
+
+		Usuarios novoUsuario = new Usuarios(nomeUsuario, senha, 1, colaborador);
+
+		return novoUsuario;
+
+	}
+
+	public Usuarios save(Usuarios novoUsuario) {
+
+		Usuarios usuario = usuariosRepository.save(novoUsuario);
+
+		if (usuario != null) {
+			return usuario;
 		} else {
 			return null;
 		}
@@ -87,10 +102,10 @@ public class UsuariosService {
 			return null;
 		}
 	}
-	
+
 	public boolean verificaAdmin(Long idUsuario) {
 		Usuarios usuario = usuariosRepository.findByIsAtivoAndIdUsuarios(1, idUsuario);
-		
+
 		if (usuario.getIsAdmin() == 1) {
 			return true;
 		} else {

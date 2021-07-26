@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.t2mTreinamento.entities.Colaboradores;
 import com.t2mTreinamento.entities.ColaboradoresEnderecos;
+import com.t2mTreinamento.entities.ColaboradoresEnderecosId;
 import com.t2mTreinamento.entities.Enderecos;
 import com.t2mTreinamento.repositories.ColaboradoresEnderecosRepository;
 import com.t2mTreinamento.repositories.ColaboradoresRepository;
@@ -100,19 +101,20 @@ public class ColaboradoresEnderecosService {
 	}
 
 	private void updateDados(ColaboradoresEnderecos colabEndr, ColaboradoresEnderecos novoColabEndr) {
-		novoColabEndr.setColaborador(colabEndr.getColaborador());
-		novoColabEndr.setEndereco(colabEndr.getEndereco());
 		novoColabEndr.setIdColaboradoresEnderecos(colabEndr.getIdColaboradoresEnderecos());
 		novoColabEndr.setIsAtivo(colabEndr.getIsAtivo());
 	}
 
 	public ColaboradoresEnderecos update(ColaboradoresEnderecos colabEndr, Long idColab, Long idEndr) {
-		Colaboradores colaborador = colaboradoresRepository.findById(idColab).get();
 
+		Colaboradores colaborador = colaboradoresRepository.findById(idColab).get();
 		Enderecos endereco = enderecosRepository.findById(idEndr).get();
 
-		ColaboradoresEnderecos novoColabEndr = colabsEndrsRepository.findByColaboradorAndEndereco(colaborador,
-				endereco);
+		ColaboradoresEnderecos novoColabEndr = new ColaboradoresEnderecos();
+
+		novoColabEndr.setColaborador(colaborador);
+		novoColabEndr.setEndereco(endereco);
+		novoColabEndr.setIdColaboradoresEnderecos(new ColaboradoresEnderecosId(idColab, idEndr));
 
 		updateDados(colabEndr, novoColabEndr);
 

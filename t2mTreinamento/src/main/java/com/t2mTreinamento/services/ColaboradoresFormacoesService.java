@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.t2mTreinamento.entities.Colaboradores;
 import com.t2mTreinamento.entities.ColaboradoresFormacoes;
+import com.t2mTreinamento.entities.ColaboradoresFormacoesId;
 import com.t2mTreinamento.entities.Formacoes;
 import com.t2mTreinamento.repositories.ColaboradoresFormacoesRepository;
 import com.t2mTreinamento.repositories.ColaboradoresRepository;
@@ -100,21 +101,22 @@ public class ColaboradoresFormacoesService {
 	}
 
 	private void updateDados(ColaboradoresFormacoes colabForm, ColaboradoresFormacoes novoColabForm) {
-		novoColabForm.setColaborador(colabForm.getColaborador());
-		novoColabForm.setDataConclusao(colabForm.getDataConclusao());
+
 		novoColabForm.setDataEntrada(colabForm.getDataEntrada());
-		novoColabForm.setFormacao(colabForm.getFormacao());
-		novoColabForm.setIdColaboradoresFormacoes(colabForm.getIdColaboradoresFormacoes());
-		novoColabForm.setIsAtivo(colabForm.getIsAtivo());
+		novoColabForm.setDataConclusao(colabForm.getDataConclusao());
+		novoColabForm.setIsAtivo(1);
 	}
 
 	public ColaboradoresFormacoes update(ColaboradoresFormacoes colabForm, Long idColab, Long idForm) {
-		Colaboradores colaborador = colaboradoresRepository.findById(idColab).get();
 
-		Formacoes formacao = formacoesRepository.findById(idForm).get();
+		Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);
+		Formacoes formacao = formacoesRepository.findByIsAtivoAndIdFormacoes(1, idForm);
 
-		ColaboradoresFormacoes novoColabForm = colabsFormsRepository.findByColaboradorAndFormacao(colaborador,
-				formacao);
+		ColaboradoresFormacoes novoColabForm = new ColaboradoresFormacoes();
+
+		novoColabForm.setColaborador(colaborador);
+		novoColabForm.setFormacao(formacao);
+		novoColabForm.setIdColaboradoresFormacoes(new ColaboradoresFormacoesId(idColab, idForm));
 
 		updateDados(colabForm, novoColabForm);
 

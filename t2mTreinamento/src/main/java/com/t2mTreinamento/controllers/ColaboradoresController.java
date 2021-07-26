@@ -21,7 +21,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.t2mTreinamento.entities.Colaboradores;
+import com.t2mTreinamento.services.ColaboradoresEnderecosService;
+import com.t2mTreinamento.services.ColaboradoresFormacoesService;
+import com.t2mTreinamento.services.ColaboradoresProjetosService;
 import com.t2mTreinamento.services.ColaboradoresService;
+import com.t2mTreinamento.services.UsuariosService;
 
 @RestController
 @RequestMapping("/colaboradores")
@@ -30,14 +34,17 @@ public class ColaboradoresController {
 	@Autowired
 	private ColaboradoresService colaboradoresService;
 
-//	@Autowired
-//	private ColaboradoresEnderecosService colabsEndrsService;
-//
-//	@Autowired
-//	private ColaboradoresFormacoesService colabsFormsService;
-//
-//	@Autowired
-//	private ColaboradoresProjetosService colabsProjsService;
+	@Autowired
+	private UsuariosService usuariosService;
+
+	@Autowired
+	private ColaboradoresEnderecosService colabsEndrsService;
+
+	@Autowired
+	private ColaboradoresFormacoesService colabsFormsService;
+
+	@Autowired
+	private ColaboradoresProjetosService colabsProjsService;
 
 	@GetMapping("/history/{id}")
 	public ResponseEntity<Colaboradores> findById(@PathVariable Long id) {
@@ -75,6 +82,11 @@ public class ColaboradoresController {
 		Colaboradores novoColaborador = colaboradoresService.save(colaborador);
 
 		if (novoColaborador != null) {
+
+			if (colaborador.getIsLider() == 1) {
+				usuariosService.save(usuariosService.criaNovoUsuario(colaborador));
+			}
+
 			return new ResponseEntity<>(novoColaborador, headers, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(novoColaborador, headers, HttpStatus.BAD_REQUEST);
@@ -86,8 +98,11 @@ public class ColaboradoresController {
 		HttpHeaders headers = new HttpHeaders();
 
 		boolean removidoDeColaboradores = colaboradoresService.delete(id);
+		boolean removidoDeColabsEndrs = colabsEndrsService.deleteByColaborador(id);
+		boolean removidoDeColabsForms = colabsFormsService.deleteByColaborador(id);
+		boolean removidoDeColabsProjs = colabsProjsService.deleteByColaborador(id);
 
-		if (removidoDeColaboradores) {
+		if (removidoDeColaboradores && removidoDeColabsEndrs && removidoDeColabsForms && removidoDeColabsProjs) {
 
 			return new ResponseEntity<>(headers, HttpStatus.OK);
 		} else {

@@ -37,6 +37,17 @@ public class Usuarios {
 	@JoinColumn(name = "id_colaborador", referencedColumnName = "id")
 	private Colaboradores colaborador;
 
+	public Usuarios() {
+
+	}
+
+	public Usuarios(String usuario, String senha, Integer isAtivo, Colaboradores colaborador) {
+		this.usuario = usuario;
+		this.senha = senha;
+		this.isAtivo = isAtivo;
+		this.colaborador = colaborador;
+	}
+
 	public Long getIdUsuarios() {
 		return idUsuarios;
 	}
