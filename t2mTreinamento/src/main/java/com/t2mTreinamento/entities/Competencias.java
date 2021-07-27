@@ -2,6 +2,7 @@ package com.t2mTreinamento.entities;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,13 +26,16 @@ public class Competencias {
 	@Column(name = "descricao")
 	private String descricao;
 
-	@OneToMany(mappedBy = "competencia")
+	@Column(name = "isativo")
+	private Integer isAtivo;
+
+	@OneToMany(mappedBy = "competencia", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<PosicoesCompetencias> setPosicoesCompetencias;
 
-	@OneToMany(mappedBy = "competencia")
+	@OneToMany(mappedBy = "competencia", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<CompetenciasNiveis> setCompetenciasNiveis;
 
-	@OneToMany(mappedBy = "competencia")
+	@OneToMany(mappedBy = "competencia", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<CompetenciasConhecimentos> setCompetenciasConhecimentos;
 
 	public Long getIdCompetencias() {
@@ -80,6 +84,14 @@ public class Competencias {
 
 	public void setSetCompetenciasConhecimentos(Set<CompetenciasConhecimentos> setCompetenciasConhecimentos) {
 		this.setCompetenciasConhecimentos = setCompetenciasConhecimentos;
+	}
+
+	public Integer getIsAtivo() {
+		return isAtivo;
+	}
+
+	public void setIsAtivo(Integer isAtivo) {
+		this.isAtivo = isAtivo;
 	}
 
 }

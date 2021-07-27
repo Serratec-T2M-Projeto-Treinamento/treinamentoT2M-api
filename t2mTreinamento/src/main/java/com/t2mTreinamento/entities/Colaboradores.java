@@ -76,6 +76,23 @@ public class Colaboradores {
 	@OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<ColaboradoresCertificacoes> setColaboradoresCertificacoes;
 
+	public Colaboradores() {
+
+	}
+
+	public Colaboradores(String nome, Calendar dataNascimento, String email, Double contaBancaria, String pix,
+			String cpf, String rg, String cnh, Integer permissao) {
+		this.nome = nome;
+		this.dataNascimento = dataNascimento;
+		this.email = email;
+		this.contaBancaria = contaBancaria;
+		this.pix = pix;
+		this.cpf = cpf;
+		this.rg = rg;
+		this.cnh = cnh;
+		this.permissao = permissao;
+	}
+
 	public Long getIdColaboradores() {
 		return idColaboradores;
 	}
