@@ -48,8 +48,8 @@ public class Colaboradores {
 	@Column(name = "cnh")
 	private String cnh;
 
-	@Column(name = "islider")
-	private Integer isLider;
+	@Column(name = "permissao")
+	private Integer permissao;
 
 	@Column(name = "isativo")
 	private Integer isAtivo;
@@ -140,14 +140,6 @@ public class Colaboradores {
 		this.cnh = cnh;
 	}
 
-	public Integer getIsLider() {
-		return isLider;
-	}
-
-	public void setIsLider(Integer isLider) {
-		this.isLider = isLider;
-	}
-
 	public Usuarios getUsuario() {
 		return usuario;
 	}
@@ -218,6 +210,14 @@ public class Colaboradores {
 
 	public void setIsAtivo(Integer isAtivo) {
 		this.isAtivo = isAtivo;
+	}
+
+	public Integer getPermissao() {
+		return permissao;
+	}
+
+	public void setPermissao(Integer permissao) {
+		this.permissao = permissao;
 	}
 
 }

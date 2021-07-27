@@ -88,18 +88,4 @@ public class ColaboradoresProjetosController {
 		}
 	}
 
-//	@PutMapping("/colaborador/{idColab}/projeto/{idProj}/dataSaida/{dataSaidaProj}")
-//	public ResponseEntity<ColaboradoresProjetos> updateDataSaida(@PathVariable Long idColab, @PathVariable Long idProj,
-//			@PathVariable String dataSaidaProj) throws Exception {
-//		HttpHeaders headers = new HttpHeaders();
-//
-//		ColaboradoresProjetos colabProjAtualizado = colabsProjsService.updateDataSaida(idColab, idProj, dataSaidaProj);
-//
-//		if (colabProjAtualizado != null) {
-//			return new ResponseEntity<>(colabProjAtualizado, headers, HttpStatus.OK);
-//		} else {
-//			return new ResponseEntity<>(colabProjAtualizado, headers, HttpStatus.BAD_REQUEST);
-//		}
-//	}
-
 }

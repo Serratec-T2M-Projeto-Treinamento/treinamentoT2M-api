@@ -15,8 +15,15 @@ public interface ColaboradoresProjetosRepository extends JpaRepository<Colaborad
 
 	List<ColaboradoresProjetos> findByColaborador(Colaboradores colaborador);
 
+	List<ColaboradoresProjetos> findByColaboradorAndIsAtivo(Colaboradores colaborador, Integer isAtivo);
+
 	List<ColaboradoresProjetos> findByProjeto(Projetos projeto);
 
+	List<ColaboradoresProjetos> findByProjetoAndIsAtivo(Projetos projeto, Integer isAtivo);
+
 	ColaboradoresProjetos findByColaboradorAndProjeto(Colaboradores colaborador, Projetos projeto);
+
+	ColaboradoresProjetos findByColaboradorAndProjetoAndIsAtivo(Colaboradores colaborador, Projetos projeto,
+			Integer isAtivo);
 
 }

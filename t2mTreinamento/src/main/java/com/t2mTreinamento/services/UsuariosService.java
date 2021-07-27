@@ -48,9 +48,21 @@ public class UsuariosService {
 		String senha = colaborador.getDataNascimento().get(Calendar.YEAR) + "/"
 				+ colaborador.getDataNascimento().get(Calendar.MONTH);
 
-		Usuarios novoUsuario = new Usuarios(nomeUsuario, senha, 1, colaborador);
+		if (colaborador.getPermissao() == 1) {
 
-		return novoUsuario;
+			Usuarios novoUsuario = new Usuarios(nomeUsuario, senha, 0, 1, colaborador);
+
+			return novoUsuario;
+
+		} else if (colaborador.getPermissao() == 2) {
+
+			Usuarios novoUsuario = new Usuarios(nomeUsuario, senha, 1, 1, colaborador);
+
+			return novoUsuario;
+
+		} else {
+			return null;
+		}
 
 	}
 
@@ -66,11 +78,24 @@ public class UsuariosService {
 	}
 
 	public boolean delete(Long id) {
-		// DELETAR DA LISTA DE REGISTROS ATIVOS
 		if (id != null && usuariosRepository.findById(id).get().getIsAtivo() == 1) {
 			Usuarios usuario = usuariosRepository.findByIsAtivoAndIdUsuarios(1, id);
 			usuario.setIsAtivo(0);
 			usuariosRepository.save(usuario);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean deleteByColaborador(Long id) {
+		if (id != null) {
+			Colaboradores colaborador = colaboradoresRepository.findById(id).get();
+			Usuarios usuario = usuariosRepository.findByColaborador(colaborador);
+
+			usuario.setIsAtivo(0);
+			usuariosRepository.save(usuario);
+
 			return true;
 		} else {
 			return false;
@@ -87,7 +112,8 @@ public class UsuariosService {
 		Usuarios usuario = usuariosRepository.findByIsAtivoAndIdUsuarios(1, idUsuario);
 		Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);
 
-		if (colaborador.getIsLider() == 1) {
+		if ((colaborador.getPermissao() == 1 && usuario.getIsAdmin() == 0)
+				|| (colaborador.getPermissao() == 2 && usuario.getIsAdmin() == 1)) {
 			usuario.setColaborador(colaborador);
 
 			Usuarios usuarioAtualizado = usuariosRepository.save(usuario);
@@ -112,4 +138,5 @@ public class UsuariosService {
 			return false;
 		}
 	}
+
 }

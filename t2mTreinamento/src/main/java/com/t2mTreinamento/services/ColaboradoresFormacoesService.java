@@ -32,7 +32,7 @@ public class ColaboradoresFormacoesService {
 
 	public List<ColaboradoresFormacoes> findByIdColaboradorAtivo(Long id) {
 		Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, id);
-		return colabsFormsRepository.findByColaborador(colaborador);
+		return colabsFormsRepository.findByColaboradorAndIsAtivo(colaborador, 1);
 	}
 
 	public List<ColaboradoresFormacoes> findByIdFormacao(Long id) {
@@ -42,7 +42,7 @@ public class ColaboradoresFormacoesService {
 
 	public List<ColaboradoresFormacoes> findByIdFormacaoAtivo(Long id) {
 		Formacoes formacao = formacoesRepository.findByIsAtivoAndIdFormacoes(1, id);
-		return colabsFormsRepository.findByFormacao(formacao);
+		return colabsFormsRepository.findByFormacaoAndIsAtivo(formacao, 1);
 	}
 
 	public List<ColaboradoresFormacoes> findAll() {
@@ -54,8 +54,8 @@ public class ColaboradoresFormacoesService {
 	}
 
 	public ColaboradoresFormacoes save(ColaboradoresFormacoes colabForm, Long idColab, Long idForm) {
-		Colaboradores colaborador = colaboradoresRepository.findById(idColab).get();
-		Formacoes formacao = formacoesRepository.findById(idForm).get();
+		Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);
+		Formacoes formacao = formacoesRepository.findByIsAtivoAndIdFormacoes(1, idForm);
 		colabForm.setColaborador(colaborador);
 		colabForm.setFormacao(formacao);
 		colabForm.setIsAtivo(1);

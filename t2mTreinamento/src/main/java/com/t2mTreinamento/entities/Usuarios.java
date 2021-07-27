@@ -41,9 +41,10 @@ public class Usuarios {
 
 	}
 
-	public Usuarios(String usuario, String senha, Integer isAtivo, Colaboradores colaborador) {
+	public Usuarios(String usuario, String senha, Integer isAdmin, Integer isAtivo, Colaboradores colaborador) {
 		this.usuario = usuario;
 		this.senha = senha;
+		this.isAdmin = isAdmin;
 		this.isAtivo = isAtivo;
 		this.colaborador = colaborador;
 	}

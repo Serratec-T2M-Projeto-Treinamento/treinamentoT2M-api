@@ -32,7 +32,7 @@ public class ColaboradoresProjetosService {
 
 	public List<ColaboradoresProjetos> findByIdColaboradorAtivo(Long id) {
 		Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, id);
-		return colabsProjsRepository.findByColaborador(colaborador);
+		return colabsProjsRepository.findByColaboradorAndIsAtivo(colaborador, 1);
 
 	}
 
@@ -43,7 +43,7 @@ public class ColaboradoresProjetosService {
 
 	public List<ColaboradoresProjetos> findByIdProjetoAtivo(Long id) {
 		Projetos projeto = projetosRepository.findByIsAtivoAndIdProjetos(1, id);
-		return colabsProjsRepository.findByProjeto(projeto);
+		return colabsProjsRepository.findByProjetoAndIsAtivo(projeto, 1);
 	}
 
 	public List<ColaboradoresProjetos> findAll() {
@@ -55,8 +55,8 @@ public class ColaboradoresProjetosService {
 	}
 
 	public ColaboradoresProjetos save(ColaboradoresProjetos colabProj, Long idColab, Long idProj) {
-		Colaboradores colaborador = colaboradoresRepository.findById(idColab).get();
-		Projetos projeto = projetosRepository.findById(idProj).get();
+		Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);
+		Projetos projeto = projetosRepository.findByIsAtivoAndIdProjetos(1, idProj);
 		colabProj.setColaborador(colaborador);
 		colabProj.setProjeto(projeto);
 		colabProj.setIsAtivo(1);
@@ -87,8 +87,8 @@ public class ColaboradoresProjetosService {
 
 	public boolean deleteByProjeto(Long id) {
 		if (id != null) {
-			Projetos projeto = projetosRepository.findById(id).get();
-			List<ColaboradoresProjetos> listColabsProjs = colabsProjsRepository.findByProjeto(projeto);
+			Projetos projeto = projetosRepository.findByIsAtivoAndIdProjetos(1, id);
+			List<ColaboradoresProjetos> listColabsProjs = colabsProjsRepository.findByProjetoAndIsAtivo(projeto, 1);
 
 			for (ColaboradoresProjetos colabProj : listColabsProjs) {
 				colabProj.setIsAtivo(0);
@@ -128,19 +128,4 @@ public class ColaboradoresProjetosService {
 
 	}
 
-//	public ColaboradoresProjetos updateDataSaida(Long idColab, Long idProj, String dataSaidaProj) throws Exception {
-//		Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);
-//		Projetos projeto = projetosRepository.findByIsAtivoAndIdProjetos(1, idProj);
-//
-//		ColaboradoresProjetos colabProj = colabsProjsRepository.findByColaboradorAndProjeto(colaborador, projeto);
-//
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//		Date dataProj = sdf.parse(dataSaidaProj);
-//		Calendar dataSaida = Calendar.getInstance();
-//		dataSaida.setTime(dataProj);
-//
-//		colabProj.setDataSaida(dataSaida);
-//
-//		return colabsProjsRepository.save(colabProj);
-//	}
 }

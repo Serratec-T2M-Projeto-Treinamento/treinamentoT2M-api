@@ -16,7 +16,14 @@ public interface ColaboradoresFormacoesRepository
 
 	List<ColaboradoresFormacoes> findByColaborador(Colaboradores colaborador);
 
+	List<ColaboradoresFormacoes> findByColaboradorAndIsAtivo(Colaboradores colaborador, Integer isAtivo);
+
 	List<ColaboradoresFormacoes> findByFormacao(Formacoes formacao);
 
+	List<ColaboradoresFormacoes> findByFormacaoAndIsAtivo(Formacoes formacao, Integer isAtivo);
+
 	ColaboradoresFormacoes findByColaboradorAndFormacao(Colaboradores colaborador, Formacoes formacao);
+
+	ColaboradoresFormacoes findByColaboradorAndFormacaoAndIsAtivo(Colaboradores colaborador, Formacoes formacao,
+			Integer isAtivo);
 }

@@ -32,7 +32,7 @@ public class ColaboradoresEnderecosService {
 
 	public List<ColaboradoresEnderecos> findByIdColaboradorAtivo(Long id) {
 		Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, id);
-		return colabsEndrsRepository.findByColaborador(colaborador);
+		return colabsEndrsRepository.findByColaboradorAndIsAtivo(colaborador, 1);
 	}
 
 	public List<ColaboradoresEnderecos> findByIdEndereco(Long id) {
@@ -42,7 +42,7 @@ public class ColaboradoresEnderecosService {
 
 	public List<ColaboradoresEnderecos> findByIdEnderecoAtivo(Long id) {
 		Enderecos endereco = enderecosRepository.findByIsAtivoAndIdEnderecos(1, id);
-		return colabsEndrsRepository.findByEndereco(endereco);
+		return colabsEndrsRepository.findByEnderecoAndIsAtivo(endereco, 1);
 	}
 
 	public List<ColaboradoresEnderecos> findAll() {
@@ -101,14 +101,13 @@ public class ColaboradoresEnderecosService {
 	}
 
 	private void updateDados(ColaboradoresEnderecos colabEndr, ColaboradoresEnderecos novoColabEndr) {
-		novoColabEndr.setIdColaboradoresEnderecos(colabEndr.getIdColaboradoresEnderecos());
 		novoColabEndr.setIsAtivo(colabEndr.getIsAtivo());
 	}
 
 	public ColaboradoresEnderecos update(ColaboradoresEnderecos colabEndr, Long idColab, Long idEndr) {
-
-		Colaboradores colaborador = colaboradoresRepository.findById(idColab).get();
-		Enderecos endereco = enderecosRepository.findById(idEndr).get();
+		// atualização
+		Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);
+		Enderecos endereco = enderecosRepository.findByIsAtivoAndIdEnderecos(1, idEndr);
 
 		ColaboradoresEnderecos novoColabEndr = new ColaboradoresEnderecos();
 

@@ -1,6 +1,8 @@
 package com.t2mTreinamento.services;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -138,9 +140,14 @@ public class ColaboradoresService {
 		}
 	}
 
-	public Colaboradores insereFormacao(Long idColab, Long idForm, Calendar dataEntrada) {
+	public Colaboradores insereFormacao(Long idColab, Long idForm, String dataEntradaForm) throws Exception {
 		Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);
 		Formacoes formacao = formacoesRepository.findByIsAtivoAndIdFormacoes(1, idForm);
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date dataForm = sdf.parse(dataEntradaForm);
+		Calendar dataEntrada = Calendar.getInstance();
+		dataEntrada.setTime(dataForm);
 
 		ColaboradoresFormacoesId colabsFormsId = new ColaboradoresFormacoesId(idColab, idForm);
 
@@ -159,6 +166,25 @@ public class ColaboradoresService {
 		} else {
 			return null;
 		}
+	}
+	
+	public Colaboradores removeFormacao(Long idColab, Long idForm) {
+		
+		if (idColab != null && idForm != null) {
+			Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);
+			Formacoes formacao = formacoesRepository.findByIsAtivoAndIdFormacoes(1, idForm);
+			
+			ColaboradoresFormacoes colabForm = colabsFormsRepository.findByColaboradorAndFormacao(colaborador, formacao);
+			
+			colaborador.getSetColaboradoresFormacoes().remove(colabForm);
+			
+			colabsFormsRepository.delete(colabForm);
+			
+			return colaborador;	
+		} else {
+			return null;
+		}
+		
 	}
 
 	public Colaboradores insereProjeto(Long idColab, Long idProj, String funcao, Calendar dataInicio) {

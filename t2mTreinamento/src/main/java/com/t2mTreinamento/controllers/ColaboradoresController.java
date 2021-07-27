@@ -83,7 +83,7 @@ public class ColaboradoresController {
 
 		if (novoColaborador != null) {
 
-			if (colaborador.getIsLider() == 1) {
+			if (colaborador.getPermissao() == 1 || colaborador.getPermissao() == 2) {
 				usuariosService.save(usuariosService.criaNovoUsuario(colaborador));
 			}
 
@@ -101,8 +101,10 @@ public class ColaboradoresController {
 		boolean removidoDeColabsEndrs = colabsEndrsService.deleteByColaborador(id);
 		boolean removidoDeColabsForms = colabsFormsService.deleteByColaborador(id);
 		boolean removidoDeColabsProjs = colabsProjsService.deleteByColaborador(id);
+		boolean usuarioRemovido = usuariosService.deleteByColaborador(id);
 
-		if (removidoDeColaboradores && removidoDeColabsEndrs && removidoDeColabsForms && removidoDeColabsProjs) {
+		if (removidoDeColaboradores && removidoDeColabsEndrs && removidoDeColabsForms && removidoDeColabsProjs
+				&& usuarioRemovido) {
 
 			return new ResponseEntity<>(headers, HttpStatus.OK);
 		} else {
@@ -156,12 +158,20 @@ public class ColaboradoresController {
 			@PathVariable String dataEntradaForm) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date dataForm = sdf.parse(dataEntradaForm);
-		Calendar dataEntrada = Calendar.getInstance();
-		dataEntrada.setTime(dataForm);
+		Colaboradores colaboradorAtualizado = colaboradoresService.insereFormacao(idColab, idForm, dataEntradaForm);
 
-		Colaboradores colaboradorAtualizado = colaboradoresService.insereFormacao(idColab, idForm, dataEntrada);
+		if (colaboradorAtualizado != null) {
+			return new ResponseEntity<>(colaboradorAtualizado, headers, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(colaboradorAtualizado, headers, HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@PutMapping("/{idColab}/formacao/{idForm}")
+	public ResponseEntity<Colaboradores> removeFormacao(@PathVariable Long idColab, @PathVariable Long idForm) {
+		HttpHeaders headers = new HttpHeaders();
+
+		Colaboradores colaboradorAtualizado = colaboradoresService.removeFormacao(idColab, idForm);
 
 		if (colaboradorAtualizado != null) {
 			return new ResponseEntity<>(colaboradorAtualizado, headers, HttpStatus.OK);
