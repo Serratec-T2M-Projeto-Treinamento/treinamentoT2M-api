@@ -42,8 +42,8 @@ public class UsuariosService {
 
 	public Usuarios criaNovoUsuario(Colaboradores colaborador) {
 
-		String nomeUsuario = colaborador.getCpf().charAt(0) + "-" + colaborador.getCpf().charAt(4)
-				+ colaborador.getCpf().charAt(8) + colaborador.getCpf().charAt(12) + colaborador.getCpf().charAt(13);
+		String nomeUsuario = colaborador.getNome().substring(0, colaborador.getNome().indexOf(" ")).toLowerCase() + "."
+				+ colaborador.getDataNascimento().get(Calendar.DAY_OF_MONTH);
 
 		String senha = colaborador.getDataNascimento().get(Calendar.YEAR) + "/"
 				+ colaborador.getDataNascimento().get(Calendar.MONTH);
