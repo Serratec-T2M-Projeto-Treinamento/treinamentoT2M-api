@@ -140,10 +140,29 @@ public class ColaboradoresService {
 		}
 	}
 
+	public Colaboradores removeEndereco(Long idColab, Long idEndr) {
+
+		if (idColab != null && idEndr != null) {
+			Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);
+			Enderecos endereco = enderecosRepository.findByIsAtivoAndIdEnderecos(1, idEndr);
+
+			ColaboradoresEnderecos colabEndr = colabsEndrsRepository.findByColaboradorAndEndereco(colaborador,
+					endereco);
+
+			colaborador.getSetColaboradoresEnderecos().remove(colabEndr);
+
+			colabsEndrsRepository.delete(colabEndr);
+
+			return colaborador;
+		} else {
+			return null;
+		}
+	}
+
 	public Colaboradores insereFormacao(Long idColab, Long idForm, String dataEntradaForm) throws Exception {
 		Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);
 		Formacoes formacao = formacoesRepository.findByIsAtivoAndIdFormacoes(1, idForm);
-		
+
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date dataForm = sdf.parse(dataEntradaForm);
 		Calendar dataEntrada = Calendar.getInstance();
@@ -167,29 +186,36 @@ public class ColaboradoresService {
 			return null;
 		}
 	}
-	
+
 	public Colaboradores removeFormacao(Long idColab, Long idForm) {
-		
+
 		if (idColab != null && idForm != null) {
 			Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);
 			Formacoes formacao = formacoesRepository.findByIsAtivoAndIdFormacoes(1, idForm);
-			
-			ColaboradoresFormacoes colabForm = colabsFormsRepository.findByColaboradorAndFormacao(colaborador, formacao);
-			
+
+			ColaboradoresFormacoes colabForm = colabsFormsRepository.findByColaboradorAndFormacao(colaborador,
+					formacao);
+
 			colaborador.getSetColaboradoresFormacoes().remove(colabForm);
-			
+
 			colabsFormsRepository.delete(colabForm);
-			
-			return colaborador;	
+
+			return colaborador;
 		} else {
 			return null;
 		}
-		
+
 	}
 
-	public Colaboradores insereProjeto(Long idColab, Long idProj, String funcao, Calendar dataInicio) {
+	public Colaboradores insereProjeto(Long idColab, Long idProj, String funcao, String dataInicioProj)
+			throws Exception {
 		Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);
 		Projetos projeto = projetosRepository.findByIsAtivoAndIdProjetos(1, idProj);
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date dataProj = sdf.parse(dataInicioProj);
+		Calendar dataInicio = Calendar.getInstance();
+		dataInicio.setTime(dataProj);
 
 		ColaboradoresProjetosId colabsProjsId = new ColaboradoresProjetosId(idColab, idProj);
 
@@ -210,12 +236,21 @@ public class ColaboradoresService {
 		}
 	}
 
-//	
-//	
-// FUTURAMENTE ATUALIZAR DATA DE SAÍDA DO PROJETO E DE FORMAÇÃO
-//	
-//	
-//	
-//	
+	public Colaboradores removeProjeto(Long idColab, Long idProj) {
 
+		if (idColab != null && idProj != null) {
+			Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);
+			Projetos projeto = projetosRepository.findByIsAtivoAndIdProjetos(1, idProj);
+
+			ColaboradoresProjetos colabProj = colabsProjsRepository.findByColaboradorAndProjeto(colaborador, projeto);
+
+			colaborador.getSetColaboradoresProjetos().remove(colabProj);
+
+			colabsProjsRepository.delete(colabProj);
+
+			return colaborador;
+		} else {
+			return null;
+		}
+	}
 }

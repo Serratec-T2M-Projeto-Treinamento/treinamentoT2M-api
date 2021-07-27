@@ -1,8 +1,5 @@
 package com.t2mTreinamento.controllers;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -125,8 +122,6 @@ public class ColaboradoresController {
 		}
 	}
 
-	// UPDATE DE RELACIONAMENTO DE ENDEREÇOS, FORMAÇÕES, PROJETOS E POSIÇÕES
-
 	@PutMapping("/{idColab}/posicao/{idPos}")
 	public ResponseEntity<Colaboradores> inserePosicao(@PathVariable Long idColab, @PathVariable Long idPos) {
 		HttpHeaders headers = new HttpHeaders();
@@ -145,6 +140,19 @@ public class ColaboradoresController {
 		HttpHeaders headers = new HttpHeaders();
 
 		Colaboradores colaboradorAtualizado = colaboradoresService.insereEndereco(idColab, idEndr);
+
+		if (colaboradorAtualizado != null) {
+			return new ResponseEntity<>(colaboradorAtualizado, headers, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(colaboradorAtualizado, headers, HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@PutMapping("/{idColab}/enderecoARemover/{idEndr}")
+	public ResponseEntity<Colaboradores> removeEndereco(@PathVariable Long idColab, @PathVariable Long idEndr) {
+		HttpHeaders headers = new HttpHeaders();
+
+		Colaboradores colaboradorAtualizado = colaboradoresService.removeEndereco(idColab, idEndr);
 
 		if (colaboradorAtualizado != null) {
 			return new ResponseEntity<>(colaboradorAtualizado, headers, HttpStatus.OK);
@@ -185,12 +193,21 @@ public class ColaboradoresController {
 			@PathVariable String funcao, @PathVariable String dataInicioProj) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date dataProj = sdf.parse(dataInicioProj);
-		Calendar dataInicio = Calendar.getInstance();
-		dataInicio.setTime(dataProj);
+		Colaboradores colaboradorAtualizado = colaboradoresService.insereProjeto(idColab, idProj, funcao,
+				dataInicioProj);
 
-		Colaboradores colaboradorAtualizado = colaboradoresService.insereProjeto(idColab, idProj, funcao, dataInicio);
+		if (colaboradorAtualizado != null) {
+			return new ResponseEntity<>(colaboradorAtualizado, headers, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(colaboradorAtualizado, headers, HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@PutMapping("/{idColab}/projeto/{idProj}")
+	public ResponseEntity<Colaboradores> removeProjeto(@PathVariable Long idColab, @PathVariable Long idProj) {
+		HttpHeaders headers = new HttpHeaders();
+
+		Colaboradores colaboradorAtualizado = colaboradoresService.removeProjeto(idColab, idProj);
 
 		if (colaboradorAtualizado != null) {
 			return new ResponseEntity<>(colaboradorAtualizado, headers, HttpStatus.OK);
