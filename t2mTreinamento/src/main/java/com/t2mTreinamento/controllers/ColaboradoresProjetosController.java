@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.t2mTreinamento.entities.Colaboradores;
 import com.t2mTreinamento.entities.ColaboradoresProjetos;
 import com.t2mTreinamento.services.ColaboradoresProjetosService;
 
@@ -85,6 +86,34 @@ public class ColaboradoresProjetosController {
 			return new ResponseEntity<>(colabProjAtualizado, headers, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(colabProjAtualizado, headers, HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@PutMapping("colaborador/{idColab}/projetoAInserir/{idProj}/funcao/{funcao}/dataInicio/{dataInicioProj}")
+	public ResponseEntity<Colaboradores> insereProjeto(@PathVariable Long idColab, @PathVariable Long idProj,
+			@PathVariable String funcao, @PathVariable String dataInicioProj) throws Exception {
+		HttpHeaders headers = new HttpHeaders();
+
+		Colaboradores colaboradorAtualizado = colabsProjsService.insereProjetoEmColaborador(idColab, idProj, funcao,
+				dataInicioProj);
+
+		if (colaboradorAtualizado != null) {
+			return new ResponseEntity<>(colaboradorAtualizado, headers, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(colaboradorAtualizado, headers, HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@PutMapping("colaborador/{idColab}/projetoARemover/{idProj}")
+	public ResponseEntity<Colaboradores> removeProjeto(@PathVariable Long idColab, @PathVariable Long idProj) {
+		HttpHeaders headers = new HttpHeaders();
+
+		Colaboradores colaboradorAtualizado = colabsProjsService.removeProjetoDeColaborador(idColab, idProj);
+
+		if (colaboradorAtualizado != null) {
+			return new ResponseEntity<>(colaboradorAtualizado, headers, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(colaboradorAtualizado, headers, HttpStatus.BAD_REQUEST);
 		}
 	}
 

@@ -1,6 +1,10 @@
 package com.t2mTreinamento.services;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -121,6 +125,55 @@ public class ColaboradoresFormacoesService {
 		updateDados(colabForm, novoColabForm);
 
 		return colabsFormsRepository.save(novoColabForm);
+	}
+
+	public Colaboradores insereFormacaoEmColaborador(Long idColab, Long idForm, String dataEntradaForm)
+			throws Exception {
+		Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);
+		Formacoes formacao = formacoesRepository.findByIsAtivoAndIdFormacoes(1, idForm);
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date dataForm = sdf.parse(dataEntradaForm);
+		Calendar dataEntrada = Calendar.getInstance();
+		dataEntrada.setTime(dataForm);
+
+		ColaboradoresFormacoesId colabsFormsId = new ColaboradoresFormacoesId(idColab, idForm);
+
+		ColaboradoresFormacoes colabForm = new ColaboradoresFormacoes(colabsFormsId, colaborador, formacao, dataEntrada,
+				1);
+
+		Set<ColaboradoresFormacoes> novoSetColabsForms = colaborador.getSetColaboradoresFormacoes();
+
+		if (novoSetColabsForms.add(colabForm)) {
+
+			novoSetColabsForms.add(colabForm);
+			colaborador.setSetColaboradoresFormacoes(novoSetColabsForms);
+			Colaboradores colaboradorAtualizado = colaboradoresRepository.save(colaborador);
+
+			return colaboradorAtualizado;
+		} else {
+			return null;
+		}
+	}
+
+	public Colaboradores removeFormacaoDeColaborador(Long idColab, Long idForm) {
+
+		if (idColab != null && idForm != null) {
+			Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);
+			Formacoes formacao = formacoesRepository.findByIsAtivoAndIdFormacoes(1, idForm);
+
+			ColaboradoresFormacoes colabForm = colabsFormsRepository.findByColaboradorAndFormacao(colaborador,
+					formacao);
+
+			colaborador.getSetColaboradoresFormacoes().remove(colabForm);
+
+			colabsFormsRepository.delete(colabForm);
+
+			return colaborador;
+		} else {
+			return null;
+		}
+
 	}
 
 }

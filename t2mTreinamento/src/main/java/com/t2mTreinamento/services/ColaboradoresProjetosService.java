@@ -1,6 +1,10 @@
 package com.t2mTreinamento.services;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -126,6 +130,53 @@ public class ColaboradoresProjetosService {
 
 		return colabsProjsRepository.save(novoColabProj);
 
+	}
+
+	public Colaboradores insereProjetoEmColaborador(Long idColab, Long idProj, String funcao, String dataInicioProj)
+			throws Exception {
+		Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);
+		Projetos projeto = projetosRepository.findByIsAtivoAndIdProjetos(1, idProj);
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date dataProj = sdf.parse(dataInicioProj);
+		Calendar dataInicio = Calendar.getInstance();
+		dataInicio.setTime(dataProj);
+
+		ColaboradoresProjetosId colabsProjsId = new ColaboradoresProjetosId(idColab, idProj);
+
+		ColaboradoresProjetos colabProj = new ColaboradoresProjetos(colabsProjsId, colaborador, projeto, funcao,
+				dataInicio, 1);
+
+		Set<ColaboradoresProjetos> novoSetColabsProjs = colaborador.getSetColaboradoresProjetos();
+
+		if (novoSetColabsProjs.add(colabProj)) {
+
+			novoSetColabsProjs.add(colabProj);
+			colaborador.setSetColaboradoresProjetos(novoSetColabsProjs);
+			Colaboradores colaboradorAtualizado = colaboradoresRepository.save(colaborador);
+
+			return colaboradorAtualizado;
+		} else {
+			return null;
+		}
+	}
+
+	public Colaboradores removeProjetoDeColaborador(Long idColab, Long idProj) {
+
+		if (idColab != null && idProj != null) {
+			Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);
+			Projetos projeto = projetosRepository.findByIsAtivoAndIdProjetos(1, idProj);
+
+			ColaboradoresProjetos colabProj = colabsProjsRepository.findByColaboradorAndProjeto(colaborador, projeto);
+
+			colaborador.getSetColaboradoresProjetos().remove(colabProj);
+
+			colabsProjsRepository.delete(colabProj);
+
+			return colaborador;
+		} else {
+			return null;
+		}
 	}
 
 }

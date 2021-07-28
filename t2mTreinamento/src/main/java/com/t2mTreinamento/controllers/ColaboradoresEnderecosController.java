@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.t2mTreinamento.entities.Colaboradores;
 import com.t2mTreinamento.entities.ColaboradoresEnderecos;
 import com.t2mTreinamento.services.ColaboradoresEnderecosService;
 
@@ -72,6 +73,34 @@ public class ColaboradoresEnderecosController {
 			return new ResponseEntity<>(colabEndrAtualizado, headers, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(colabEndrAtualizado, headers, HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@PutMapping("colaborador/{idColab}/enderecoAInserir/{idEndr}")
+	public ResponseEntity<Colaboradores> insereEnderecoEmColaborador(@PathVariable Long idColab,
+			@PathVariable Long idEndr) {
+		HttpHeaders headers = new HttpHeaders();
+
+		Colaboradores colaboradorAtualizado = colabsEndrsService.insereEnderecoEmColaborador(idColab, idEndr);
+
+		if (colaboradorAtualizado != null) {
+			return new ResponseEntity<>(colaboradorAtualizado, headers, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(colaboradorAtualizado, headers, HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@PutMapping("colaborador/{idColab}/enderecoARemover/{idEndr}")
+	public ResponseEntity<Colaboradores> removeEnderecoDeColaborador(@PathVariable Long idColab,
+			@PathVariable Long idEndr) {
+		HttpHeaders headers = new HttpHeaders();
+
+		Colaboradores colaboradorAtualizado = colabsEndrsService.removeEnderecoDeColaborador(idColab, idEndr);
+
+		if (colaboradorAtualizado != null) {
+			return new ResponseEntity<>(colaboradorAtualizado, headers, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(colaboradorAtualizado, headers, HttpStatus.BAD_REQUEST);
 		}
 	}
 

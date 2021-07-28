@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.t2mTreinamento.entities.Colaboradores;
 import com.t2mTreinamento.entities.ColaboradoresFormacoes;
 import com.t2mTreinamento.services.ColaboradoresFormacoesService;
 
@@ -85,6 +86,34 @@ public class ColaboradoresFormacoesController {
 			return new ResponseEntity<>(colabFormAtualizado, headers, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(colabFormAtualizado, headers, HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@PutMapping("colaborador/{idColab}/formacao/{idForm}/dataEntrada/{dataEntradaForm}")
+	public ResponseEntity<Colaboradores> insereFormacao(@PathVariable Long idColab, @PathVariable Long idForm,
+			@PathVariable String dataEntradaForm) throws Exception {
+		HttpHeaders headers = new HttpHeaders();
+
+		Colaboradores colaboradorAtualizado = colabsFormsService.insereFormacaoEmColaborador(idColab, idForm,
+				dataEntradaForm);
+
+		if (colaboradorAtualizado != null) {
+			return new ResponseEntity<>(colaboradorAtualizado, headers, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(colaboradorAtualizado, headers, HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@PutMapping("/{idColab}/formacaoARemover/{idForm}")
+	public ResponseEntity<Colaboradores> removeFormacao(@PathVariable Long idColab, @PathVariable Long idForm) {
+		HttpHeaders headers = new HttpHeaders();
+
+		Colaboradores colaboradorAtualizado = colabsFormsService.removeFormacaoDeColaborador(idColab, idForm);
+
+		if (colaboradorAtualizado != null) {
+			return new ResponseEntity<>(colaboradorAtualizado, headers, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(colaboradorAtualizado, headers, HttpStatus.BAD_REQUEST);
 		}
 	}
 

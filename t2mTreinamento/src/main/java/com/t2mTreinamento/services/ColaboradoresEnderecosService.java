@@ -1,6 +1,7 @@
 package com.t2mTreinamento.services;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -118,6 +119,47 @@ public class ColaboradoresEnderecosService {
 		updateDados(colabEndr, novoColabEndr);
 
 		return colabsEndrsRepository.save(novoColabEndr);
+	}
+
+	public Colaboradores insereEnderecoEmColaborador(Long idColab, Long idEndr) {
+		Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);
+		Enderecos endereco = enderecosRepository.findByIsAtivoAndIdEnderecos(1, idEndr);
+
+		ColaboradoresEnderecosId colabsEndrsId = new ColaboradoresEnderecosId(idColab, idEndr);
+
+		ColaboradoresEnderecos colabEndr = new ColaboradoresEnderecos(colabsEndrsId, colaborador, endereco, 1);
+
+		Set<ColaboradoresEnderecos> novoSetColabsEndrs = colaborador.getSetColaboradoresEnderecos();
+
+		if (novoSetColabsEndrs.add(colabEndr)) {
+
+			novoSetColabsEndrs.add(colabEndr);
+			colaborador.setSetColaboradoresEnderecos(novoSetColabsEndrs);
+			Colaboradores colaboradorAtualizado = colaboradoresRepository.save(colaborador);
+
+			return colaboradorAtualizado;
+		} else {
+			return null;
+		}
+	}
+
+	public Colaboradores removeEnderecoDeColaborador(Long idColab, Long idEndr) {
+
+		if (idColab != null && idEndr != null) {
+			Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);
+			Enderecos endereco = enderecosRepository.findByIsAtivoAndIdEnderecos(1, idEndr);
+
+			ColaboradoresEnderecos colabEndr = colabsEndrsRepository.findByColaboradorAndEndereco(colaborador,
+					endereco);
+
+			colaborador.getSetColaboradoresEnderecos().remove(colabEndr);
+
+			colabsEndrsRepository.delete(colabEndr);
+
+			return colaborador;
+		} else {
+			return null;
+		}
 	}
 
 }

@@ -60,4 +60,6 @@ public class PosicoesService {
 		posicao.setIsAtivo(1);
 		return posicoesRepository.save(posicao);
 	}
+	
+
 }
