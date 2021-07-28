@@ -18,8 +18,16 @@ public class NiveisService {
 		return niveisRepository.findById(id).get();
 	}
 
+	public Niveis findByIsAtivoAndIdNiveis(Long id) {
+		return niveisRepository.findByIsAtivoAndIdNiveis(1, id);
+	}
+
 	public List<Niveis> findAll() {
 		return niveisRepository.findAll();
+	}
+
+	public List<Niveis> findByIsAtivo() {
+		return niveisRepository.findByIsAtivo(1);
 	}
 
 	public Long Count() {
@@ -27,8 +35,8 @@ public class NiveisService {
 	}
 
 	public Niveis save(Niveis nivel) {
+		nivel.setIsAtivo(1);
 		Niveis novoNivel = niveisRepository.save(nivel);
-
 		if (novoNivel != null) {
 			return novoNivel;
 		} else {
@@ -37,8 +45,10 @@ public class NiveisService {
 	}
 
 	public boolean delete(Long id) {
-		if (id != null) {
-			niveisRepository.deleteById(id);
+		if (id != null && niveisRepository.findById(id).get().getIsAtivo() == 1) {
+			Niveis nivel = niveisRepository.findByIsAtivoAndIdNiveis(1, id);
+			nivel.setIsAtivo(0);
+			niveisRepository.save(nivel);
 			return true;
 		} else {
 			return false;
@@ -47,6 +57,7 @@ public class NiveisService {
 
 	public Niveis update(Niveis nivel, Long id) {
 		nivel.setIdNiveis(id);
+		nivel.setIsAtivo(1);
 		return niveisRepository.save(nivel);
 	}
 }

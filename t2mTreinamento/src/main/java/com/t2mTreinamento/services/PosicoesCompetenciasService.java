@@ -1,5 +1,6 @@
 package com.t2mTreinamento.services;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +18,107 @@ import com.t2mTreinamento.repositories.PosicoesRepository;
 public class PosicoesCompetenciasService {
 
 	@Autowired
-	PosicoesCompetenciasRepository posCompsRepository;
+	public PosicoesCompetenciasRepository posCompsRepository;
 
 	@Autowired
-	PosicoesRepository posicoesRepository;
+	public PosicoesRepository posicoesRepository;
 
 	@Autowired
-	CompetenciasRepository competenciasRepository;
+	public CompetenciasRepository competenciasRepository;
+
+	public List<PosicoesCompetencias> findByIdPosicao(Long id) {
+		Posicoes posicao = posicoesRepository.findById(id).get();
+		return posCompsRepository.findByPosicao(posicao);
+	}
+
+	public List<PosicoesCompetencias> findByIdPosicaoAtivo(Long id) {
+		Posicoes posicao = posicoesRepository.findByIsAtivoAndIdPosicoes(1, id);
+		return posCompsRepository.findByPosicaoAndIsAtivo(posicao, 1);
+	}
+
+	public List<PosicoesCompetencias> findByIdCompetencia(Long id) {
+		Competencias competencia = competenciasRepository.findById(id).get();
+		return posCompsRepository.findByCompetencia(competencia);
+	}
+
+	public List<PosicoesCompetencias> findByIdCompetenciaAtivo(Long id) {
+		Competencias competencia = competenciasRepository.findByIsAtivoAndIdCompetencias(1, id);
+		return posCompsRepository.findByCompetenciaAndIsAtivo(competencia, 1);
+	}
+
+	public List<PosicoesCompetencias> findAll() {
+		return posCompsRepository.findAll();
+	}
+
+	public Long Count() {
+		return posCompsRepository.count();
+	}
+
+	public PosicoesCompetencias save(PosicoesCompetencias posComp, Long idPos, Long idComp) {
+		Posicoes posicao = posicoesRepository.findById(idPos).get();
+		Competencias competencia = competenciasRepository.findById(idComp).get();
+		posComp.setPosicao(posicao);
+		posComp.setCompetencia(competencia);
+		posComp.setIsAtivo(1);
+		PosicoesCompetencias novoPosComp = posCompsRepository.save(posComp);
+
+		if (novoPosComp != null) {
+			return novoPosComp;
+		} else {
+			return null;
+		}
+	}
+
+	public boolean deleteByPosicao(Long id) {
+		if (id != null) {
+			Posicoes posicao = posicoesRepository.findById(id).get();
+			List<PosicoesCompetencias> listPosComps = posCompsRepository.findByPosicao(posicao);
+
+			for (PosicoesCompetencias posComp : listPosComps) {
+				posComp.setIsAtivo(0);
+				posCompsRepository.save(posComp);
+			}
+
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean deleteByCompetencia(Long id) {
+		if (id != null) {
+			Competencias competencia = competenciasRepository.findById(id).get();
+			List<PosicoesCompetencias> listPosComps = posCompsRepository.findByCompetencia(competencia);
+
+			for (PosicoesCompetencias posComp : listPosComps) {
+				posComp.setIsAtivo(0);
+				posCompsRepository.save(posComp);
+			}
+
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private void updateDados(PosicoesCompetencias posComp, PosicoesCompetencias novoPosComp) {
+		novoPosComp.setIsAtivo(posComp.getIsAtivo());
+	}
+
+	public PosicoesCompetencias update(PosicoesCompetencias posComp, Long idPos, Long idComp) {
+		Posicoes posicao = posicoesRepository.findByIsAtivoAndIdPosicoes(1, idPos);
+		Competencias competencia = competenciasRepository.findByIsAtivoAndIdCompetencias(1, idComp);
+
+		PosicoesCompetencias novoPosComp = new PosicoesCompetencias();
+
+		novoPosComp.setPosicao(posicao);
+		novoPosComp.setCompetencia(competencia);
+		novoPosComp.setIdPosicoesCompetencias(new PosicoesCompetenciasId(idPos, idComp));
+
+		updateDados(posComp, novoPosComp);
+
+		return posCompsRepository.save(novoPosComp);
+	}
 
 	public Posicoes insereCompetenciaEmPosicao(Long idPos, Long idComp) {
 		Posicoes posicao = posicoesRepository.findByIsAtivoAndIdPosicoes(1, idPos);

@@ -25,6 +25,9 @@ public class Conhecimentos {
 	@Column(name = "descricao")
 	private String descricao;
 
+	@Column(name = "isativo")
+	private Integer isAtivo;
+
 	@OneToMany(mappedBy = "conhecimento")
 	private Set<CompetenciasConhecimentos> setCompetenciasConhecimentos;
 
@@ -80,6 +83,14 @@ public class Conhecimentos {
 
 	public void setSetConhecimentosTreinamentos(Set<ConhecimentosTreinamentos> setConhecimentosTreinamentos) {
 		this.setConhecimentosTreinamentos = setConhecimentosTreinamentos;
+	}
+
+	public Integer getIsAtivo() {
+		return isAtivo;
+	}
+
+	public void setIsAtivo(Integer isAtivo) {
+		this.isAtivo = isAtivo;
 	}
 
 }

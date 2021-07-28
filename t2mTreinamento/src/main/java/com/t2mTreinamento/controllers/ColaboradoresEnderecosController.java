@@ -49,6 +49,19 @@ public class ColaboradoresEnderecosController {
 		return new ResponseEntity<>(colabsEndrsService.findByIdEnderecoAtivo(id), headers, HttpStatus.OK);
 	}
 
+	@DeleteMapping("/colaborador/{id}")
+	public ResponseEntity<List<ColaboradoresEnderecos>> deleteByColaborador(@PathVariable Long id) {
+		HttpHeaders headers = new HttpHeaders();
+
+		boolean foiRemovido = colabsEndrsService.deleteByColaborador(id);
+
+		if (foiRemovido) {
+			return new ResponseEntity<>(headers, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
+		}
+	}
+
 	@DeleteMapping("/endereco/{id}")
 	public ResponseEntity<List<ColaboradoresEnderecos>> deleteByEndereco(@PathVariable Long id) {
 		HttpHeaders headers = new HttpHeaders();

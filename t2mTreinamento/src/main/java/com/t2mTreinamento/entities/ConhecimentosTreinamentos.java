@@ -1,5 +1,6 @@
 package com.t2mTreinamento.entities;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,7 +14,7 @@ import javax.persistence.Table;
 public class ConhecimentosTreinamentos {
 
 	@EmbeddedId
-	private CompetenciasNiveisId idCompetenciasNiveis;
+	private ConhecimentosTreinamentosId idConhecimentosTreinamentos;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@MapsId("idConhecimento")
@@ -25,12 +26,27 @@ public class ConhecimentosTreinamentos {
 	@JoinColumn(name = "id_treinamento")
 	private Treinamentos treinamento;
 
-	public CompetenciasNiveisId getIdCompetenciasNiveis() {
-		return idCompetenciasNiveis;
+	@Column(name = "isativo")
+	private Integer isAtivo;
+
+	public ConhecimentosTreinamentos() {
+
 	}
 
-	public void setIdCompetenciasNiveis(CompetenciasNiveisId idCompetenciasNiveis) {
-		this.idCompetenciasNiveis = idCompetenciasNiveis;
+	public ConhecimentosTreinamentos(ConhecimentosTreinamentosId idConhecimentosTreinamentos,
+			Conhecimentos conhecimento, Treinamentos treinamento, Integer isAtivo) {
+		this.idConhecimentosTreinamentos = idConhecimentosTreinamentos;
+		this.conhecimento = conhecimento;
+		this.treinamento = treinamento;
+		this.isAtivo = isAtivo;
+	}
+
+	public ConhecimentosTreinamentosId getIdConhecimentosTreinamentos() {
+		return idConhecimentosTreinamentos;
+	}
+
+	public void setIdConhecimentosTreinamentos(ConhecimentosTreinamentosId idConhecimentosTreinamentos) {
+		this.idConhecimentosTreinamentos = idConhecimentosTreinamentos;
 	}
 
 	public Conhecimentos getConhecimento() {
@@ -47,6 +63,14 @@ public class ConhecimentosTreinamentos {
 
 	public void setTreinamento(Treinamentos treinamento) {
 		this.treinamento = treinamento;
+	}
+
+	public Integer getIsAtivo() {
+		return isAtivo;
+	}
+
+	public void setIsAtivo(Integer isAtivo) {
+		this.isAtivo = isAtivo;
 	}
 
 }

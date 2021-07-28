@@ -106,7 +106,6 @@ public class ColaboradoresEnderecosService {
 	}
 
 	public ColaboradoresEnderecos update(ColaboradoresEnderecos colabEndr, Long idColab, Long idEndr) {
-		// atualização
 		Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);
 		Enderecos endereco = enderecosRepository.findByIsAtivoAndIdEnderecos(1, idEndr);
 

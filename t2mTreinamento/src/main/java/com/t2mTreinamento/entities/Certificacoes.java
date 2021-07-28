@@ -24,6 +24,9 @@ public class Certificacoes {
 	@Column(name = "tempo_validade")
 	private Double tempoValidade;
 
+	@Column(name = "isativo")
+	private Integer isAtivo;
+
 	@OneToOne
 	@JoinColumn(name = "id_treinamento", referencedColumnName = "id")
 	private Treinamentos treinamento;
@@ -61,6 +64,14 @@ public class Certificacoes {
 
 	public void setSetColaboradoresCertificacoes(Set<ColaboradoresCertificacoes> setColaboradoresCertificacoes) {
 		this.setColaboradoresCertificacoes = setColaboradoresCertificacoes;
+	}
+
+	public Integer getIsAtivo() {
+		return isAtivo;
+	}
+
+	public void setIsAtivo(Integer isAtivo) {
+		this.isAtivo = isAtivo;
 	}
 
 }

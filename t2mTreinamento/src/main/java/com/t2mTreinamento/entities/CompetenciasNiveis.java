@@ -1,5 +1,6 @@
 package com.t2mTreinamento.entities;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,6 +26,21 @@ public class CompetenciasNiveis {
 	@JoinColumn(name = "id_nivel")
 	private Niveis nivel;
 
+	@Column(name = "isativo")
+	private Integer isAtivo;
+
+	public CompetenciasNiveis() {
+
+	}
+
+	public CompetenciasNiveis(CompetenciasNiveisId idCompetenciasNiveis, Competencias competencia, Niveis nivel,
+			Integer isAtivo) {
+		this.idCompetenciasNiveis = idCompetenciasNiveis;
+		this.competencia = competencia;
+		this.nivel = nivel;
+		this.isAtivo = isAtivo;
+	}
+
 	public CompetenciasNiveisId getIdCompetenciasNiveis() {
 		return idCompetenciasNiveis;
 	}
@@ -47,6 +63,14 @@ public class CompetenciasNiveis {
 
 	public void setNivel(Niveis nivel) {
 		this.nivel = nivel;
+	}
+
+	public Integer getIsAtivo() {
+		return isAtivo;
+	}
+
+	public void setIsAtivo(Integer isAtivo) {
+		this.isAtivo = isAtivo;
 	}
 
 }

@@ -35,6 +35,22 @@ public class ColaboradoresCertificacoes {
 	@Column(name = "data_obtencao")
 	private Calendar dataObtencao;
 
+	@Column(name = "isativo")
+	private Integer isAtivo;
+
+	public ColaboradoresCertificacoes() {
+
+	}
+
+	public ColaboradoresCertificacoes(ColaboradoresCertificacoesId idColaboradoresCertificacoes,
+			Colaboradores colaborador, Certificacoes certificacao, Calendar dataObtencao, Integer isAtivo) {
+		this.idColaboradoresCertificacoes = idColaboradoresCertificacoes;
+		this.colaborador = colaborador;
+		this.certificacao = certificacao;
+		this.dataObtencao = dataObtencao;
+		this.isAtivo = isAtivo;
+	}
+
 	public ColaboradoresCertificacoesId getIdColaboradoresCertificacoes() {
 		return idColaboradoresCertificacoes;
 	}
@@ -65,6 +81,14 @@ public class ColaboradoresCertificacoes {
 
 	public void setDataObtencao(Calendar dataObtencao) {
 		this.dataObtencao = dataObtencao;
+	}
+
+	public Integer getIsAtivo() {
+		return isAtivo;
+	}
+
+	public void setIsAtivo(Integer isAtivo) {
+		this.isAtivo = isAtivo;
 	}
 
 }

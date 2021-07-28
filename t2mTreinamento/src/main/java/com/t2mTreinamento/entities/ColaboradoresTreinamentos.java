@@ -33,6 +33,22 @@ public class ColaboradoresTreinamentos {
 	@Column(name = "status")
 	private String status;
 
+	@Column(name = "isativo")
+	private Integer isAtivo;
+
+	public ColaboradoresTreinamentos() {
+
+	}
+
+	public ColaboradoresTreinamentos(ColaboradoresTreinamentosId idColaboradoresTreinamentos, Colaboradores colaborador,
+			Treinamentos treinamento, String status, Integer isAtivo) {
+		this.idColaboradoresTreinamentos = idColaboradoresTreinamentos;
+		this.colaborador = colaborador;
+		this.treinamento = treinamento;
+		this.status = status;
+		this.isAtivo = isAtivo;
+	}
+
 	public ColaboradoresTreinamentosId getIdColaboradoresTreinamentos() {
 		return idColaboradoresTreinamentos;
 	}
@@ -63,6 +79,14 @@ public class ColaboradoresTreinamentos {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public Integer getIsAtivo() {
+		return isAtivo;
+	}
+
+	public void setIsAtivo(Integer isAtivo) {
+		this.isAtivo = isAtivo;
 	}
 
 }
