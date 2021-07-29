@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.t2mTreinamento.entities.Certificacoes;
 import com.t2mTreinamento.services.CertificacoesService;
-import com.t2mTreinamento.services.TreinamentosService;
+import com.t2mTreinamento.services.ColaboradoresCertificacoesService;
 
 @RestController
 @RequestMapping("/certificacoes")
@@ -27,9 +27,6 @@ public class CertificacoesController {
 
 	@Autowired
 	private CertificacoesService certificacoesService;
-
-	@Autowired
-	private TreinamentosService treinamentosService;
 
 	@Autowired
 	private ColaboradoresCertificacoesService colabsCertsService;
@@ -82,11 +79,9 @@ public class CertificacoesController {
 		HttpHeaders headers = new HttpHeaders();
 
 		boolean removidoDeCertificacoes = certificacoesService.delete(id);
-		// VERIFICAR
-		boolean removidoDeTreinamentos = treinamentosService.deleteByCertificacao(id);
 		boolean removidoDeColabsCerts = colabsCertsService.deleteByCertificacao(id);
 
-		if (removidoDeCertificacoes && removidoDeTreinamentos && removidoDeColabsCerts) {
+		if (removidoDeCertificacoes && removidoDeColabsCerts) {
 
 			return new ResponseEntity<>(headers, HttpStatus.OK);
 		} else {

@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.t2mTreinamento.entities.Colaboradores;
+import com.t2mTreinamento.services.ColaboradoresCertificacoesService;
 import com.t2mTreinamento.services.ColaboradoresEnderecosService;
 import com.t2mTreinamento.services.ColaboradoresFormacoesService;
 import com.t2mTreinamento.services.ColaboradoresProjetosService;
 import com.t2mTreinamento.services.ColaboradoresService;
+import com.t2mTreinamento.services.ColaboradoresTreinamentosService;
 import com.t2mTreinamento.services.UsuariosService;
 
 @RestController
@@ -42,6 +44,12 @@ public class ColaboradoresController {
 
 	@Autowired
 	private ColaboradoresProjetosService colabsProjsService;
+
+	@Autowired
+	private ColaboradoresTreinamentosService colabsTrnsService;
+
+	@Autowired
+	private ColaboradoresCertificacoesService colabsCertsService;
 
 	@GetMapping("/history/{id}")
 	public ResponseEntity<Colaboradores> findById(@PathVariable Long id) {
@@ -98,10 +106,12 @@ public class ColaboradoresController {
 		boolean removidoDeColabsEndrs = colabsEndrsService.deleteByColaborador(id);
 		boolean removidoDeColabsForms = colabsFormsService.deleteByColaborador(id);
 		boolean removidoDeColabsProjs = colabsProjsService.deleteByColaborador(id);
+		boolean removidoDeColabsTrns = colabsTrnsService.deleteByColaborador(id);
+		boolean removidoDeColabsCerts = colabsCertsService.deleteByColaborador(id);
 		boolean usuarioRemovido = usuariosService.deleteByColaborador(id);
 
 		if (removidoDeColaboradores && removidoDeColabsEndrs && removidoDeColabsForms && removidoDeColabsProjs
-				&& usuarioRemovido) {
+				&& removidoDeColabsTrns && removidoDeColabsCerts && usuarioRemovido) {
 
 			return new ResponseEntity<>(headers, HttpStatus.OK);
 		} else {

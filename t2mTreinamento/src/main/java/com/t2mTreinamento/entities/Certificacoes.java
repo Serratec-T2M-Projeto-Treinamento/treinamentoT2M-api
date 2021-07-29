@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "certificacoes")
 public class Certificacoes {
@@ -29,6 +31,7 @@ public class Certificacoes {
 
 	@OneToOne
 	@JoinColumn(name = "id_treinamento", referencedColumnName = "id")
+	@JsonIgnore
 	private Treinamentos treinamento;
 
 	@OneToMany(mappedBy = "certificacao")

@@ -24,7 +24,7 @@ public class CertificacoesService {
 	}
 
 	public Certificacoes findByIsAtivoAndIdCertificacoes(Long idCertificacoes) {
-		return certificacoesRepository.findByIsAtivoAndaIdCertificacoes(1, idCertificacoes);
+		return certificacoesRepository.findByIsAtivoAndIdCertificacoes(1, idCertificacoes);
 	}
 
 	public List<Certificacoes> findAll() {
@@ -51,9 +51,22 @@ public class CertificacoesService {
 
 	public boolean delete(Long id) {
 		if (id != null && certificacoesRepository.findById(id).get().getIsAtivo() == 1) {
-			Certificacoes certificacao = certificacoesRepository.findByIsAtivoAndaIdCertificacoes(1, id);
+			Certificacoes certificacao = certificacoesRepository.findByIsAtivoAndIdCertificacoes(1, id);
 			certificacao.setIsAtivo(0);
 			certificacoesRepository.save(certificacao);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean deleteByTreinamento(Long id) {
+		if (id != null) {
+			Treinamentos treinamento = treinamentosRepository.findByIsAtivoAndIdTreinamentos(1, id);
+			Certificacoes certificacao = certificacoesRepository.findByTreinamento(treinamento);
+			certificacao.setIsAtivo(0);
+			certificacoesRepository.save(certificacao);
+
 			return true;
 		} else {
 			return false;
@@ -66,8 +79,6 @@ public class CertificacoesService {
 		return certificacoesRepository.save(certificacao);
 	}
 
-	// POTENCIALMENTE CRIAR INSERÇÃO NO TREINAMENTO.
-	// ALTERAR COLUNA
 	public Certificacoes insereTreinamento(Long idCert, Long idTrn) {
 		Certificacoes certificacao = certificacoesRepository.findByIsAtivoAndIdCertificacoes(1, idCert);
 		Treinamentos treinamento = treinamentosRepository.findByIsAtivoAndIdTreinamentos(1, idTrn);

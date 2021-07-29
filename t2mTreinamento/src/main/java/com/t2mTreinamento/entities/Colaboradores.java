@@ -33,9 +33,6 @@ public class Colaboradores {
 	@Column(name = "email")
 	private String email;
 
-	@Column(name = "conta_bancaria")
-	private Double contaBancaria;
-
 	@Column(name = "pix")
 	private String pix;
 
@@ -85,7 +82,6 @@ public class Colaboradores {
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
 		this.email = email;
-		this.contaBancaria = contaBancaria;
 		this.pix = pix;
 		this.cpf = cpf;
 		this.rg = rg;
@@ -115,14 +111,6 @@ public class Colaboradores {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public Double getContaBancaria() {
-		return contaBancaria;
-	}
-
-	public void setContaBancaria(Double contaBancaria) {
-		this.contaBancaria = contaBancaria;
 	}
 
 	public String getPix() {

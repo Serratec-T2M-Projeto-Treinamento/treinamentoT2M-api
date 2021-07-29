@@ -89,7 +89,7 @@ public class PosicoesCompetenciasController {
 		}
 	}
 
-	@PutMapping("posicao/{idPos}/competenciaAInserir/{idComp}")
+	@PutMapping("/posicao/{idPos}/competenciaAInserir/{idComp}")
 	public ResponseEntity<Posicoes> insereCompetenciaEmPosicao(@PathVariable Long idPos, @PathVariable Long idComp) {
 		HttpHeaders headers = new HttpHeaders();
 
@@ -102,7 +102,7 @@ public class PosicoesCompetenciasController {
 		}
 	}
 
-	@PutMapping("posicao/{idPos}/competenciaARemover/{idComp}")
+	@PutMapping("/posicao/{idPos}/competenciaARemover/{idComp}")
 	public ResponseEntity<Posicoes> removeCompetenciaDePosicao(@PathVariable Long idPos, @PathVariable Long idComp) {
 		HttpHeaders headers = new HttpHeaders();
 

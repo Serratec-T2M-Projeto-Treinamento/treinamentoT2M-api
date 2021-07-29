@@ -60,5 +60,4 @@ public class TreinamentosService {
 		return treinamentosRepository.save(treinamento);
 	}
 
-	// POTENCIALMENTE MOVER MÉTODO DE INSERÇÃO DE CERTIFICADO PARA CÁ
 }

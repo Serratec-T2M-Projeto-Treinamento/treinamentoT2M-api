@@ -9,6 +9,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "competencias_conhecimentos")
 public class CompetenciasConhecimentos {
@@ -18,11 +20,13 @@ public class CompetenciasConhecimentos {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@MapsId("idCompetencia")
+	@JsonIgnore
 	@JoinColumn(name = "id_competencia")
 	private Competencias competencia;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@MapsId("idConhecimento")
+	@JsonIgnore
 	@JoinColumn(name = "id_conhecimento")
 	private Conhecimentos conhecimento;
 

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.t2mTreinamento.entities.Treinamentos;
 import com.t2mTreinamento.services.CertificacoesService;
+import com.t2mTreinamento.services.ColaboradoresTreinamentosService;
 import com.t2mTreinamento.services.ConhecimentosTreinamentosService;
 import com.t2mTreinamento.services.TreinamentosService;
 

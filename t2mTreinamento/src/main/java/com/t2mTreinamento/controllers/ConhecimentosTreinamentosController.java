@@ -103,7 +103,7 @@ public class ConhecimentosTreinamentosController {
 		}
 	}
 
-	@PutMapping("conhecimento/{idCon}/treinamentoAInserir/{idTrn}")
+	@PutMapping("conhecimento/{idCon}/treinamentoARemover/{idTrn}")
 	public ResponseEntity<Conhecimentos> removeTreinamentoDeConhecimento(@PathVariable Long idCon,
 			@PathVariable Long idTrn) {
 		HttpHeaders headers = new HttpHeaders();
