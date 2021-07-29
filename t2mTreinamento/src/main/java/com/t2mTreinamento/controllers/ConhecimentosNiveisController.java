@@ -89,8 +89,9 @@ public class ConhecimentosNiveisController {
 		}
 	}
 
-	@PutMapping("conhecimento/{idCon}/nivelAInserir/{idNiv}")
-	public ResponseEntity<Conhecimentos> insereNivelEmConhecimento(@PathVariable Long idCon, @PathVariable Long idNiv) {
+	@PutMapping("/conhecimento/{idCon}/nivelAInserir/{idNiv}")
+	public ResponseEntity<Conhecimentos> insereNivelEmConhecimento(@PathVariable Long idCon, @PathVariable Long idNiv)
+			throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 
 		Conhecimentos conhecimentoAtualizado = consNivsService.insereNivelEmConhecimento(idCon, idNiv);
@@ -102,8 +103,9 @@ public class ConhecimentosNiveisController {
 		}
 	}
 
-	@PutMapping("conhecimento/{idCon}/nivelARemover/{idNiv}")
-	public ResponseEntity<Conhecimentos> removeNivelDeConhecimento(@PathVariable Long idCon, @PathVariable Long idNiv) {
+	@PutMapping("/conhecimento/{idCon}/nivelARemover/{idNiv}")
+	public ResponseEntity<Conhecimentos> removeNivelDeConhecimento(@PathVariable Long idCon, @PathVariable Long idNiv)
+			throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 
 		Conhecimentos conhecimentoAtualizado = consNivsService.removeNivelDeConhecimento(idCon, idNiv);

@@ -120,7 +120,7 @@ public class ConhecimentosNiveisService {
 		return consNivsRepository.save(novoConNiv);
 	}
 
-	public Conhecimentos insereNivelEmConhecimento(Long idCon, Long idNiv) {
+	public Conhecimentos insereNivelEmConhecimento(Long idCon, Long idNiv) throws Exception {
 		Conhecimentos conhecimento = conhecimentosRepository.findByIsAtivoAndIdConhecimentos(1, idCon);
 		Niveis nivel = niveisRepository.findByIsAtivoAndIdNiveis(1, idNiv);
 
