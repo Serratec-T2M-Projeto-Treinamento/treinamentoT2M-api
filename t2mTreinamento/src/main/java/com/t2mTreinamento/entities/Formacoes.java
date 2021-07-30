@@ -35,7 +35,7 @@ public class Formacoes {
 	@JsonIgnore
 	private Integer isAtivo;
 
-	@OneToMany(mappedBy = "formacao", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "formacao", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnore
 	private Set<ColaboradoresFormacoes> setColaboradoresFormacoes;
 

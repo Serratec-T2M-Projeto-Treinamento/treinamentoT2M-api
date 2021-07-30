@@ -120,7 +120,7 @@ public class ColaboradoresEnderecosService {
 		return colabsEndrsRepository.save(novoColabEndr);
 	}
 
-	public Colaboradores insereEnderecoEmColaborador(Long idColab, Long idEndr) {
+	public Colaboradores insereEnderecoEmColaborador(Long idColab, Long idEndr) throws Exception {
 		Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);
 		Enderecos endereco = enderecosRepository.findByIsAtivoAndIdEnderecos(1, idEndr);
 
@@ -142,7 +142,7 @@ public class ColaboradoresEnderecosService {
 		}
 	}
 
-	public Colaboradores removeEnderecoDeColaborador(Long idColab, Long idEndr) {
+	public Colaboradores removeEnderecoDeColaborador(Long idColab, Long idEndr) throws Exception {
 
 		if (idColab != null && idEndr != null) {
 			Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);

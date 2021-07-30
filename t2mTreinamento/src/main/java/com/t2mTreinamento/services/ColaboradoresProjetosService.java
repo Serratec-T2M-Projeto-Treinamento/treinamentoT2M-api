@@ -161,7 +161,7 @@ public class ColaboradoresProjetosService {
 		}
 	}
 
-	public Colaboradores removeProjetoDeColaborador(Long idColab, Long idProj) {
+	public Colaboradores removeProjetoDeColaborador(Long idColab, Long idProj) throws Exception {
 
 		if (idColab != null && idProj != null) {
 			Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);

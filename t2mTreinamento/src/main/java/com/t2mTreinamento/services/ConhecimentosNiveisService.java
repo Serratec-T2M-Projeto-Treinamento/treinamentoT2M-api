@@ -142,7 +142,7 @@ public class ConhecimentosNiveisService {
 		}
 	}
 
-	public Conhecimentos removeNivelDeConhecimento(Long idCon, Long idNiv) {
+	public Conhecimentos removeNivelDeConhecimento(Long idCon, Long idNiv) throws Exception {
 
 		if (idCon != null && idNiv != null) {
 			Conhecimentos conhecimento = conhecimentosRepository.findByIsAtivoAndIdConhecimentos(1, idCon);

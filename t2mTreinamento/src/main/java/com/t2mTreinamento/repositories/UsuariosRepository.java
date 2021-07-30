@@ -17,4 +17,6 @@ public interface UsuariosRepository extends JpaRepository<Usuarios, Long> {
 
 	Usuarios findByColaborador(Colaboradores colaborador);
 
+	Usuarios findByUsuarioAndSenhaAndIsAtivo(String usuario, String senha, Integer isAtivo);
+
 }

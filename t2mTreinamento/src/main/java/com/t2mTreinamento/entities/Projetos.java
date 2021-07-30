@@ -48,7 +48,7 @@ public class Projetos {
 	@JsonIgnore
 	private Integer isAtivo;
 
-	@OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnore
 	private Set<ColaboradoresProjetos> setColaboradoresProjetos;
 

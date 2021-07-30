@@ -2,6 +2,7 @@ package com.t2mTreinamento.entities;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,13 +36,13 @@ public class Treinamentos {
 	@Column(name = "isativo")
 	private Integer isAtivo;
 
-	@OneToMany(mappedBy = "treinamento")
+	@OneToMany(mappedBy = "treinamento", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<ConhecimentosTreinamentos> setConhecimentosTreinamentos;
 
-	@OneToMany(mappedBy = "treinamento")
+	@OneToMany(mappedBy = "treinamento", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<ColaboradoresTreinamentos> setColaboradoresTreinamentos;
 
-	@OneToOne(mappedBy = "treinamento")
+	@OneToOne(mappedBy = "treinamento", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Certificacoes certificacao;
 
 	public Long getIdTreinamentos() {

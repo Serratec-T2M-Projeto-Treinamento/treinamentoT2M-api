@@ -109,16 +109,16 @@ public class UsuariosController {
 		}
 	}
 
-	@GetMapping("/{idUsuario}/verificaAdmin")
-	public ResponseEntity<Usuarios> verificaAdmin(@PathVariable Long idUsuario) {
+	@PostMapping("/login")
+	public ResponseEntity<Usuarios> loginUsuario(@RequestBody Usuarios usuario) {
 		HttpHeaders headers = new HttpHeaders();
 
-		boolean usuarioIsAdmin = usuariosService.verificaAdmin(idUsuario);
+		Usuarios usuarioVerificado = usuariosService.verificaLogin(usuario.getUsuario(), usuario.getSenha());
 
-		if (usuarioIsAdmin) {
-			return new ResponseEntity<>(headers, HttpStatus.OK);
+		if (usuarioVerificado != null) {
+			return new ResponseEntity<>(usuarioVerificado, headers, HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(usuarioVerificado, headers, HttpStatus.BAD_REQUEST);
 		}
 	}
 

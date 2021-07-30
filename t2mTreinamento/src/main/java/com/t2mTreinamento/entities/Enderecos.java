@@ -50,7 +50,7 @@ public class Enderecos {
 	@JsonIgnore
 	private Integer isAtivo;
 
-	@OneToMany(mappedBy = "endereco", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "endereco", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnore
 	private Set<ColaboradoresEnderecos> setColaboradoresEnderecos;
 

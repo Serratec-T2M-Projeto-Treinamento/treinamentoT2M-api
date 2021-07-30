@@ -2,6 +2,7 @@ package com.t2mTreinamento.entities;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,7 +35,7 @@ public class Certificacoes {
 	@JsonIgnore
 	private Treinamentos treinamento;
 
-	@OneToMany(mappedBy = "certificacao")
+	@OneToMany(mappedBy = "certificacao", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<ColaboradoresCertificacoes> setColaboradoresCertificacoes;
 
 	public Long getIdCertificacoes() {

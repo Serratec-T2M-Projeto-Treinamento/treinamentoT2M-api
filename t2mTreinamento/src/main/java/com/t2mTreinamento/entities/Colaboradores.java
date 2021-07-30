@@ -51,7 +51,7 @@ public class Colaboradores {
 	@Column(name = "isativo")
 	private Integer isAtivo;
 
-	@OneToOne(mappedBy = "colaborador", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "colaborador", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Usuarios usuario;
 
 	@ManyToOne

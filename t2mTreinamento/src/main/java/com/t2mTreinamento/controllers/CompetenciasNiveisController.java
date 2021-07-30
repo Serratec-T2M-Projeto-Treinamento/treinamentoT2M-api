@@ -89,8 +89,9 @@ public class CompetenciasNiveisController {
 		}
 	}
 
-	@PutMapping("competencia/{idComp}/nivelAInserir/{idNiv}")
-	public ResponseEntity<Competencias> insereNivelEmCompetencia(@PathVariable Long idComp, @PathVariable Long idNiv) {
+	@PutMapping("/competencia/{idComp}/nivelAInserir/{idNiv}")
+	public ResponseEntity<Competencias> insereNivelEmCompetencia(@PathVariable Long idComp, @PathVariable Long idNiv)
+			throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 
 		Competencias competenciaAtualizada = compsNivsService.insereNivelEmCompetencia(idComp, idNiv);
@@ -102,8 +103,9 @@ public class CompetenciasNiveisController {
 		}
 	}
 
-	@PutMapping("competencia/{idComp}/nivelARemover/{idNiv}")
-	public ResponseEntity<Competencias> removeNivelDeCompetencia(@PathVariable Long idComp, @PathVariable Long idNiv) {
+	@PutMapping("/competencia/{idComp}/nivelARemover/{idNiv}")
+	public ResponseEntity<Competencias> removeNivelDeCompetencia(@PathVariable Long idComp, @PathVariable Long idNiv)
+			throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 
 		Competencias competenciaAtualizada = compsNivsService.removeNivelDeCompetencia(idComp, idNiv);

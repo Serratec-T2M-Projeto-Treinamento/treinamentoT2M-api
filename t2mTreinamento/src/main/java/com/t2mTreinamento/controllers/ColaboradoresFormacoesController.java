@@ -105,7 +105,8 @@ public class ColaboradoresFormacoesController {
 	}
 
 	@PutMapping("/{idColab}/formacaoARemover/{idForm}")
-	public ResponseEntity<Colaboradores> removeFormacao(@PathVariable Long idColab, @PathVariable Long idForm) {
+	public ResponseEntity<Colaboradores> removeFormacao(@PathVariable Long idColab, @PathVariable Long idForm)
+			throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 
 		Colaboradores colaboradorAtualizado = colabsFormsService.removeFormacaoDeColaborador(idColab, idForm);

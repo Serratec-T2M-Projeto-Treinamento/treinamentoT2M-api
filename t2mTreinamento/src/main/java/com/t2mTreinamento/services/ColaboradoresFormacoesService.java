@@ -156,7 +156,7 @@ public class ColaboradoresFormacoesService {
 		}
 	}
 
-	public Colaboradores removeFormacaoDeColaborador(Long idColab, Long idForm) {
+	public Colaboradores removeFormacaoDeColaborador(Long idColab, Long idForm) throws Exception {
 
 		if (idColab != null && idForm != null) {
 			Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);

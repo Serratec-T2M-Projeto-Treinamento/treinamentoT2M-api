@@ -129,13 +129,13 @@ public class UsuariosService {
 		}
 	}
 
-	public boolean verificaAdmin(Long idUsuario) {
-		Usuarios usuario = usuariosRepository.findByIsAtivoAndIdUsuarios(1, idUsuario);
+	public Usuarios verificaLogin(String nomeUsuario, String senha) {
+		Usuarios usuarioVerificado = usuariosRepository.findByUsuarioAndSenhaAndIsAtivo(nomeUsuario, senha, 1);
 
-		if (usuario.getIsAdmin() == 1) {
-			return true;
+		if (usuarioVerificado != null) {
+			return usuarioVerificado;
 		} else {
-			return false;
+			return null;
 		}
 	}
 

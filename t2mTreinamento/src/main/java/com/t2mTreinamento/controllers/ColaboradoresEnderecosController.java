@@ -91,7 +91,7 @@ public class ColaboradoresEnderecosController {
 
 	@PutMapping("/colaborador/{idColab}/enderecoAInserir/{idEndr}")
 	public ResponseEntity<Colaboradores> insereEnderecoEmColaborador(@PathVariable Long idColab,
-			@PathVariable Long idEndr) {
+			@PathVariable Long idEndr) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 
 		Colaboradores colaboradorAtualizado = colabsEndrsService.insereEnderecoEmColaborador(idColab, idEndr);
@@ -105,7 +105,7 @@ public class ColaboradoresEnderecosController {
 
 	@PutMapping("/colaborador/{idColab}/enderecoARemover/{idEndr}")
 	public ResponseEntity<Colaboradores> removeEnderecoDeColaborador(@PathVariable Long idColab,
-			@PathVariable Long idEndr) {
+			@PathVariable Long idEndr) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 
 		Colaboradores colaboradorAtualizado = colabsEndrsService.removeEnderecoDeColaborador(idColab, idEndr);

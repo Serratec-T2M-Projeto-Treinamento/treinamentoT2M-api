@@ -89,7 +89,7 @@ public class ColaboradoresCertificacoesController {
 		}
 	}
 
-	@PutMapping("colaborador/{idColab}/certificacaoAInserir/{idCert}/dataObtencao/{dataObtencaoCert}")
+	@PutMapping("/colaborador/{idColab}/certificacaoAInserir/{idCert}/dataObtencao/{dataObtencaoCert}")
 	public ResponseEntity<Colaboradores> insereCertificacao(@PathVariable Long idColab, @PathVariable Long idCert,
 			@PathVariable String dataObtencaoCert) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
@@ -104,7 +104,7 @@ public class ColaboradoresCertificacoesController {
 		}
 	}
 
-	@PutMapping("colaborador/{idColab}/certificacaoARemover/{idCert}/dataObtencao/{dataObtencaoCert}")
+	@PutMapping("/colaborador/{idColab}/certificacaoARemover/{idCert}/dataObtencao/{dataObtencaoCert}")
 	public ResponseEntity<Colaboradores> removeCertificacao(@PathVariable Long idColab, @PathVariable Long idCert)
 			throws Exception {
 		HttpHeaders headers = new HttpHeaders();

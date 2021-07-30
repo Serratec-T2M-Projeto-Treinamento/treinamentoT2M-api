@@ -90,7 +90,8 @@ public class PosicoesCompetenciasController {
 	}
 
 	@PutMapping("/posicao/{idPos}/competenciaAInserir/{idComp}")
-	public ResponseEntity<Posicoes> insereCompetenciaEmPosicao(@PathVariable Long idPos, @PathVariable Long idComp) {
+	public ResponseEntity<Posicoes> insereCompetenciaEmPosicao(@PathVariable Long idPos, @PathVariable Long idComp)
+			throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 
 		Posicoes posicaoAtualizada = posCompsService.insereCompetenciaEmPosicao(idPos, idComp);
@@ -103,7 +104,8 @@ public class PosicoesCompetenciasController {
 	}
 
 	@PutMapping("/posicao/{idPos}/competenciaARemover/{idComp}")
-	public ResponseEntity<Posicoes> removeCompetenciaDePosicao(@PathVariable Long idPos, @PathVariable Long idComp) {
+	public ResponseEntity<Posicoes> removeCompetenciaDePosicao(@PathVariable Long idPos, @PathVariable Long idComp)
+			throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 
 		Posicoes posicaoAtualizada = posCompsService.removeCompetenciaDePosicao(idPos, idComp);

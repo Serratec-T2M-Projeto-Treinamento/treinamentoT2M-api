@@ -89,9 +89,9 @@ public class CompetenciasConhecimentosController {
 		}
 	}
 
-	@PutMapping("competencia/{idComp}/conhecimentoAInserir/{idCon}")
+	@PutMapping("/competencia/{idComp}/conhecimentoAInserir/{idCon}")
 	public ResponseEntity<Competencias> insereConhecimentoEmCompetencia(@PathVariable Long idComp,
-			@PathVariable Long idCon) {
+			@PathVariable Long idCon) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 
 		Competencias competenciaAtualizada = compsConsService.insereConhecimentoEmCompetencia(idComp, idCon);
@@ -103,9 +103,9 @@ public class CompetenciasConhecimentosController {
 		}
 	}
 
-	@PutMapping("competencia/{idComp}/conhecimentoARemover/{idCon}")
+	@PutMapping("/competencia/{idComp}/conhecimentoARemover/{idCon}")
 	public ResponseEntity<Competencias> removeConhecimentoDeCompetencia(@PathVariable Long idComp,
-			@PathVariable Long idCon) {
+			@PathVariable Long idCon) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 
 		Competencias competenciaAtualizada = compsConsService.removeConhecimentoDeCompetencia(idComp, idCon);

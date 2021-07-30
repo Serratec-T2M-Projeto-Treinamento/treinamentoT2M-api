@@ -120,7 +120,7 @@ public class CompetenciasNiveisService {
 		return compsNivsRepository.save(novoCompNiv);
 	}
 
-	public Competencias insereNivelEmCompetencia(Long idComp, Long idNiv) {
+	public Competencias insereNivelEmCompetencia(Long idComp, Long idNiv) throws Exception {
 		Competencias competencia = competenciasRepository.findByIsAtivoAndIdCompetencias(1, idComp);
 		Niveis nivel = niveisRepository.findByIsAtivoAndIdNiveis(1, idNiv);
 
@@ -142,7 +142,7 @@ public class CompetenciasNiveisService {
 		}
 	}
 
-	public Competencias removeNivelDeCompetencia(Long idComp, Long idNiv) {
+	public Competencias removeNivelDeCompetencia(Long idComp, Long idNiv) throws Exception {
 
 		if (idComp != null && idNiv != null) {
 			Competencias competencia = competenciasRepository.findByIsAtivoAndIdCompetencias(1, idComp);

@@ -147,7 +147,7 @@ public class ColaboradoresTreinamentosService {
 		}
 	}
 
-	public Colaboradores removeTreinamentoDeColaborador(Long idColab, Long idTrn) {
+	public Colaboradores removeTreinamentoDeColaborador(Long idColab, Long idTrn) throws Exception {
 
 		if (idColab != null && idTrn != null) {
 			Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);

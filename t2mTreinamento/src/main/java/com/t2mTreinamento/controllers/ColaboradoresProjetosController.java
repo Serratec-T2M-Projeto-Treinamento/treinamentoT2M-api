@@ -89,7 +89,7 @@ public class ColaboradoresProjetosController {
 		}
 	}
 
-	@PutMapping("colaborador/{idColab}/projetoAInserir/{idProj}/funcao/{funcao}/dataInicio/{dataInicioProj}")
+	@PutMapping("/colaborador/{idColab}/projetoAInserir/{idProj}/funcao/{funcao}/dataInicio/{dataInicioProj}")
 	public ResponseEntity<Colaboradores> insereProjeto(@PathVariable Long idColab, @PathVariable Long idProj,
 			@PathVariable String funcao, @PathVariable String dataInicioProj) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
@@ -104,8 +104,9 @@ public class ColaboradoresProjetosController {
 		}
 	}
 
-	@PutMapping("colaborador/{idColab}/projetoARemover/{idProj}")
-	public ResponseEntity<Colaboradores> removeProjeto(@PathVariable Long idColab, @PathVariable Long idProj) {
+	@PutMapping("/colaborador/{idColab}/projetoARemover/{idProj}")
+	public ResponseEntity<Colaboradores> removeProjeto(@PathVariable Long idColab, @PathVariable Long idProj)
+			throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 
 		Colaboradores colaboradorAtualizado = colabsProjsService.removeProjetoDeColaborador(idColab, idProj);

@@ -89,9 +89,9 @@ public class ConhecimentosTreinamentosController {
 		}
 	}
 
-	@PutMapping("conhecimento/{idCon}/treinamentoAInserir/{idTrn}")
+	@PutMapping("/conhecimento/{idCon}/treinamentoAInserir/{idTrn}")
 	public ResponseEntity<Conhecimentos> insereTreinamentoEmConhecimento(@PathVariable Long idCon,
-			@PathVariable Long idTrn) {
+			@PathVariable Long idTrn) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 
 		Conhecimentos conhecimentoAtualizado = consTrnsService.insereTreinamentoEmConhecimento(idCon, idTrn);
@@ -103,9 +103,9 @@ public class ConhecimentosTreinamentosController {
 		}
 	}
 
-	@PutMapping("conhecimento/{idCon}/treinamentoARemover/{idTrn}")
+	@PutMapping("/conhecimento/{idCon}/treinamentoARemover/{idTrn}")
 	public ResponseEntity<Conhecimentos> removeTreinamentoDeConhecimento(@PathVariable Long idCon,
-			@PathVariable Long idTrn) {
+			@PathVariable Long idTrn) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 
 		Conhecimentos conhecimentoAtualizado = consTrnsService.removeTreinamentoDeConhecimento(idCon, idTrn);

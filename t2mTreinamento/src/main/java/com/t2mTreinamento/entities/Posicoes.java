@@ -2,6 +2,7 @@ package com.t2mTreinamento.entities;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,11 +31,11 @@ public class Posicoes {
 	@Column(name = "isativo")
 	private Integer isAtivo;
 
-	@OneToMany(mappedBy = "posicao")
+	@OneToMany(mappedBy = "posicao", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnore
 	private Set<Colaboradores> setColaboradores;
 
-	@OneToMany(mappedBy = "posicao")
+	@OneToMany(mappedBy = "posicao", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnore
 	private Set<PosicoesCompetencias> setPosicoesCompetencias;
 

@@ -120,7 +120,7 @@ public class CompetenciasConhecimentosService {
 		return compsConsRepository.save(novoCompCon);
 	}
 
-	public Competencias insereConhecimentoEmCompetencia(Long idComp, Long idCon) {
+	public Competencias insereConhecimentoEmCompetencia(Long idComp, Long idCon) throws Exception {
 		Competencias competencia = competenciasRepository.findByIsAtivoAndIdCompetencias(1, idComp);
 		Conhecimentos conhecimento = conhecimentosRepository.findByIsAtivoAndIdConhecimentos(1, idCon);
 
@@ -142,7 +142,7 @@ public class CompetenciasConhecimentosService {
 		}
 	}
 
-	public Competencias removeConhecimentoDeCompetencia(Long idComp, Long idCon) {
+	public Competencias removeConhecimentoDeCompetencia(Long idComp, Long idCon) throws Exception {
 
 		if (idComp != null && idCon != null) {
 			Competencias competencia = competenciasRepository.findByIsAtivoAndIdCompetencias(1, idComp);

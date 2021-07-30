@@ -160,7 +160,7 @@ public class ColaboradoresCertificacoesService {
 		}
 	}
 
-	public Colaboradores removeCertificacaoDeColaborador(Long idColab, Long idCert) {
+	public Colaboradores removeCertificacaoDeColaborador(Long idColab, Long idCert) throws Exception {
 
 		if (idColab != null && idCert != null) {
 			Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);

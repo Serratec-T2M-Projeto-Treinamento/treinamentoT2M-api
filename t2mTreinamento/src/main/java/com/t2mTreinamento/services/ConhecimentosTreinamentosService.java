@@ -120,7 +120,7 @@ public class ConhecimentosTreinamentosService {
 		return consTrnsRepository.save(novoConTrn);
 	}
 
-	public Conhecimentos insereTreinamentoEmConhecimento(Long idCon, Long idTrn) {
+	public Conhecimentos insereTreinamentoEmConhecimento(Long idCon, Long idTrn) throws Exception {
 		Conhecimentos conhecimento = conhecimentosRepository.findByIsAtivoAndIdConhecimentos(1, idCon);
 		Treinamentos treinamento = treinamentosRepository.findByIsAtivoAndIdTreinamentos(1, idTrn);
 
@@ -142,7 +142,7 @@ public class ConhecimentosTreinamentosService {
 		}
 	}
 
-	public Conhecimentos removeTreinamentoDeConhecimento(Long idCon, Long idTrn) {
+	public Conhecimentos removeTreinamentoDeConhecimento(Long idCon, Long idTrn) throws Exception {
 
 		if (idCon != null && idTrn != null) {
 			Conhecimentos conhecimento = conhecimentosRepository.findByIsAtivoAndIdConhecimentos(1, idCon);

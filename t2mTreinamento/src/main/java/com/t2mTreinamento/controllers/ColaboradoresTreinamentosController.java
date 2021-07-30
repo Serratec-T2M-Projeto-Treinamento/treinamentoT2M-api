@@ -89,7 +89,7 @@ public class ColaboradoresTreinamentosController {
 		}
 	}
 
-	@PutMapping("colaborador/{idColab}/treinamentoAInserir/{idTrn}/status/{status}")
+	@PutMapping("/colaborador/{idColab}/treinamentoAInserir/{idTrn}/status/{status}")
 	public ResponseEntity<Colaboradores> insereTreinamento(@PathVariable Long idColab, @PathVariable Long idTrn,
 			@PathVariable String status) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
@@ -103,7 +103,7 @@ public class ColaboradoresTreinamentosController {
 		}
 	}
 
-	@PutMapping("colaborador/{idColab}/treinamentoARemover/{idTrn}/status/{status}")
+	@PutMapping("/colaborador/{idColab}/treinamentoARemover/{idTrn}/status/{status}")
 	public ResponseEntity<Colaboradores> removeTreinamento(@PathVariable Long idColab, @PathVariable Long idTrn)
 			throws Exception {
 		HttpHeaders headers = new HttpHeaders();
