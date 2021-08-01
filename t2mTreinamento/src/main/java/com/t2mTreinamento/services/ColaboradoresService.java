@@ -72,6 +72,7 @@ public class ColaboradoresService {
 		UsuariosDTO usuarioDTO = new UsuariosDTO();
 		if (colab.getUsuario() != null) {
 			usuarioDTO.setUsuario(colab.getUsuario().getUsuario());
+			usuarioDTO.setSenha(colab.getUsuario().getSenha());
 			usuarioDTO.setIsAdmin(colab.getUsuario().getIsAdmin());
 		} else {
 			usuarioDTO = null;

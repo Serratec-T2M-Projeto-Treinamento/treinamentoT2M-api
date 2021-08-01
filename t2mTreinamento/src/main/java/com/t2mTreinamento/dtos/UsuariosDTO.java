@@ -2,6 +2,7 @@ package com.t2mTreinamento.dtos;
 
 public class UsuariosDTO {
 	private String usuario;
+	private String senha;
 	private Integer isAdmin;
 
 	public String getUsuario() {
@@ -18,6 +19,14 @@ public class UsuariosDTO {
 
 	public void setIsAdmin(Integer isAdmin) {
 		this.isAdmin = isAdmin;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 }
