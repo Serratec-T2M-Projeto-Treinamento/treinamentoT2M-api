@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.t2mTreinamento.dtos.ColaboradoresDTO;
 import com.t2mTreinamento.entities.Colaboradores;
 import com.t2mTreinamento.services.ColaboradoresCertificacoesService;
 import com.t2mTreinamento.services.ColaboradoresEnderecosService;
@@ -57,10 +58,17 @@ public class ColaboradoresController {
 		return new ResponseEntity<>(colaboradoresService.findById(id), headers, HttpStatus.OK);
 	}
 
+//	@GetMapping("/{id}")
+//	public ResponseEntity<Colaboradores> findByIsAtivoAndIdColaboradores(@PathVariable Long id) {
+//		HttpHeaders headers = new HttpHeaders();
+//		return new ResponseEntity<>(colaboradoresService.findByIsAtivoAndIdColaboradores(id), headers, HttpStatus.OK);
+//	}
+
 	@GetMapping("/{id}")
-	public ResponseEntity<Colaboradores> findByIsAtivoAndIdColaboradores(@PathVariable Long id) {
+	public ResponseEntity<ColaboradoresDTO> findByIsAtivoAndIdColaboradores(@PathVariable Long id) {
 		HttpHeaders headers = new HttpHeaders();
-		return new ResponseEntity<>(colaboradoresService.findByIsAtivoAndIdColaboradores(id), headers, HttpStatus.OK);
+		return new ResponseEntity<>(colaboradoresService.findByIsAtivoAndIdColaboradoresDTO(id), headers,
+				HttpStatus.OK);
 	}
 
 	@GetMapping("/history")
@@ -69,10 +77,16 @@ public class ColaboradoresController {
 		return new ResponseEntity<>(colaboradoresService.findAll(), headers, HttpStatus.OK);
 	}
 
+//	@GetMapping
+//	public ResponseEntity<List<Colaboradores>> findByIsAtivo() throws Exception {
+//		HttpHeaders headers = new HttpHeaders();
+//		return new ResponseEntity<>(colaboradoresService.findByIsAtivo(), headers, HttpStatus.OK);
+//	}
+
 	@GetMapping
-	public ResponseEntity<List<Colaboradores>> findByIsAtivo() throws Exception {
+	public ResponseEntity<List<ColaboradoresDTO>> findByIsAtivo() throws Exception {
 		HttpHeaders headers = new HttpHeaders();
-		return new ResponseEntity<>(colaboradoresService.findByIsAtivo(), headers, HttpStatus.OK);
+		return new ResponseEntity<>(colaboradoresService.findAllDTO(), headers, HttpStatus.OK);
 	}
 
 	@GetMapping("/count")

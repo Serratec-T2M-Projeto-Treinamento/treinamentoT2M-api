@@ -77,7 +77,7 @@ public class Colaboradores {
 
 	}
 
-	public Colaboradores(String nome, Calendar dataNascimento, String email, Double contaBancaria, String pix,
+	public Colaboradores(String nome, Calendar dataNascimento, String email, String pix,
 			String cpf, String rg, String cnh, Integer permissao) {
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
@@ -87,6 +87,19 @@ public class Colaboradores {
 		this.rg = rg;
 		this.cnh = cnh;
 		this.permissao = permissao;
+	}
+
+	public Colaboradores(String nome, Calendar dataNascimento, String email, String pix,
+			String cpf, String rg, String cnh, Integer permissao, Integer isAtivo) {
+		this.nome = nome;
+		this.dataNascimento = dataNascimento;
+		this.email = email;
+		this.pix = pix;
+		this.cpf = cpf;
+		this.rg = rg;
+		this.cnh = cnh;
+		this.permissao = permissao;
+		this.isAtivo = isAtivo;
 	}
 
 	public Long getIdColaboradores() {

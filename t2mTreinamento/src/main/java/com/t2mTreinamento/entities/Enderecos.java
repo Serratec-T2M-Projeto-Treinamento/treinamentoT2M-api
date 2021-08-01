@@ -26,7 +26,7 @@ public class Enderecos {
 	private String cep;
 
 	@Column(name = "rua")
-	private String Rua;
+	private String rua;
 
 	@Column(name = "numero")
 	private String numero;
@@ -54,6 +54,23 @@ public class Enderecos {
 	@JsonIgnore
 	private Set<ColaboradoresEnderecos> setColaboradoresEnderecos;
 
+	public Enderecos() {
+
+	}
+
+	public Enderecos(String cep, String rua, String numero, String complemento, String bairro, String cidade,
+			String estado, String pais, Integer isAtivo) {
+		this.cep = cep;
+		this.rua = rua;
+		this.numero = numero;
+		this.complemento = complemento;
+		this.bairro = bairro;
+		this.cidade = cidade;
+		this.estado = estado;
+		this.pais = pais;
+		this.isAtivo = isAtivo;
+	}
+
 	public Long getIdEnderecos() {
 		return idEnderecos;
 	}
@@ -71,11 +88,11 @@ public class Enderecos {
 	}
 
 	public String getRua() {
-		return Rua;
+		return rua;
 	}
 
 	public void setRua(String rua) {
-		Rua = rua;
+		this.rua = rua;
 	}
 
 	public String getNumero() {
