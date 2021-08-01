@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.t2mTreinamento.dtos.CertificacoesDTO;
 import com.t2mTreinamento.entities.Certificacoes;
 import com.t2mTreinamento.services.CertificacoesService;
 import com.t2mTreinamento.services.ColaboradoresCertificacoesService;
@@ -38,9 +39,10 @@ public class CertificacoesController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Certificacoes> findByIsAtivoAndIdCertificacoes(@PathVariable Long id) {
+	public ResponseEntity<CertificacoesDTO> findByIsAtivoAndIdCertificacoes(@PathVariable Long id) {
 		HttpHeaders headers = new HttpHeaders();
-		return new ResponseEntity<>(certificacoesService.findByIsAtivoAndIdCertificacoes(id), headers, HttpStatus.OK);
+		return new ResponseEntity<>(certificacoesService.findByIsAtivoAndIdCertificacoesDTO(id), headers,
+				HttpStatus.OK);
 	}
 
 	@GetMapping("/history")
@@ -50,9 +52,9 @@ public class CertificacoesController {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<Certificacoes>> findByIsAtivo() throws Exception {
+	public ResponseEntity<List<CertificacoesDTO>> findAllDTO() throws Exception {
 		HttpHeaders headers = new HttpHeaders();
-		return new ResponseEntity<>(certificacoesService.findByIsAtivo(), headers, HttpStatus.OK);
+		return new ResponseEntity<>(certificacoesService.findAllDTO(), headers, HttpStatus.OK);
 	}
 
 	@GetMapping("/count")

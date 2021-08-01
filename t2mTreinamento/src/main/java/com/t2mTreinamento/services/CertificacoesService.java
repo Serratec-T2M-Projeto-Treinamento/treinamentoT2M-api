@@ -1,10 +1,12 @@
 package com.t2mTreinamento.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.t2mTreinamento.dtos.CertificacoesDTO;
 import com.t2mTreinamento.entities.Certificacoes;
 import com.t2mTreinamento.entities.Treinamentos;
 import com.t2mTreinamento.repositories.CertificacoesRepository;
@@ -19,6 +21,15 @@ public class CertificacoesService {
 	@Autowired
 	public TreinamentosRepository treinamentosRepository;
 
+	public void converteCertParaDTO(Certificacoes cert, CertificacoesDTO certDTO) {
+
+		certDTO.setIdCertificacoes(cert.getIdCertificacoes());
+		certDTO.setTempoValidade(cert.getTempoValidade());
+		certDTO.setNomeCertificado(cert.getTreinamento().getNome());
+		certDTO.setInstituicaoCertificado(cert.getTreinamento().getInstituicao());
+
+	}
+
 	public Certificacoes findById(Long id) {
 		return certificacoesRepository.findById(id).get();
 	}
@@ -27,12 +38,30 @@ public class CertificacoesService {
 		return certificacoesRepository.findByIsAtivoAndIdCertificacoes(1, idCertificacoes);
 	}
 
+	public CertificacoesDTO findByIsAtivoAndIdCertificacoesDTO(Long idCertificacoes) {
+		Certificacoes cert = certificacoesRepository.findByIsAtivoAndIdCertificacoes(1, idCertificacoes);
+		CertificacoesDTO certDTO = new CertificacoesDTO();
+
+		converteCertParaDTO(cert, certDTO);
+		return certDTO;
+	}
+
 	public List<Certificacoes> findAll() {
 		return certificacoesRepository.findAll();
 	}
 
 	public List<Certificacoes> findByIsAtivo() {
 		return certificacoesRepository.findByIsAtivo(1);
+	}
+
+	public List<CertificacoesDTO> findAllDTO() {
+		List<CertificacoesDTO> listCerts = new ArrayList<>();
+		for (Certificacoes cert : certificacoesRepository.findByIsAtivo(1)) {
+			CertificacoesDTO certDTO = new CertificacoesDTO();
+			converteCertParaDTO(cert, certDTO);
+			listCerts.add(certDTO);
+		}
+		return listCerts;
 	}
 
 	public Long Count() {
