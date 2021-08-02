@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.t2mTreinamento.dtos.FormacoesDTO;
 import com.t2mTreinamento.entities.Formacoes;
 import com.t2mTreinamento.services.ColaboradoresFormacoesService;
 import com.t2mTreinamento.services.FormacoesService;
@@ -38,9 +39,9 @@ public class FormacoesController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Formacoes> findByIsAtivoAndIdFormacoes(@PathVariable Long id) {
+	public ResponseEntity<FormacoesDTO> findByIsAtivoAndIdFormacoes(@PathVariable Long id) {
 		HttpHeaders headers = new HttpHeaders();
-		return new ResponseEntity<>(formacoesService.findByIsAtivoAndIdFormacoes(id), headers, HttpStatus.OK);
+		return new ResponseEntity<>(formacoesService.findByIsAtivoAndIdFormacoesDTO(id), headers, HttpStatus.OK);
 	}
 
 	@GetMapping("/history")
@@ -50,9 +51,9 @@ public class FormacoesController {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<Formacoes>> findByIsAtivo() {
+	public ResponseEntity<List<FormacoesDTO>> findAllDTO() {
 		HttpHeaders headers = new HttpHeaders();
-		return new ResponseEntity<>(formacoesService.findByIsAtivo(), headers, HttpStatus.OK);
+		return new ResponseEntity<>(formacoesService.findAllDTO(), headers, HttpStatus.OK);
 	}
 
 	@GetMapping("/count")

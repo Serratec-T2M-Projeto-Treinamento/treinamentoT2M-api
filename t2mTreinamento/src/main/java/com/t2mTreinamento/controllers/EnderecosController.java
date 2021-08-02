@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.t2mTreinamento.dtos.EnderecosDTO;
 import com.t2mTreinamento.entities.Enderecos;
 import com.t2mTreinamento.services.ColaboradoresEnderecosService;
 import com.t2mTreinamento.services.EnderecosService;
@@ -38,9 +39,9 @@ public class EnderecosController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Enderecos> findByIsAtivoAndIdEnderecos(@PathVariable Long id) {
+	public ResponseEntity<EnderecosDTO> findByIsAtivoAndIdEnderecos(@PathVariable Long id) {
 		HttpHeaders headers = new HttpHeaders();
-		return new ResponseEntity<>(enderecosService.findByIsAtivoAndIdEnderecos(id), headers, HttpStatus.OK);
+		return new ResponseEntity<>(enderecosService.findByIsAtivoAndIdEnderecosDTO(id), headers, HttpStatus.OK);
 	}
 
 	@GetMapping("/history")
@@ -50,9 +51,9 @@ public class EnderecosController {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<Enderecos>> findByIsAtivo() throws Exception {
+	public ResponseEntity<List<EnderecosDTO>> findByIsAtivo() throws Exception {
 		HttpHeaders headers = new HttpHeaders();
-		return new ResponseEntity<>(enderecosService.findByIsAtivo(), headers, HttpStatus.OK);
+		return new ResponseEntity<>(enderecosService.findAllDTO(), headers, HttpStatus.OK);
 	}
 
 	@GetMapping("/count")
