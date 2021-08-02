@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.t2mTreinamento.dtos.CompetenciasDTO;
 import com.t2mTreinamento.entities.Competencias;
 import com.t2mTreinamento.services.CompetenciasConhecimentosService;
 import com.t2mTreinamento.services.CompetenciasNiveisService;
@@ -46,9 +47,9 @@ public class CompetenciasController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Competencias> findByIsAtivoAndIdCompetencias(@PathVariable Long id) {
+	public ResponseEntity<CompetenciasDTO> findByIsAtivoAndIdCompetenciasDTO(@PathVariable Long id) {
 		HttpHeaders headers = new HttpHeaders();
-		return new ResponseEntity<>(competenciasService.findByIsAtivoAndIdCompetencias(id), headers, HttpStatus.OK);
+		return new ResponseEntity<>(competenciasService.findByIsAtivoAndIdCompetenciasDTO(id), headers, HttpStatus.OK);
 	}
 
 	@GetMapping("/history")
@@ -58,9 +59,9 @@ public class CompetenciasController {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<Competencias>> findByIsAtivo() throws Exception {
+	public ResponseEntity<List<CompetenciasDTO>> findAllDTO() throws Exception {
 		HttpHeaders headers = new HttpHeaders();
-		return new ResponseEntity<>(competenciasService.findByIsAtivo(), headers, HttpStatus.OK);
+		return new ResponseEntity<>(competenciasService.findAllDTO(), headers, HttpStatus.OK);
 	}
 
 	@GetMapping("/count")
