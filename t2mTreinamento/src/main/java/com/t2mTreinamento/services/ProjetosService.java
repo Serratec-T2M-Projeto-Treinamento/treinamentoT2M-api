@@ -1,10 +1,12 @@
 package com.t2mTreinamento.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.t2mTreinamento.dtos.ProjetosDTO;
 import com.t2mTreinamento.entities.Projetos;
 import com.t2mTreinamento.repositories.ProjetosRepository;
 
@@ -14,6 +16,17 @@ public class ProjetosService {
 	@Autowired
 	public ProjetosRepository projetosRepository;
 
+	public void converteProjetoParaDTO(Projetos proj, ProjetosDTO projDTO) {
+		projDTO.setIdProjetos(proj.getIdProjetos());
+		projDTO.setAppGerenciamento(proj.getAppGerenciamento());
+		projDTO.setDataEntrega(proj.getDataEntrega());
+		projDTO.setDataEntregaEsperada(proj.getDataEntregaEsperada());
+		projDTO.setDescricao(proj.getDescricao());
+		projDTO.setEquipe(proj.getEquipe());
+		projDTO.setNome(proj.getNome());
+		projDTO.setSegmento(proj.getSegmento());
+	}
+
 	public Projetos findById(Long id) {
 		return projetosRepository.findById(id).get();
 	}
@@ -22,12 +35,29 @@ public class ProjetosService {
 		return projetosRepository.findByIsAtivoAndIdProjetos(1, idProjetos);
 	}
 
+	public ProjetosDTO findByIsAtivoAndIdProjetosDTO(Long idProjetos) {
+		Projetos proj = projetosRepository.findByIsAtivoAndIdProjetos(1, idProjetos);
+		ProjetosDTO projDTO = new ProjetosDTO();
+		converteProjetoParaDTO(proj, projDTO);
+		return projDTO;
+	}
+
 	public List<Projetos> findAll() {
 		return projetosRepository.findAll();
 	}
 
 	public List<Projetos> findByIsAtivo() {
 		return projetosRepository.findByIsAtivo(1);
+	}
+
+	public List<ProjetosDTO> findAllDTO() {
+		List<ProjetosDTO> listProjs = new ArrayList<>();
+		for (Projetos proj : projetosRepository.findByIsAtivo(1)) {
+			ProjetosDTO projDTO = new ProjetosDTO();
+			converteProjetoParaDTO(proj, projDTO);
+			listProjs.add(projDTO);
+		}
+		return listProjs;
 	}
 
 	public Long Count() {
