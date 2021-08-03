@@ -16,7 +16,7 @@ public class ProjetosService {
 	@Autowired
 	public ProjetosRepository projetosRepository;
 
-	public void converteProjetoParaDTO(Projetos proj, ProjetosDTO projDTO) {
+	public void converteProjParaDTO(Projetos proj, ProjetosDTO projDTO) {
 		projDTO.setIdProjetos(proj.getIdProjetos());
 		projDTO.setAppGerenciamento(proj.getAppGerenciamento());
 		projDTO.setDataEntrega(proj.getDataEntrega());
@@ -38,7 +38,7 @@ public class ProjetosService {
 	public ProjetosDTO findByIsAtivoAndIdProjetosDTO(Long idProjetos) {
 		Projetos proj = projetosRepository.findByIsAtivoAndIdProjetos(1, idProjetos);
 		ProjetosDTO projDTO = new ProjetosDTO();
-		converteProjetoParaDTO(proj, projDTO);
+		converteProjParaDTO(proj, projDTO);
 		return projDTO;
 	}
 
@@ -54,7 +54,7 @@ public class ProjetosService {
 		List<ProjetosDTO> listProjs = new ArrayList<>();
 		for (Projetos proj : projetosRepository.findByIsAtivo(1)) {
 			ProjetosDTO projDTO = new ProjetosDTO();
-			converteProjetoParaDTO(proj, projDTO);
+			converteProjParaDTO(proj, projDTO);
 			listProjs.add(projDTO);
 		}
 		return listProjs;

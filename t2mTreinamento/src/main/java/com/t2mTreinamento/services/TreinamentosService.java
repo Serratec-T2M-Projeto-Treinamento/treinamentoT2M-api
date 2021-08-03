@@ -1,10 +1,12 @@
 package com.t2mTreinamento.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.t2mTreinamento.dtos.TreinamentosDTO;
 import com.t2mTreinamento.entities.Treinamentos;
 import com.t2mTreinamento.repositories.TreinamentosRepository;
 
@@ -14,6 +16,14 @@ public class TreinamentosService {
 	@Autowired
 	public TreinamentosRepository treinamentosRepository;
 
+	public void converteTrnParaDTO(Treinamentos trn, TreinamentosDTO trnDTO) {
+		trnDTO.setIdTreinamentos(trn.getIdTreinamentos());
+		trnDTO.setCargaHoraria(trn.getCargaHoraria());
+		trnDTO.setDescricao(trn.getDescricao());
+		trnDTO.setInstituicao(trn.getInstituicao());
+		trnDTO.setNome(trn.getNome());
+	}
+
 	public Treinamentos findById(Long id) {
 		return treinamentosRepository.findById(id).get();
 	}
@@ -22,12 +32,29 @@ public class TreinamentosService {
 		return treinamentosRepository.findByIsAtivoAndIdTreinamentos(1, idTreinamentos);
 	}
 
+	public TreinamentosDTO findByIsAtivoAndIdTreinamentosDTO(Long idTreinamentos) {
+		Treinamentos trn = treinamentosRepository.findByIsAtivoAndIdTreinamentos(1, idTreinamentos);
+		TreinamentosDTO trnDTO = new TreinamentosDTO();
+		converteTrnParaDTO(trn, trnDTO);
+		return trnDTO;
+	}
+
 	public List<Treinamentos> findAll() {
 		return treinamentosRepository.findAll();
 	}
 
 	public List<Treinamentos> findByIsAtivo() {
 		return treinamentosRepository.findByIsAtivo(1);
+	}
+
+	public List<TreinamentosDTO> findAllDTO() {
+		List<TreinamentosDTO> listTrns = new ArrayList<>();
+		for (Treinamentos trn : treinamentosRepository.findByIsAtivo(1)) {
+			TreinamentosDTO trnDTO = new TreinamentosDTO();
+			converteTrnParaDTO(trn, trnDTO);
+			listTrns.add(trnDTO);
+		}
+		return listTrns;
 	}
 
 	public Long Count() {
