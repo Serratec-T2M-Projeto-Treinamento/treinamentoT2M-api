@@ -91,7 +91,7 @@ public class ColaboradoresProjetosService {
 
 	public boolean deleteByProjeto(Long id) {
 		if (id != null) {
-			Projetos projeto = projetosRepository.findByIsAtivoAndIdProjetos(1, id);
+			Projetos projeto = projetosRepository.findById(id).get();
 			List<ColaboradoresProjetos> listColabsProjs = colabsProjsRepository.findByProjetoAndIsAtivo(projeto, 1);
 
 			for (ColaboradoresProjetos colabProj : listColabsProjs) {

@@ -76,7 +76,7 @@ public class ColaboradoresCertificacoesService {
 
 	public boolean deleteByColaborador(Long id) {
 		if (id != null) {
-			Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, id);
+			Colaboradores colaborador = colaboradoresRepository.findById(id).get();
 			List<ColaboradoresCertificacoes> listColabsCerts = colabsCertsRepository.findByColaborador(colaborador);
 
 			for (ColaboradoresCertificacoes colabCert : listColabsCerts) {
@@ -92,7 +92,7 @@ public class ColaboradoresCertificacoesService {
 
 	public boolean deleteByCertificacao(Long id) {
 		if (id != null) {
-			Certificacoes certificacao = certificacoesRepository.findByIsAtivoAndIdCertificacoes(1, id);
+			Certificacoes certificacao = certificacoesRepository.findById(id).get();
 			List<ColaboradoresCertificacoes> listColabsCerts = colabsCertsRepository.findByCertificacao(certificacao);
 
 			for (ColaboradoresCertificacoes colabCert : listColabsCerts) {
