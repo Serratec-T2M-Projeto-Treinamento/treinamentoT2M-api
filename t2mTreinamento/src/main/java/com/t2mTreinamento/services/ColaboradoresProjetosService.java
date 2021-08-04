@@ -1,8 +1,6 @@
 package com.t2mTreinamento.services;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -132,20 +130,20 @@ public class ColaboradoresProjetosService {
 
 	}
 
-	public Colaboradores insereProjetoEmColaborador(Long idColab, Long idProj, String funcao, String dataInicioProj)
-			throws Exception {
+	public Colaboradores insereProjetoEmColaborador(Long idColab, Long idProj, String funcao, Calendar dataInicio,
+			Calendar dataSaida) throws Exception {
 		Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);
 		Projetos projeto = projetosRepository.findByIsAtivoAndIdProjetos(1, idProj);
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date dataProj = sdf.parse(dataInicioProj);
-		Calendar dataInicio = Calendar.getInstance();
-		dataInicio.setTime(dataProj);
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//		Date dataProj = sdf.parse(dataInicioProj);
+//		Calendar dataInicio = Calendar.getInstance();
+//		dataInicio.setTime(dataProj);
 
 		ColaboradoresProjetosId colabsProjsId = new ColaboradoresProjetosId(idColab, idProj);
 
 		ColaboradoresProjetos colabProj = new ColaboradoresProjetos(colabsProjsId, colaborador, projeto, funcao,
-				dataInicio, 1);
+				dataInicio, dataSaida, 1);
 
 		Set<ColaboradoresProjetos> novoSetColabsProjs = colaborador.getSetColaboradoresProjetos();
 

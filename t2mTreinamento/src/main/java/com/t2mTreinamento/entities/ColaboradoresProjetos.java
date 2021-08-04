@@ -59,6 +59,17 @@ public class ColaboradoresProjetos {
 		this.isAtivo = isAtivo;
 	}
 
+	public ColaboradoresProjetos(ColaboradoresProjetosId idColaboradoresProjetos, Colaboradores colaborador,
+			Projetos projeto, String funcao, Calendar dataInicio, Calendar dataSaida, Integer isAtivo) {
+		this.idColaboradoresProjetos = idColaboradoresProjetos;
+		this.colaborador = colaborador;
+		this.projeto = projeto;
+		this.funcao = funcao;
+		this.dataInicio = dataInicio;
+		this.dataSaida = dataSaida;
+		this.isAtivo = isAtivo;
+	}
+
 	public ColaboradoresProjetosId getIdColaboradoresProjetos() {
 		return idColaboradoresProjetos;
 	}

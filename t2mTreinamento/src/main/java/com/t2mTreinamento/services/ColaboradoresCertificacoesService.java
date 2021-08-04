@@ -134,11 +134,6 @@ public class ColaboradoresCertificacoesService {
 		Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);
 		Certificacoes certificacao = certificacoesRepository.findByIsAtivoAndIdCertificacoes(1, idCert);
 
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//		Date dataCert = sdf.parse(dataObtencaoCert);
-//		Calendar dataObtencao = Calendar.getInstance();
-//		dataObtencao.setTime(dataCert);
-
 		ColaboradoresCertificacoesId colabsCertsId = new ColaboradoresCertificacoesId(idColab, idCert);
 
 		ColaboradoresCertificacoes colabCert = new ColaboradoresCertificacoes(colabsCertsId, colaborador, certificacao,

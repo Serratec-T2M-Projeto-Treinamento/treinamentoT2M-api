@@ -89,13 +89,13 @@ public class ColaboradoresProjetosController {
 		}
 	}
 
-	@PutMapping("/colaborador/{idColab}/projetoAInserir/{idProj}/funcao/{funcao}/dataInicio/{dataInicioProj}")
-	public ResponseEntity<Colaboradores> insereProjeto(@PathVariable Long idColab, @PathVariable Long idProj,
-			@PathVariable String funcao, @PathVariable String dataInicioProj) throws Exception {
+	@PutMapping("/colaborador/{idColab}/projetoAInserir/{idProj}")
+	public ResponseEntity<Colaboradores> insereProjeto(@RequestBody ColaboradoresProjetos colabProj,
+			@PathVariable Long idColab, @PathVariable Long idProj) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 
-		Colaboradores colaboradorAtualizado = colabsProjsService.insereProjetoEmColaborador(idColab, idProj, funcao,
-				dataInicioProj);
+		Colaboradores colaboradorAtualizado = colabsProjsService.insereProjetoEmColaborador(idColab, idProj,
+				colabProj.getFuncao(), colabProj.getDataInicio(), colabProj.getDataSaida());
 
 		if (colaboradorAtualizado != null) {
 			return new ResponseEntity<>(colaboradorAtualizado, headers, HttpStatus.OK);
