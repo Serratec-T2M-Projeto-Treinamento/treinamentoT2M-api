@@ -14,6 +14,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "colaboradores")
@@ -24,30 +28,40 @@ public class Colaboradores {
 	@Column(name = "id")
 	private Long idColaboradores;
 
+	@NotBlank
+	@Size(min = 3, message = "O nome precisa ter um mínimo de {min} caracteres")
+	@Size(max = 50, message = "O nome excede o limite de {max} caracteres")
 	@Column(name = "nome")
 	private String nome;
 
 	@Column(name = "data_nascimento")
 	private Calendar dataNascimento;
 
+	@Email(message = "E-mail fornecido não é válido")
+	@Pattern(regexp = ".+@.+\\..+", message = "E-mail fornecido não é válido")
 	@Column(name = "email")
 	private String email;
 
-	@Column(name = "pix")
+	@Column(name = "pix", unique = true)
 	private String pix;
 
-	@Column(name = "cpf")
+	@NotBlank
+	@Column(name = "cpf", unique = true)
 	private String cpf;
 
-	@Column(name = "rg")
+	@NotBlank
+	@Column(name = "rg", unique = true)
 	private String rg;
 
+	@NotBlank
 	@Column(name = "cnh")
 	private String cnh;
 
+	@NotBlank
 	@Column(name = "permissao")
 	private Integer permissao;
 
+	@NotBlank
 	@Column(name = "isativo")
 	private Integer isAtivo;
 
@@ -77,8 +91,8 @@ public class Colaboradores {
 
 	}
 
-	public Colaboradores(String nome, Calendar dataNascimento, String email, String pix,
-			String cpf, String rg, String cnh, Integer permissao) {
+	public Colaboradores(String nome, Calendar dataNascimento, String email, String pix, String cpf, String rg,
+			String cnh, Integer permissao) {
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
 		this.email = email;
@@ -89,8 +103,8 @@ public class Colaboradores {
 		this.permissao = permissao;
 	}
 
-	public Colaboradores(String nome, Calendar dataNascimento, String email, String pix,
-			String cpf, String rg, String cnh, Integer permissao, Integer isAtivo) {
+	public Colaboradores(String nome, Calendar dataNascimento, String email, String pix, String cpf, String rg,
+			String cnh, Integer permissao, Integer isAtivo) {
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
 		this.email = email;
