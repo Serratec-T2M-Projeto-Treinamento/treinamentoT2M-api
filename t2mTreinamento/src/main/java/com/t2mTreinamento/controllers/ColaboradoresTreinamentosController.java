@@ -89,12 +89,13 @@ public class ColaboradoresTreinamentosController {
 		}
 	}
 
-	@PutMapping("/colaborador/{idColab}/treinamentoAInserir/{idTrn}/status/{status}")
-	public ResponseEntity<Colaboradores> insereTreinamento(@PathVariable Long idColab, @PathVariable Long idTrn,
-			@PathVariable String status) throws Exception {
+	@PutMapping("/colaborador/{idColab}/treinamentoAInserir/{idTrn}")
+	public ResponseEntity<Colaboradores> insereTreinamento(@RequestBody ColaboradoresTreinamentos colabTrn,
+			@PathVariable Long idColab, @PathVariable Long idTrn) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 
-		Colaboradores colaboradorAtualizado = colabsTrnsService.insereTreinamentoEmColaborador(idColab, idTrn, status);
+		Colaboradores colaboradorAtualizado = colabsTrnsService.insereTreinamentoEmColaborador(idColab, idTrn,
+				colabTrn.getStatus());
 
 		if (colaboradorAtualizado != null) {
 			return new ResponseEntity<>(colaboradorAtualizado, headers, HttpStatus.OK);
@@ -103,7 +104,7 @@ public class ColaboradoresTreinamentosController {
 		}
 	}
 
-	@PutMapping("/colaborador/{idColab}/treinamentoARemover/{idTrn}/status/{status}")
+	@PutMapping("/colaborador/{idColab}/treinamentoARemover/{idTrn}")
 	public ResponseEntity<Colaboradores> removeTreinamento(@PathVariable Long idColab, @PathVariable Long idTrn)
 			throws Exception {
 		HttpHeaders headers = new HttpHeaders();

@@ -135,11 +135,6 @@ public class ColaboradoresProjetosService {
 		Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);
 		Projetos projeto = projetosRepository.findByIsAtivoAndIdProjetos(1, idProj);
 
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//		Date dataProj = sdf.parse(dataInicioProj);
-//		Calendar dataInicio = Calendar.getInstance();
-//		dataInicio.setTime(dataProj);
-
 		ColaboradoresProjetosId colabsProjsId = new ColaboradoresProjetosId(idColab, idProj);
 
 		ColaboradoresProjetos colabProj = new ColaboradoresProjetos(colabsProjsId, colaborador, projeto, funcao,
