@@ -55,6 +55,16 @@ public class ColaboradoresFormacoes {
 		this.isAtivo = isAtivo;
 	}
 
+	public ColaboradoresFormacoes(ColaboradoresFormacoesId idColaboradoresFormacoes, Colaboradores colaborador,
+			Formacoes formacao, Calendar dataEntrada, Calendar dataConclusao, Integer isAtivo) {
+		this.idColaboradoresFormacoes = idColaboradoresFormacoes;
+		this.colaborador = colaborador;
+		this.formacao = formacao;
+		this.dataEntrada = dataEntrada;
+		this.dataConclusao = dataConclusao;
+		this.isAtivo = isAtivo;
+	}
+
 	public ColaboradoresFormacoesId getIdColaboradoresFormacoes() {
 		return idColaboradoresFormacoes;
 	}

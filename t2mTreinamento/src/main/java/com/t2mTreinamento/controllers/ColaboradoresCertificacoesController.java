@@ -104,7 +104,7 @@ public class ColaboradoresCertificacoesController {
 		}
 	}
 
-	@PutMapping("/colaborador/{idColab}/certificacaoARemover/{idCert}/dataObtencao/{dataObtencaoCert}")
+	@PutMapping("/colaborador/{idColab}/certificacaoARemover/{idCert}")
 	public ResponseEntity<Colaboradores> removeCertificacao(@PathVariable Long idColab, @PathVariable Long idCert)
 			throws Exception {
 		HttpHeaders headers = new HttpHeaders();

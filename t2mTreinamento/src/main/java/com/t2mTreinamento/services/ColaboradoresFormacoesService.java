@@ -1,8 +1,6 @@
 package com.t2mTreinamento.services;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -127,20 +125,15 @@ public class ColaboradoresFormacoesService {
 		return colabsFormsRepository.save(novoColabForm);
 	}
 
-	public Colaboradores insereFormacaoEmColaborador(Long idColab, Long idForm, String dataEntradaForm)
-			throws Exception {
+	public Colaboradores insereFormacaoEmColaborador(Long idColab, Long idForm, Calendar dataEntrada,
+			Calendar dataConclusao) throws Exception {
 		Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);
 		Formacoes formacao = formacoesRepository.findByIsAtivoAndIdFormacoes(1, idForm);
-
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date dataForm = sdf.parse(dataEntradaForm);
-		Calendar dataEntrada = Calendar.getInstance();
-		dataEntrada.setTime(dataForm);
 
 		ColaboradoresFormacoesId colabsFormsId = new ColaboradoresFormacoesId(idColab, idForm);
 
 		ColaboradoresFormacoes colabForm = new ColaboradoresFormacoes(colabsFormsId, colaborador, formacao, dataEntrada,
-				1);
+				dataConclusao, 1);
 
 		Set<ColaboradoresFormacoes> novoSetColabsForms = colaborador.getSetColaboradoresFormacoes();
 

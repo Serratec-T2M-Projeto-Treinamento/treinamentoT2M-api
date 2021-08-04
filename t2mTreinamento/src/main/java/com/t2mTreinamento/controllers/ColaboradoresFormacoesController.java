@@ -89,13 +89,13 @@ public class ColaboradoresFormacoesController {
 		}
 	}
 
-	@PutMapping("colaborador/{idColab}/formacao/{idForm}/dataEntrada/{dataEntradaForm}")
-	public ResponseEntity<Colaboradores> insereFormacao(@PathVariable Long idColab, @PathVariable Long idForm,
-			@PathVariable String dataEntradaForm) throws Exception {
+	@PutMapping("/colaborador/{idColab}/formacaoAInserir/{idForm}")
+	public ResponseEntity<Colaboradores> insereFormacao(@RequestBody ColaboradoresFormacoes colabForm,
+			@PathVariable Long idColab, @PathVariable Long idForm) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 
 		Colaboradores colaboradorAtualizado = colabsFormsService.insereFormacaoEmColaborador(idColab, idForm,
-				dataEntradaForm);
+				colabForm.getDataConclusao(), colabForm.getDataConclusao());
 
 		if (colaboradorAtualizado != null) {
 			return new ResponseEntity<>(colaboradorAtualizado, headers, HttpStatus.OK);

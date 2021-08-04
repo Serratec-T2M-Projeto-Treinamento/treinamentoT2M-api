@@ -130,8 +130,11 @@ public class ColaboradoresService {
 				projDTO.setEquipe(proj.getEquipe());
 				projDTO.setNome(proj.getNome());
 				projDTO.setSegmento(proj.getSegmento());
-
 				colabProjDTO.setProjeto(projDTO);
+
+				colabProjDTO.setFuncao(colabProj.getFuncao());
+				colabProjDTO.setDataInicio(colabProj.getDataInicio());
+				colabProjDTO.setDataSaida(colabProj.getDataSaida());
 
 				setColabsProjsDTO.add(colabProjDTO);
 			}
@@ -157,6 +160,8 @@ public class ColaboradoresService {
 				formDTO.setNome(form.getNome());
 
 				colabFormDTO.setFormacao(formDTO);
+				colabFormDTO.setDataEntrada(colabForm.getDataEntrada());
+				colabFormDTO.setDataConclusao(colabForm.getDataConclusao());
 
 				setColabsFormsDTO.add(colabFormDTO);
 			}
@@ -208,6 +213,7 @@ public class ColaboradoresService {
 				certDTO.setInstituicaoCertificado(cert.getTreinamento().getInstituicao());
 
 				colabCertDTO.setCertificacao(certDTO);
+				colabCertDTO.setDataObtencao(colabCert.getDataObtencao());
 
 				setColabsCertsDTO.add(colabCertDTO);
 			}
