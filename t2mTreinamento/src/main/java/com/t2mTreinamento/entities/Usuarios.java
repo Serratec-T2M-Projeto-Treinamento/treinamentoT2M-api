@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -20,9 +21,11 @@ public class Usuarios {
 	@Column(name = "id")
 	private Long idUsuarios;
 
+	@NotBlank
 	@Column(name = "usuario")
 	private String usuario;
 
+	@NotBlank
 	@Column(name = "senha")
 	private String senha;
 

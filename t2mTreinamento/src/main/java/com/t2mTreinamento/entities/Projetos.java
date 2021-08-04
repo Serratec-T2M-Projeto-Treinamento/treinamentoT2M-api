@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -23,6 +24,7 @@ public class Projetos {
 	@Column(name = "id")
 	private Long idProjetos;
 
+	@NotBlank
 	@Column(name = "nome")
 	private String nome;
 
@@ -48,7 +50,7 @@ public class Projetos {
 	@JsonIgnore
 	private Integer isAtivo;
 
-	@OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Set<ColaboradoresProjetos> setColaboradoresProjetos;
 

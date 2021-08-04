@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -30,8 +31,10 @@ public class ColaboradoresTreinamentos {
 	@JoinColumn(name = "id_treinamento")
 	private Treinamentos treinamento;
 
+	@NotBlank
 	@Column(name = "status")
 	private String status;
+
 
 	@Column(name = "isativo")
 	private Integer isAtivo;

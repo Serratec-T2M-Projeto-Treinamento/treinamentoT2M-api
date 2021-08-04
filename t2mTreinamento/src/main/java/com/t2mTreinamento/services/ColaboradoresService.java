@@ -272,25 +272,6 @@ public class ColaboradoresService {
 		}
 	}
 
-//	public ColaboradoresDTO saveDTO(ColaboradoresDTO colabDTO) {
-//		if (colabDTO != null) {
-//			Colaboradores novoColab = new Colaboradores(colabDTO.getNome(), colabDTO.getDataNascimento(),
-//					colabDTO.getEmail(), colabDTO.getPix(), colabDTO.getCpf(), colabDTO.getRg(), colabDTO.getCnh(),
-//					colabDTO.getPermissao(), 1);
-//
-//			colaboradoresRepository.save(novoColab);
-//
-//			ColaboradoresDTO resColab = new ColaboradoresDTO(novoColab.getIdColaboradores(), novoColab.getNome(),
-//					novoColab.getDataNascimento(), novoColab.getEmail(), novoColab.getPix(), novoColab.getCpf(),
-//					novoColab.getRg(), novoColab.getCnh(), novoColab.getPermissao());
-//
-//			return resColab;
-//		} else {
-//			return null;
-//		}
-//
-//	}
-
 	public boolean delete(Long id) {
 		if (id != null && colaboradoresRepository.findById(id).get().getIsAtivo() == 1) {
 			Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, id);

@@ -35,7 +35,7 @@ public class Certificacoes {
 	@JsonIgnore
 	private Treinamentos treinamento;
 
-	@OneToMany(mappedBy = "certificacao", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "certificacao", cascade = CascadeType.ALL)
 	private Set<ColaboradoresCertificacoes> setColaboradoresCertificacoes;
 
 	public Long getIdCertificacoes() {

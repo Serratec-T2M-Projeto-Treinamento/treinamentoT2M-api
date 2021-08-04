@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -22,20 +23,24 @@ public class Formacoes {
 	@Column(name = "id")
 	private Long idFormacoes;
 
+	@NotBlank
 	@Column(name = "nome")
 	private String nome;
 
+	@NotBlank
 	@Column(name = "nivel")
 	private String nivel;
 
+	@NotBlank
 	@Column(name = "instituicao")
 	private String instituicao;
+
 
 	@Column(name = "isativo")
 	@JsonIgnore
 	private Integer isAtivo;
 
-	@OneToMany(mappedBy = "formacao", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "formacao", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Set<ColaboradoresFormacoes> setColaboradoresFormacoes;
 

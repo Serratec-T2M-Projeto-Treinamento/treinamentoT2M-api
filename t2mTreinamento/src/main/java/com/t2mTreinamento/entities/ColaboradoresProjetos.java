@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -32,6 +33,7 @@ public class ColaboradoresProjetos {
 	@JoinColumn(name = "id_projeto")
 	private Projetos projeto;
 
+	@NotBlank
 	@Column(name = "funcao")
 	private String funcao;
 

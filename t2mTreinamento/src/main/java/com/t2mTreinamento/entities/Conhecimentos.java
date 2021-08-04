@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "conhecimentos")
@@ -20,6 +21,7 @@ public class Conhecimentos {
 	@Column(name = "id")
 	private Long idConhecimentos;
 
+	@NotBlank
 	@Column(name = "nome")
 	private String nome;
 
@@ -29,13 +31,13 @@ public class Conhecimentos {
 	@Column(name = "isativo")
 	private Integer isAtivo;
 
-	@OneToMany(mappedBy = "conhecimento", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "conhecimento", cascade = CascadeType.ALL)
 	private Set<CompetenciasConhecimentos> setCompetenciasConhecimentos;
 
-	@OneToMany(mappedBy = "conhecimento", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "conhecimento", cascade = CascadeType.ALL)
 	private Set<ConhecimentosNiveis> setConhecimentosNiveis;
 
-	@OneToMany(mappedBy = "conhecimento", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "conhecimento", cascade = CascadeType.ALL)
 	private Set<ConhecimentosTreinamentos> setConhecimentosTreinamentos;
 
 	public Long getIdConhecimentos() {

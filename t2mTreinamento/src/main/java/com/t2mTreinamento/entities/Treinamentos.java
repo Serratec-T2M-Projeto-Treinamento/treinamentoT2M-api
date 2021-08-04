@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "treinamentos")
@@ -21,9 +22,11 @@ public class Treinamentos {
 	@Column(name = "id")
 	private Long idTreinamentos;
 
+	@NotBlank
 	@Column(name = "nome")
 	private String nome;
 
+	@NotBlank
 	@Column(name = "instituicao")
 	private String instituicao;
 
@@ -36,13 +39,13 @@ public class Treinamentos {
 	@Column(name = "isativo")
 	private Integer isAtivo;
 
-	@OneToMany(mappedBy = "treinamento", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "treinamento", cascade = CascadeType.ALL)
 	private Set<ConhecimentosTreinamentos> setConhecimentosTreinamentos;
 
-	@OneToMany(mappedBy = "treinamento", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "treinamento", cascade = CascadeType.ALL)
 	private Set<ColaboradoresTreinamentos> setColaboradoresTreinamentos;
 
-	@OneToOne(mappedBy = "treinamento", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(mappedBy = "treinamento", cascade = CascadeType.ALL)
 	private Certificacoes certificacao;
 
 	public Long getIdTreinamentos() {

@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -22,6 +23,7 @@ public class Posicoes {
 	@Column(name = "id")
 	private Long idPosicoes;
 
+	@NotBlank
 	@Column(name = "nome")
 	private String nome;
 
@@ -31,11 +33,11 @@ public class Posicoes {
 	@Column(name = "isativo")
 	private Integer isAtivo;
 
-	@OneToMany(mappedBy = "posicao", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "posicao", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Set<Colaboradores> setColaboradores;
 
-	@OneToMany(mappedBy = "posicao", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "posicao", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Set<PosicoesCompetencias> setPosicoesCompetencias;
 

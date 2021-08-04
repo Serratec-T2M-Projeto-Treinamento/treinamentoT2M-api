@@ -28,7 +28,6 @@ public class Colaboradores {
 	@Column(name = "id")
 	private Long idColaboradores;
 
-	@NotBlank
 	@Size(min = 3, message = "O nome precisa ter um mínimo de {min} caracteres")
 	@Size(max = 50, message = "O nome excede o limite de {max} caracteres")
 	@Column(name = "nome")
@@ -42,6 +41,7 @@ public class Colaboradores {
 	@Column(name = "email")
 	private String email;
 
+	@NotBlank
 	@Column(name = "pix", unique = true)
 	private String pix;
 
@@ -57,34 +57,32 @@ public class Colaboradores {
 	@Column(name = "cnh")
 	private String cnh;
 
-	@NotBlank
 	@Column(name = "permissao")
 	private Integer permissao;
 
-	@NotBlank
 	@Column(name = "isativo")
 	private Integer isAtivo;
 
-	@OneToOne(mappedBy = "colaborador", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(mappedBy = "colaborador", cascade = CascadeType.ALL)
 	private Usuarios usuario;
 
 	@ManyToOne
 	@JoinColumn(name = "id_posicao", referencedColumnName = "id")
 	private Posicoes posicao;
 
-	@OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL)
 	private Set<ColaboradoresEnderecos> setColaboradoresEnderecos;
 
-	@OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL)
 	private Set<ColaboradoresProjetos> setColaboradoresProjetos;
 
-	@OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL)
 	private Set<ColaboradoresFormacoes> setColaboradoresFormacoes;
 
-	@OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL)
 	private Set<ColaboradoresTreinamentos> setColaboradoresTreinamentos;
 
-	@OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL)
 	private Set<ColaboradoresCertificacoes> setColaboradoresCertificacoes;
 
 	public Colaboradores() {

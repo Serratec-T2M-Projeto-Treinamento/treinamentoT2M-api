@@ -26,10 +26,10 @@ public class Niveis {
 	@Column(name = "isativo")
 	private Integer isAtivo;
 
-	@OneToMany(mappedBy = "nivel", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "nivel", cascade = CascadeType.ALL)
 	private Set<CompetenciasNiveis> setCompetenciasNiveis;
 
-	@OneToMany(mappedBy = "nivel", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "nivel", cascade = CascadeType.ALL)
 	private Set<ConhecimentosNiveis> setConhecimentosNiveis;
 
 	public Long getIdNiveis() {
