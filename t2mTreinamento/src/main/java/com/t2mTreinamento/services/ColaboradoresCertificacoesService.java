@@ -1,8 +1,6 @@
 package com.t2mTreinamento.services;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -131,15 +129,15 @@ public class ColaboradoresCertificacoesService {
 
 	}
 
-	public Colaboradores insereCertificacaoEmColaborador(Long idColab, Long idCert, String dataObtencaoCert)
+	public Colaboradores insereCertificacaoEmColaborador(Long idColab, Long idCert, Calendar dataObtencao)
 			throws Exception {
 		Colaboradores colaborador = colaboradoresRepository.findByIsAtivoAndIdColaboradores(1, idColab);
 		Certificacoes certificacao = certificacoesRepository.findByIsAtivoAndIdCertificacoes(1, idCert);
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date dataCert = sdf.parse(dataObtencaoCert);
-		Calendar dataObtencao = Calendar.getInstance();
-		dataObtencao.setTime(dataCert);
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//		Date dataCert = sdf.parse(dataObtencaoCert);
+//		Calendar dataObtencao = Calendar.getInstance();
+//		dataObtencao.setTime(dataCert);
 
 		ColaboradoresCertificacoesId colabsCertsId = new ColaboradoresCertificacoesId(idColab, idCert);
 

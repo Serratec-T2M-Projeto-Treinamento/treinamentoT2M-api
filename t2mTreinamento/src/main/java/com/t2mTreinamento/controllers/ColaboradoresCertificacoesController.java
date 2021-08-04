@@ -89,13 +89,13 @@ public class ColaboradoresCertificacoesController {
 		}
 	}
 
-	@PutMapping("/colaborador/{idColab}/certificacaoAInserir/{idCert}/dataObtencao/{dataObtencaoCert}")
-	public ResponseEntity<Colaboradores> insereCertificacao(@PathVariable Long idColab, @PathVariable Long idCert,
-			@PathVariable String dataObtencaoCert) throws Exception {
+	@PutMapping("/colaborador/{idColab}/certificacaoAInserir/{idCert}")
+	public ResponseEntity<Colaboradores> insereCertificacao(@RequestBody ColaboradoresCertificacoes colabCert,
+			@PathVariable Long idColab, @PathVariable Long idCert) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 
 		Colaboradores colaboradorAtualizado = colabsCertsService.insereCertificacaoEmColaborador(idColab, idCert,
-				dataObtencaoCert);
+				colabCert.getDataObtencao());
 
 		if (colaboradorAtualizado != null) {
 			return new ResponseEntity<>(colaboradorAtualizado, headers, HttpStatus.OK);
