@@ -134,7 +134,7 @@ public class ColaboradoresController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Colaboradores> update(@RequestBody Colaboradores colaborador, @PathVariable Long id) {
+	public ResponseEntity<Colaboradores> update(@Valid @RequestBody Colaboradores colaborador, @PathVariable Long id) {
 		HttpHeaders headers = new HttpHeaders();
 
 		Colaboradores colaboradorAtualizado = colaboradoresService.update(colaborador, id);

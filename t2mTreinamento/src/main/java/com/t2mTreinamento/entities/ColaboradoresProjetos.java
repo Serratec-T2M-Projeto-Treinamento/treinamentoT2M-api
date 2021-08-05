@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -34,9 +36,12 @@ public class ColaboradoresProjetos {
 	private Projetos projeto;
 
 	@NotBlank
+	@Size(min = 3, message = "A função precisa ter no mínimo {min} caracteres")
+	@Size(max = 50, message = "A função excede o máximo de {max} caracteres")
 	@Column(name = "funcao")
 	private String funcao;
 
+	@NotNull
 	@Column(name = "data_inicio")
 	private Calendar dataInicio;
 

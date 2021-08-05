@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -24,9 +25,12 @@ public class Posicoes {
 	private Long idPosicoes;
 
 	@NotBlank
+	@Size(min = 3, message = "O nome precisa ter um mínimo de {min} caracteres")
+	@Size(max = 50, message = "O nome excede o limite de {max} caracteres")
 	@Column(name = "nome")
 	private String nome;
 
+	@Size(max = 255, message = "Descrição excede o limite de {max} caracteres")
 	@Column(name = "descricao")
 	private String descricao;
 

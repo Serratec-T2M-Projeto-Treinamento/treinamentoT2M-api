@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -22,10 +23,12 @@ public class Usuarios {
 	private Long idUsuarios;
 
 	@NotBlank
+	@Size(max = 20, message = "Usuário excede o limite de {max} caracteres")
 	@Column(name = "usuario")
 	private String usuario;
 
 	@NotBlank
+	@Size(max = 8, message = "Senha excede o limite de {max} caracteres")
 	@Column(name = "senha")
 	private String senha;
 

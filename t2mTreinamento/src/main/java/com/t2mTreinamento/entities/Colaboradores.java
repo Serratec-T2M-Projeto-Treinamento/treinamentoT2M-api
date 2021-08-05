@@ -16,6 +16,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -28,6 +29,7 @@ public class Colaboradores {
 	@Column(name = "id")
 	private Long idColaboradores;
 
+	@NotBlank
 	@Size(min = 3, message = "O nome precisa ter um mínimo de {min} caracteres")
 	@Size(max = 50, message = "O nome excede o limite de {max} caracteres")
 	@Column(name = "nome")
@@ -41,15 +43,19 @@ public class Colaboradores {
 	@Column(name = "email")
 	private String email;
 
-	@NotBlank
 	@Column(name = "pix", unique = true)
 	private String pix;
 
 	@NotBlank
+	@Size(min = 14, message = "Formato de CPF inválido")
+	@Size(max = 14, message = "Formato de CPF inválido")
+//	@Pattern(regexp = "/^\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}$/", message = "CPF inválido")
 	@Column(name = "cpf", unique = true)
 	private String cpf;
 
 	@NotBlank
+	@Size(min = 12, message = "Formato de RG inválido")
+	@Size(max = 12, message = "Formato de RG inválido")
 	@Column(name = "rg", unique = true)
 	private String rg;
 
@@ -57,6 +63,7 @@ public class Colaboradores {
 	@Column(name = "cnh")
 	private String cnh;
 
+	@NotNull
 	@Column(name = "permissao")
 	private Integer permissao;
 

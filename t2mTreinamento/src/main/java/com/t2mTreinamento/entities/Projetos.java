@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -25,18 +27,24 @@ public class Projetos {
 	private Long idProjetos;
 
 	@NotBlank
+	@Size(min = 3, message = "O nome precisa ter um mínimo de {min} caracteres")
+	@Size(max = 25, message = "O nome excede o limite de {max} caracteres")
 	@Column(name = "nome")
 	private String nome;
 
+	@Size(max = 255, message = "Descrição excede o limite de {max} caracteres")
 	@Column(name = "descricao")
 	private String descricao;
 
+	@Size(max = 255, message = "App de gerenciamento excede o limite de {max} caracteres")
 	@Column(name = "app_gerenciamento")
 	private String appGerenciamento;
 
+	@Size(max = 50, message = "Segmento excede o limite de {max} caracteres")
 	@Column(name = "segmento")
 	private String segmento;
 
+	@NotNull
 	@Column(name = "data_entrega_esperada")
 	private Calendar dataEntregaEsperada;
 

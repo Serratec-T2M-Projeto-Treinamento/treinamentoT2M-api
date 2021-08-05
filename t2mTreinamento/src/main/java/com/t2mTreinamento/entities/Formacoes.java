@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -24,17 +25,22 @@ public class Formacoes {
 	private Long idFormacoes;
 
 	@NotBlank
+	@Size(min = 5, message = "Nome precisa ter no mínimo {min} caracteres")
+	@Size(max = 50, message = "Nome excede o limite de {max} caracteres")
 	@Column(name = "nome")
 	private String nome;
 
 	@NotBlank
+	@Size(min = 5, message = "Nível precisa ter no mínimo {min} caracteres")
+	@Size(max = 50, message = "Nível excede o limite de {max} caracteres")
 	@Column(name = "nivel")
 	private String nivel;
 
 	@NotBlank
+	@Size(min = 5, message = "Instituição precisa ter no mínimo {min} caracteres")
+	@Size(max = 30, message = "Instituição excede o limite de {max} caracteres")
 	@Column(name = "instituicao")
 	private String instituicao;
-
 
 	@Column(name = "isativo")
 	@JsonIgnore

@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -24,30 +25,38 @@ public class Enderecos {
 	private Long idEnderecos;
 
 	@NotBlank
+	@Size(min = 9, message = "CEP inválido")
+	@Size(max = 9, message = "CEP inválido")
 	@Column(name = "cep")
 	private String cep;
 
+	@Size(max = 100, message = "Rua excede o limite de {max} caracteres")
 	@Column(name = "rua")
 	private String rua;
 
+	@Size(max = 10, message = "Número excede o limite de {max} caracteres")
 	@Column(name = "numero")
 	private String numero;
 
+	@Size(max = 15, message = "Complemento excede o limite de {max} caracteres")
 	@Column(name = "complemento")
 	private String complemento;
 
+	@Size(max = 50, message = "Bairro excede o limite de {max} caracteres")
 	@Column(name = "bairro")
 	private String bairro;
 
+	@Size(max = 50, message = "Complemento excede o limite de {max} caracteres")
 	@Column(name = "cidade")
 	private String cidade;
 
+	@Size(max = 2, message = "UF inválido")
 	@Column(name = "estado")
 	private String estado;
 
+	@Size(max = 15, message = "País excede o limite de {max} caracteres")
 	@Column(name = "pais")
 	private String pais;
-
 
 	@Column(name = "isativo")
 	@JsonIgnore

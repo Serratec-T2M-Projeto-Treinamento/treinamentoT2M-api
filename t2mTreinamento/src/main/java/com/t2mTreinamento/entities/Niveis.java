@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "niveis")
@@ -20,6 +21,7 @@ public class Niveis {
 	@Column(name = "id")
 	private Long idNiveis;
 
+	@Size(max = 50, message = "Nível excede o limite de {max} caracteres")
 	@Column(name = "nivel")
 	private String nivel;
 

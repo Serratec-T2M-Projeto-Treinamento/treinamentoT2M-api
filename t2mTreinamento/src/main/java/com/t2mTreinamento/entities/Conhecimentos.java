@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "conhecimentos")
@@ -22,9 +23,12 @@ public class Conhecimentos {
 	private Long idConhecimentos;
 
 	@NotBlank
+	@Size(min = 3, message = "Nome precisa ter no mínimo {min} caracteres")
+	@Size(max = 25, message = "Nome excede o máximo de {max} caracteres")
 	@Column(name = "nome")
 	private String nome;
 
+	@Size(max = 255, message = "Descrição excede o máximo de {max} caracteres")
 	@Column(name = "descricao")
 	private String descricao;
 

@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -32,9 +33,10 @@ public class ColaboradoresTreinamentos {
 	private Treinamentos treinamento;
 
 	@NotBlank
+	@Size(min = 3, message = "Status precisa ter no mínimo {min} caracteres")
+	@Size(max = 20, message = "Status excede o máximo de {max} caracteres")
 	@Column(name = "status")
 	private String status;
-
 
 	@Column(name = "isativo")
 	private Integer isAtivo;

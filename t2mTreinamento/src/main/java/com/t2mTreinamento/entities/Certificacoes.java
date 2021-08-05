@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -24,6 +25,7 @@ public class Certificacoes {
 	@Column(name = "id")
 	private Long idCertificacoes;
 
+	@NotNull
 	@Column(name = "tempo_validade")
 	private Double tempoValidade;
 

@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -32,6 +33,7 @@ public class ColaboradoresFormacoes {
 	@JoinColumn(name = "id_formacao")
 	private Formacoes formacao;
 
+	@NotNull
 	@Column(name = "data_entrada")
 	private Calendar dataEntrada;
 
