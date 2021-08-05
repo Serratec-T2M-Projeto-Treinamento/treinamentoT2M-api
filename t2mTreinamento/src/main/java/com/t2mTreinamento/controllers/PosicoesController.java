@@ -86,7 +86,7 @@ public class PosicoesController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Posicoes> update(@RequestBody Posicoes posicao, @PathVariable Long id) {
+	public ResponseEntity<Posicoes> update(@Valid @RequestBody Posicoes posicao, @PathVariable Long id) {
 		HttpHeaders headers = new HttpHeaders();
 
 		Posicoes posicaoAtualizada = posicoesService.update(posicao, id);

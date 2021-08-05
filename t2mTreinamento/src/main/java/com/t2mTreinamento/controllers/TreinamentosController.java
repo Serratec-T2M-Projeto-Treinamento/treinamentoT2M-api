@@ -101,7 +101,7 @@ public class TreinamentosController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Treinamentos> update(@RequestBody Treinamentos treinamento, @PathVariable Long id) {
+	public ResponseEntity<Treinamentos> update(@Valid @RequestBody Treinamentos treinamento, @PathVariable Long id) {
 		HttpHeaders headers = new HttpHeaders();
 
 		Treinamentos treinamentoAtualizado = treinamentosService.update(treinamento, id);

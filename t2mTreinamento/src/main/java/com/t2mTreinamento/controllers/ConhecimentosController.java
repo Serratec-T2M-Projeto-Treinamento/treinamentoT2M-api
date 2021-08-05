@@ -102,7 +102,7 @@ public class ConhecimentosController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Conhecimentos> update(@RequestBody Conhecimentos conhecimento, @PathVariable Long id) {
+	public ResponseEntity<Conhecimentos> update(@Valid @RequestBody Conhecimentos conhecimento, @PathVariable Long id) {
 		HttpHeaders headers = new HttpHeaders();
 
 		Conhecimentos conhecimentoAtualizado = conhecimentosService.update(conhecimento, id);

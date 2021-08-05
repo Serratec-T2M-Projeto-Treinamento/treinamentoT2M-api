@@ -58,12 +58,6 @@ public class ColaboradoresController {
 		return new ResponseEntity<>(colaboradoresService.findById(id), headers, HttpStatus.OK);
 	}
 
-//	@GetMapping("/{id}")
-//	public ResponseEntity<Colaboradores> findByIsAtivoAndIdColaboradores(@PathVariable Long id) {
-//		HttpHeaders headers = new HttpHeaders();
-//		return new ResponseEntity<>(colaboradoresService.findByIsAtivoAndIdColaboradores(id), headers, HttpStatus.OK);
-//	}
-
 	@GetMapping("/{id}")
 	public ResponseEntity<ColaboradoresDTO> findByIsAtivoAndIdColaboradores(@PathVariable Long id) {
 		HttpHeaders headers = new HttpHeaders();
@@ -76,12 +70,6 @@ public class ColaboradoresController {
 		HttpHeaders headers = new HttpHeaders();
 		return new ResponseEntity<>(colaboradoresService.findAll(), headers, HttpStatus.OK);
 	}
-
-//	@GetMapping
-//	public ResponseEntity<List<Colaboradores>> findByIsAtivo() throws Exception {
-//		HttpHeaders headers = new HttpHeaders();
-//		return new ResponseEntity<>(colaboradoresService.findByIsAtivo(), headers, HttpStatus.OK);
-//	}
 
 	@GetMapping
 	public ResponseEntity<List<ColaboradoresDTO>> findByIsAtivo() throws Exception {

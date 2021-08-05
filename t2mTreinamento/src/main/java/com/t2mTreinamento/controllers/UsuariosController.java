@@ -84,7 +84,7 @@ public class UsuariosController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Usuarios> update(@RequestBody Usuarios usuario, @PathVariable Long id) {
+	public ResponseEntity<Usuarios> update(@Valid @RequestBody Usuarios usuario, @PathVariable Long id) {
 		HttpHeaders headers = new HttpHeaders();
 
 		Usuarios usuarioAtualizado = usuariosService.update(usuario, id);
@@ -110,7 +110,7 @@ public class UsuariosController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<Usuarios> loginUsuario(@RequestBody Usuarios usuario) {
+	public ResponseEntity<Usuarios> loginUsuario(@Valid @RequestBody Usuarios usuario) {
 		HttpHeaders headers = new HttpHeaders();
 
 		Usuarios usuarioVerificado = usuariosService.verificaLogin(usuario.getUsuario(), usuario.getSenha());

@@ -2,6 +2,8 @@ package com.t2mTreinamento.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -76,8 +78,8 @@ public class ConhecimentosNiveisController {
 	}
 
 	@PutMapping("/conhecimento/{idCon}/nivel/{idNiv}")
-	public ResponseEntity<ConhecimentosNiveis> update(@RequestBody ConhecimentosNiveis conNiv, @PathVariable Long idCon,
-			@PathVariable Long idNiv) {
+	public ResponseEntity<ConhecimentosNiveis> update(@Valid @RequestBody ConhecimentosNiveis conNiv,
+			@PathVariable Long idCon, @PathVariable Long idNiv) {
 		HttpHeaders headers = new HttpHeaders();
 
 		ConhecimentosNiveis conNivAtualizado = consNivsService.update(conNiv, idCon, idNiv);

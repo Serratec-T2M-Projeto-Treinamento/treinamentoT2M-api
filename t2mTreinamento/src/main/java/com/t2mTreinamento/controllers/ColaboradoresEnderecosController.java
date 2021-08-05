@@ -2,6 +2,8 @@ package com.t2mTreinamento.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -76,7 +78,7 @@ public class ColaboradoresEnderecosController {
 	}
 
 	@PutMapping("/colaborador/{idColab}/endereco/{idEndr}")
-	public ResponseEntity<ColaboradoresEnderecos> update(@RequestBody ColaboradoresEnderecos colabEndr,
+	public ResponseEntity<ColaboradoresEnderecos> update(@Valid @RequestBody ColaboradoresEnderecos colabEndr,
 			@PathVariable Long idColab, @PathVariable Long idEndr) {
 		HttpHeaders headers = new HttpHeaders();
 

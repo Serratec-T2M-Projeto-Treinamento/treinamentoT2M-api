@@ -92,7 +92,7 @@ public class CertificacoesController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Certificacoes> update(@RequestBody Certificacoes certificacao, @PathVariable Long id) {
+	public ResponseEntity<Certificacoes> update(@Valid @RequestBody Certificacoes certificacao, @PathVariable Long id) {
 		HttpHeaders headers = new HttpHeaders();
 
 		Certificacoes certificacaoAtualizada = certificacoesService.update(certificacao, id);

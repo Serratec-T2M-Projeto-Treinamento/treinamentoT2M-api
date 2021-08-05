@@ -90,7 +90,7 @@ public class FormacoesController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Formacoes> update(@RequestBody Formacoes formacao, @PathVariable Long id) {
+	public ResponseEntity<Formacoes> update(@Valid @RequestBody Formacoes formacao, @PathVariable Long id) {
 		HttpHeaders headers = new HttpHeaders();
 
 		Formacoes formacaoAtualizada = formacoesService.update(formacao, id);

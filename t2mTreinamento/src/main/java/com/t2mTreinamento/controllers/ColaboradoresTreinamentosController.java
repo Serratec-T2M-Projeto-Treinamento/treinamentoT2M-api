@@ -2,6 +2,8 @@ package com.t2mTreinamento.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -76,7 +78,7 @@ public class ColaboradoresTreinamentosController {
 	}
 
 	@PutMapping("/colaborador/{idColab}/treinamento/{idTrn}")
-	public ResponseEntity<ColaboradoresTreinamentos> update(@RequestBody ColaboradoresTreinamentos colabTrn,
+	public ResponseEntity<ColaboradoresTreinamentos> update(@Valid @RequestBody ColaboradoresTreinamentos colabTrn,
 			@PathVariable Long idColab, @PathVariable Long idTrn) {
 		HttpHeaders headers = new HttpHeaders();
 
@@ -90,7 +92,7 @@ public class ColaboradoresTreinamentosController {
 	}
 
 	@PutMapping("/colaborador/{idColab}/treinamentoAInserir/{idTrn}")
-	public ResponseEntity<Colaboradores> insereTreinamento(@RequestBody ColaboradoresTreinamentos colabTrn,
+	public ResponseEntity<Colaboradores> insereTreinamento(@Valid @RequestBody ColaboradoresTreinamentos colabTrn,
 			@PathVariable Long idColab, @PathVariable Long idTrn) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 

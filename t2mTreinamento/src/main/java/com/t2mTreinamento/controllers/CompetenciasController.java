@@ -101,7 +101,7 @@ public class CompetenciasController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Competencias> update(@RequestBody Competencias competencia, @PathVariable Long id) {
+	public ResponseEntity<Competencias> update(@Valid @RequestBody Competencias competencia, @PathVariable Long id) {
 		HttpHeaders headers = new HttpHeaders();
 
 		Competencias competenciaAtualizada = competenciasService.update(competencia, id);

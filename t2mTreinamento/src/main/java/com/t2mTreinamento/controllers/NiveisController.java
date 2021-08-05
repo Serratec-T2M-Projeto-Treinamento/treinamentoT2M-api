@@ -95,7 +95,7 @@ public class NiveisController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Niveis> update(@RequestBody Niveis nivel, @PathVariable Long id) {
+	public ResponseEntity<Niveis> update(@Valid @RequestBody Niveis nivel, @PathVariable Long id) {
 		HttpHeaders headers = new HttpHeaders();
 
 		Niveis nivelAtualizado = niveisService.update(nivel, id);

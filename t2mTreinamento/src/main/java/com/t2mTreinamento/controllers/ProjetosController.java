@@ -90,7 +90,7 @@ public class ProjetosController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Projetos> update(@RequestBody Projetos projeto, @PathVariable Long id) {
+	public ResponseEntity<Projetos> update(@Valid @RequestBody Projetos projeto, @PathVariable Long id) {
 		HttpHeaders headers = new HttpHeaders();
 
 		Projetos projetoAtualizado = projetosService.update(projeto, id);

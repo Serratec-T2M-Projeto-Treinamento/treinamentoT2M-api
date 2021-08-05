@@ -2,6 +2,8 @@ package com.t2mTreinamento.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -76,7 +78,7 @@ public class PosicoesCompetenciasController {
 	}
 
 	@PutMapping("/posicao/{idPos}/competencia/{idComp}")
-	public ResponseEntity<PosicoesCompetencias> update(@RequestBody PosicoesCompetencias posComp,
+	public ResponseEntity<PosicoesCompetencias> update(@Valid @RequestBody PosicoesCompetencias posComp,
 			@PathVariable Long idPos, @PathVariable Long idComp) {
 		HttpHeaders headers = new HttpHeaders();
 

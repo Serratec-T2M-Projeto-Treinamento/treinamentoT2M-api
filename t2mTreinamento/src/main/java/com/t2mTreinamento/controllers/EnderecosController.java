@@ -90,7 +90,7 @@ public class EnderecosController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Enderecos> update(@RequestBody Enderecos endereco, @PathVariable Long id) {
+	public ResponseEntity<Enderecos> update(@Valid @RequestBody Enderecos endereco, @PathVariable Long id) {
 		HttpHeaders headers = new HttpHeaders();
 
 		Enderecos enderecoAtualizado = enderecosService.update(endereco, id);
