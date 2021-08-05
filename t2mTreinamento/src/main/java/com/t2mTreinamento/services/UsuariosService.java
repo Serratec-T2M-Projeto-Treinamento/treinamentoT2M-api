@@ -91,10 +91,13 @@ public class UsuariosService {
 	public boolean deleteByColaborador(Long id) {
 		if (id != null) {
 			Colaboradores colaborador = colaboradoresRepository.findById(id).get();
-			Usuarios usuario = usuariosRepository.findByColaborador(colaborador);
 
-			usuario.setIsAtivo(0);
-			usuariosRepository.save(usuario);
+			if (colaborador.getUsuario() != null) {
+				Usuarios usuario = usuariosRepository.findByColaborador(colaborador);
+
+				usuario.setIsAtivo(0);
+				usuariosRepository.save(usuario);
+			}
 
 			return true;
 		} else {
