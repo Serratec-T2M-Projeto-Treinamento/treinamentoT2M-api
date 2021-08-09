@@ -53,6 +53,7 @@
 - Equipe fixa de 3 desenvolvedores.
 - Prazo em que foi desenvolvido 19/07/2021 até 06/08/2021.
 - Deploy feito no Heroku, utilizando serviço EC2 AWS.
+- Método com comando subtree utilizando Heroku CLI.  
 - Sendo consumindo por T2M Treinamento Web e Mobile.
 <br>
 
